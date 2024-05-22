@@ -1,67 +1,23 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-  <p-panel header="Login Example">
-    <div
-      class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
-      style="margin: 10px 0px"
-    >
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">Login:</div>
-        <div class="ui-grid-col-6">
-          <input
-            pInputText
-            type="text"
-            formControlName="login"
-            class="form-control"
-            name="login"
-          />
-        </div>
-        <div class="ui-grid-col-4">
-          <div
-            [hidden]="
-              loginForm.controls['login'].valid ||
-              !loginForm.controls['login'].dirty
-            "
-            class="alert alert-danger"
-          >
-            Login is required
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2">Password:</div>
-        <div class="ui-grid-col-6">
-          <input
-            pInputText
-            type="password"
-            formControlName="password"
-            class="form-control"
-            name="password"
-          />
-        </div>
-        <div class="ui-grid-col-4">
-          <div
-            [hidden]="
-              loginForm.controls['password'].valid ||
-              !loginForm.controls['password'].dirty
-            "
-            class="alert alert-danger"
-          >
-            Password is required
-          </div>
-        </div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2"></div>
-        <div class="ui-grid-col-6">
-          <button
-            pButton
-            type="submit"
-            label="Submit"
-            [disabled]="!loginForm.valid"
-          ></button>
-        </div>
-        <div class="ui-grid-col-4"></div>
-      </div>
+<div class="grid login">
+    <div class="col-8 background">
+        <img alt="Login Background" src="./assets/images/login-background.jpg"/>
     </div>
-  </p-panel>
-</form>
+    <div class="col-4 form">
+        <div class="form__title">
+            <h1>Hello Again!</h1>
+            <h2>Welcome Back</h2>
+        </div>
+        <form (submit)="onSubmit()" class="flex flex-column row-gap-4" [formGroup]="loginForm">
+            <span class="p-input-icon-left">
+                <i class="ph ph-envelope-simple"></i>
+                <input id="email" type="text" pInputText formControlName="email" placeholder="Email"/>
+            </span>
+            <span class="p-input-icon-left">
+                <i class="ph ph-lock-simple"></i>
+                <input id="password" name="password" type="password" pPassword [feedback]="false"
+                       formControlName="password" placeholder="Password"/>
+            </span>
+            <p-button type="submit" [label]="'Login'"></p-button>
+        </form>
+    </div>
+</div>

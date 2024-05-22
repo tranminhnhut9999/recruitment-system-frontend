@@ -1,0 +1,17 @@
+.dashboard-header {
+  #app-logo {
+    width: 35px;
+    height: 35px;
+  }
+  #user-avt {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  ::ng-deep .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+    background-color: unset;
+    &:hover {
+      background: #e9ecef;
+    }
+  }
+}
