@@ -1,0 +1,16 @@
+<div class="sidebar" [ngClass]="{'collapsed': collapsed}">
+    <div class="actions">
+        <span class="action-btn" (click)="toggle()" *ngIf="!collapsed">
+            <i class="ph ph-caret-double-left"></i>
+        </span>
+        <span class="action-btn" (click)="toggle()" *ngIf="collapsed">
+            <i class="ph ph-caret-double-right"></i>
+        </span>
+    </div>
+    <ul *ngIf="!collapsed">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>

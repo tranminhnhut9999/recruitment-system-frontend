@@ -16,6 +16,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 import {AvatarModule} from "primeng/avatar";
 import {MenuModule} from "primeng/menu";
+import { RecruitmentComponent } from './components/dashboard/recruitment/recruitment.component';
+import {SidebarModule} from "primeng/sidebar";
+import {TableModule} from "primeng/table";
+import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
+import { RecruitmentHeaderComponent } from './components/dashboard/recruitment/recruitment-header/recruitment-header.component';
+import {ToolbarModule} from "primeng/toolbar";
 
 @NgModule({
   declarations: [
@@ -23,6 +29,9 @@ import {MenuModule} from "primeng/menu";
     LoginComponent,
     DashboardComponent,
     DashboardHeaderComponent,
+    RecruitmentComponent,
+    DashboardSidebarComponent,
+    RecruitmentHeaderComponent,
   ],
     imports: [
         BrowserModule,
@@ -38,7 +47,10 @@ import {MenuModule} from "primeng/menu";
         NgOptimizedImage,
         MenubarModule,
         AvatarModule,
-        MenuModule
+        MenuModule,
+        SidebarModule,
+        TableModule,
+        ToolbarModule
     ],
   providers: [],
   bootstrap: [AppComponent]

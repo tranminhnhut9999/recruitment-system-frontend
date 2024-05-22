@@ -1,0 +1,9 @@
+.recruitment {
+  height: 100%;
+  .content{
+    padding-top: .25rem;
+  }
+  &__jobs {
+    flex-grow: 1;
+  }
+}

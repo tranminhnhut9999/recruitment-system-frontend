@@ -1,0 +1,37 @@
+<div #recruitment class="recruitment flex flex-column">
+    <div class="header">
+        <app-recruitment-header></app-recruitment-header>
+    </div>
+    <div class="flex content flex-grow-1">
+        <div class="side-bar ">
+            <app-dashboard-sidebar></app-dashboard-sidebar>
+        </div>
+        <div class="recruitment__jobs ">
+            <p-table [value]="jobOverviews" [(selection)]="selectedJobOverview" dataKey="id"
+                     [tableStyle]="{'min-width': '50rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 4rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th>Chức vụ</th>
+                        <th>Bộ phận</th>
+                        <th>Mục tiêu</th>
+                        <th>Ứng viên</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-job>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="job"></p-tableCheckbox>
+                        </td>
+                        <td>{{ job.name }}</td>
+                        <td>{{ job.department }}</td>
+                        <td>{{ job.targetCandidate }}</td>
+                        <td>{{ job.candidateNumber }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

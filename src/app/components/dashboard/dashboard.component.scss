@@ -1,0 +1,9 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__body {
+    padding: .25rem 0;
+    flex-grow: 1;
+  }
+}
