@@ -1,0 +1,21 @@
+<form class="job-posting" [formGroup]="jobInformationFormGroup">
+    <div class="job-posting__title">
+        <h4>Chức vụ</h4>
+        <input id="title__input" type="text" pInputText formControlName="jobTitle"/>
+    </div>
+    <p-divider></p-divider>
+    <p-tabView>
+        <p-tabPanel header="Tuyển dụng">
+        </p-tabPanel>
+        <p-tabPanel header="Mô tả công việc">
+            <p>
+                <p-editor formControlName="jobDescription" [style]="{ height: '320px', width: '100%' }" />
+            </p>
+        </p-tabPanel>
+        <p-tabPanel header="Từ khóa kĩ năng">
+            <p>
+                Kĩ năng
+            </p>
+        </p-tabPanel>
+    </p-tabView>
+</form>

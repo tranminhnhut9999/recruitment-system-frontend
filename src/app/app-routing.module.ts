@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {RecruitmentComponent} from "./components/dashboard/recruitment/recruitment.component";
+import {JobPostingComponent} from "./components/dashboard/job-posting/job-posting.component";
 
 const routes: Routes = [
     {
@@ -10,10 +11,22 @@ const routes: Routes = [
             {
                 path: "recruitment",
                 component: RecruitmentComponent,
+            },
+            {
+                path: '',
+                redirectTo: "recruitment",
+                pathMatch: "full"
+            },
+            {
+                path: "jobs/:id",
+                component: JobPostingComponent,
             }
         ]
     },
-    {path: '', redirectTo: 'dashboard/recruitment', pathMatch: 'full'},
+    {
+        path: "login", component: LoginComponent
+    },
+    {path: '', redirectTo: 'login', pathMatch: "full"},
 ];
 
 @NgModule({

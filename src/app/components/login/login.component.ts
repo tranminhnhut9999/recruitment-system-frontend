@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
   value:any;
+  constructor(private router: Router) {
+  }
   ngOnInit() {
     this.loginForm = new FormGroup({
       'email': new FormControl('', Validators.required),
@@ -18,8 +21,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  handleSubmit() {
     this.submitted = true;
-    alert(JSON.stringify(this.loginForm.value));
+    this.router.navigateByUrl('/dashboard/recruitment');
   }
 }

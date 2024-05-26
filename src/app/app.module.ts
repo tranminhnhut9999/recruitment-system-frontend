@@ -22,6 +22,10 @@ import {TableModule} from "primeng/table";
 import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
 import { RecruitmentHeaderComponent } from './components/dashboard/recruitment/recruitment-header/recruitment-header.component';
 import {ToolbarModule} from "primeng/toolbar";
+import { JobPostingComponent } from './components/dashboard/job-posting/job-posting.component';
+import {DividerModule} from "primeng/divider";
+import {TabViewModule} from "primeng/tabview";
+import {EditorModule} from "primeng/editor";
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import {ToolbarModule} from "primeng/toolbar";
     RecruitmentComponent,
     DashboardSidebarComponent,
     RecruitmentHeaderComponent,
+    JobPostingComponent,
   ],
     imports: [
         BrowserModule,
@@ -50,7 +55,10 @@ import {ToolbarModule} from "primeng/toolbar";
         MenuModule,
         SidebarModule,
         TableModule,
-        ToolbarModule
+        ToolbarModule,
+        DividerModule,
+        TabViewModule,
+        EditorModule
     ],
   providers: [],
   bootstrap: [AppComponent]

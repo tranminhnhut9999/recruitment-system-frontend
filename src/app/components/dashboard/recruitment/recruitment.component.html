@@ -25,7 +25,9 @@
                         <td>
                             <p-tableCheckbox [value]="job"></p-tableCheckbox>
                         </td>
-                        <td>{{ job.name }}</td>
+                        <td>
+                            <a class="job-detail-btn" [routerLink]="'/dashboard/jobs/'+job.id">{{ job.name }}</a>
+                        </td>
                         <td>{{ job.department }}</td>
                         <td>{{ job.targetCandidate }}</td>
                         <td>{{ job.candidateNumber }}</td>

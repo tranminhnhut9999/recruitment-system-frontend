@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
+import {MenuItem, MenuItemCommandEvent} from "primeng/api";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-dashboard-header',
@@ -9,6 +10,10 @@ import {MenuItem} from "primeng/api";
 export class DashboardHeaderComponent implements OnInit {
     headerMenuItems: MenuItem[] | undefined;
     profileMenuItems: MenuItem[] | undefined;
+
+    constructor(private router: Router) {
+
+    }
 
     ngOnInit() {
         this.headerMenuItems = [
@@ -65,7 +70,10 @@ export class DashboardHeaderComponent implements OnInit {
         ];
         this.profileMenuItems = [
             {label: "Thông tin cá nhân"},
-            {label: "Đăng xuất"}
+            {
+                label: "Đăng xuất",
+                command: () => this.router.navigateByUrl("/login")
+            }
         ]
     }
 }

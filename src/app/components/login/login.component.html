@@ -7,7 +7,7 @@
             <h1>Hello Again!</h1>
             <h2>Welcome Back</h2>
         </div>
-        <form (submit)="onSubmit()" class="flex flex-column row-gap-4" [formGroup]="loginForm">
+        <form (submit)="handleSubmit()" class="flex flex-column row-gap-4" [formGroup]="loginForm">
             <span class="p-input-icon-left">
                 <i class="ph ph-envelope-simple"></i>
                 <input id="email" type="text" pInputText formControlName="email" placeholder="Email"/>
