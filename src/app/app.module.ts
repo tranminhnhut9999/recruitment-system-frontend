@@ -26,6 +26,12 @@ import { JobPostingComponent } from './components/dashboard/job-posting/job-post
 import {DividerModule} from "primeng/divider";
 import {TabViewModule} from "primeng/tabview";
 import {EditorModule} from "primeng/editor";
+import {DropdownModule} from "primeng/dropdown";
+import {PaginatorModule} from "primeng/paginator";
+import {MultiSelectModule} from "primeng/multiselect";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -58,9 +64,14 @@ import {EditorModule} from "primeng/editor";
         ToolbarModule,
         DividerModule,
         TabViewModule,
-        EditorModule
+        EditorModule,
+        DropdownModule,
+        PaginatorModule,
+        MultiSelectModule,
+        ToastModule,
+        ConfirmDialogModule
     ],
-  providers: [],
+  providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,21 +1,91 @@
 <form class="job-posting" [formGroup]="jobInformationFormGroup">
     <div class="job-posting__title">
         <h4>Chức vụ</h4>
-        <input id="title__input" type="text" pInputText formControlName="jobTitle"/>
+        <input id="title__input" type="text" pInputText formControlName="jobTitle"
+               placeholder="VD: Nhân viên bán hàng"/>
     </div>
     <p-divider></p-divider>
     <p-tabView>
         <p-tabPanel header="Tuyển dụng">
+            <form class="grid job-posting__form justify-content-between">
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Bộ phận</label>
+                    <p-dropdown [filter]="true" filterBy="value"
+                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                                [options]="departments"
+                                placeholder="Chọn bộ phận"></p-dropdown>
+                </div>
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Mục tiêu</label>
+                    <p-inputNumber
+                            [min]="1"
+                            class="flex-1 flex flex-row-reverse"
+                            mode="decimal"
+                            inputId="withoutgrouping"
+                            placeholder="Số lượng tuyển dụng"
+                            [useGrouping]="false"/>
+                </div>
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Nơi làm việc</label>
+                    <p-dropdown [filter]="true" filterBy="value"
+                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                                [options]="workingPlaces"
+                                placeholder="Chọn nơi làm việc"></p-dropdown>
+                </div>
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Recruiter</label>
+                    <p-multiSelect
+                            class="flex-1 flex flex-row-reverse"
+                            [options]="recruiters"
+                            placeholder="Người tuyển dụng"
+                            optionLabel="value"
+                            display="chip"
+                            [showClear]="true"/>
+                </div>
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Loại việc làm</label>
+                    <p-dropdown [filter]="true" filterBy="value"
+                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                                [options]="jobTypes"
+                                placeholder="Loại việc làm"></p-dropdown>
+                </div>
+                <div class="job-posting__form-info col-6 flex">
+                    <label class="align-self-center">Người phỏng vấn</label>
+                    <p-multiSelect
+                            class="flex-1 flex flex-row-reverse"
+                            [options]="interviewers"
+                            placeholder="Người phỏng vấn"
+                            optionLabel="value"
+                            display="chip"
+                            [showClear]="true"
+
+                    />
+                </div>
+            </form>
         </p-tabPanel>
         <p-tabPanel header="Mô tả công việc">
             <p>
-                <p-editor formControlName="jobDescription" [style]="{ height: '320px', width: '100%' }" />
+                <p-editor formControlName="jobDescription" [style]="{ height: '320px', width: '100%' }"/>
             </p>
         </p-tabPanel>
         <p-tabPanel header="Từ khóa kĩ năng">
-            <p>
-                Kĩ năng
-            </p>
+            <p-multiSelect
+                    class="flex-1 flex flex-row-reverse"
+                    [options]="recruiters"
+                    placeholder="Người tuyển dụng"
+                    optionLabel="value"
+                    display="chip"
+                    [showClear]="true"/>
         </p-tabPanel>
     </p-tabView>
+    <div class="job-posting__footer">
+        <div class="actions flex flex-row-reverse column-gap-3">
+            <div class="action-item">
+                <p-button styleClass="p-button-primary" label="Lưu"></p-button>
+            </div>
+            <div class="action-item">
+                <p-button styleClass="p-button-secondary" label="Trở về" (click)="handleClickingBack()"></p-button>
+            </div>
+        </div>
+    </div>
 </form>

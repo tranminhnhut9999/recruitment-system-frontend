@@ -20,6 +20,11 @@ const routes: Routes = [
             {
                 path: "jobs/:id",
                 component: JobPostingComponent,
+                pathMatch: "full"
+            },
+            {
+                path: "job-posting",
+                component: JobPostingComponent
             }
         ]
     },

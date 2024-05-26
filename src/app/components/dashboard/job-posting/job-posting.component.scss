@@ -1,4 +1,41 @@
 .job-posting {
   width: 60%;
   margin: 0 auto;
+
+  ::ng-deep .p-dropdown {
+    width: 100%;
+  }
+
+  #title__input {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  &__form-info {
+    label {
+      width: 30%;
+      min-width: 30%;
+    }
+  }
+  &__footer {
+    .actions {
+      .action-item {
+        ::ng-deep .p-button {
+          width: 6rem;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .p-inputnumber {
+    width: 100%;
+  }
+  ::ng-deep p-multiselect, p-dropdown {
+    width: calc(100% - 30%);
+  }
+
+  ::ng-deep .p-multiselect {
+    width: 100%;
+    max-width: 100%;
+  }
 }

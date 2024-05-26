@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
 }
