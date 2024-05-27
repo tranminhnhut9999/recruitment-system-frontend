@@ -9,12 +9,18 @@
     width: 100%;
     max-width: 22rem;
   }
-  ::ng-deep .p-dropdown {
+  ::ng-deep .p-dropdown{
     width: 100%;
   }
   .block__detail {
     .block__title {
       width: 25%;
+    }
+  }
+  .personal-information {
+    ::ng-deep .p-dropdown, p-dropdown{
+      width: 100%;
+      max-width: none;
     }
   }
 }

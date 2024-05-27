@@ -1,100 +1,229 @@
 <div class="profile">
-    <div class="profile__information">
-        <div class="information__main flex justify-content-between">
-            <div>
-                <h2>Nguyen Minh Nhut</h2>
-                <h3>Quản Lý Nhân Sự</h3>
-            </div>
-            <div>
-                <p-avatar label="T" size="xlarge"/>
-            </div>
-        </div>
-        <div class="information__others grid row-gap-3 mt-3">
-            <div class="col-6">
-                <label class="information__label">Di động cá nhân:</label>
-                <span class="information__value">012345678</span>
-            </div>
-            <div class="col-6">
-                <label class="information__label">Email:</label>
-                <span class="information__value">tranminhnhut@gmail.com</span>
-            </div>
-            <div class="col-6">
-                <label class="information__label">Di động công ty:</label>
-                <span class="information__value">0974657284</span>
-            </div>
-            <div class="col-6">
-                <label class="information__label">Địa điểm làm việc:</label>
-                <span class="information__value">1460 Đ. Võ Văn Kiệt, Phường 1, Quận 6, Thành phố Hồ Chí Minh
+  <div class="profile__information">
+    <div class="information__main flex justify-content-between">
+      <div>
+        <h2>Nguyen Minh Nhut</h2>
+        <h3>Quản Lý Nhân Sự</h3>
+      </div>
+      <div>
+        <p-avatar label="N"  size="xlarge"/>
+      </div>
+    </div>
+    <div class="information__others grid row-gap-3 mt-3">
+      <div class="col-6">
+        <label class="information__label">Di động cá nhân:</label>
+        <span class="information__value">012345678</span>
+      </div>
+      <div class="col-6">
+        <label class="information__label">Email:</label>
+        <span class="information__value">tranminhnhut@gmail.com</span>
+      </div>
+      <div class="col-6">
+        <label class="information__label">Di động công ty:</label>
+        <span class="information__value">0974657284</span>
+      </div>
+      <div class="col-6">
+        <label class="information__label">Địa điểm làm việc:</label>
+        <span class="information__value">1460 Đ. Võ Văn Kiệt, Phường 1, Quận 6, Thành phố Hồ Chí Minh
                 </span>
-            </div>
-            <div class="col-6">
-                <label class="information__label">Vai trò tài khoản:</label>
-                <span class="information__value">HR Manager
+      </div>
+      <div class="col-6">
+        <label class="information__label">Vai trò tài khoản:</label>
+        <span class="information__value">HR Manager
                 </span>
-            </div>
-        </div>
+      </div>
+    </div>
 
-    </div>
-    <div class="profile__configuration mt-4">
-        <p-tabView>
-            <p-tabPanel header="Bảo mật tài khoản">
-                <div class="configuration__block">
-                    <div class="title">
-                        <h3>QUẢN LÝ MẬT KHẨU</h3>
-                        <p-divider/>
-                        <p-button label="Thay đổi mật khẩu" styleClass="p-button-secondary"></p-button>
-                    </div>
-                </div>
-            </p-tabPanel>
-            <p-tabPanel header="Thông tin công việc">
-                <div class="configuration__block">
-                    <h3>VỊ TRÍ</h3>
-                    <p-divider/>
-                    <div class="grid">
-                        <div class="col-12 flex align-items-center">
-                            <label class="information__label">Bộ phận:</label>
-                            <p-dropdown [filter]="true" filterBy="value"
-                                        [showClear]="true" class="flex-1" optionLabel="value"
-                                        [options]="departments"
-                                        placeholder="Chọn bộ phận"></p-dropdown>
-                        </div>
-                        <div class="col-12 flex align-items-center">
-                            <label class="information__label">Địa chỉ làm việc:</label>
-                            <p-dropdown [filter]="true" filterBy="value"
-                                        [showClear]="true" class="flex-1" optionLabel="value"
-                                        [options]="workingPlaces"
-                                        placeholder="Chọn nơi làm việc"></p-dropdown>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4"></div>
-                <div class="configuration__block">
-                    <h3>NGƯỜI PHÊ DUYỆT</h3>
-                    <p-divider/>
-                    <p><b>Tổng giám đốc</b>: Trần Quang A</p>
-                </div>
-            </p-tabPanel>
-            <p-tabPanel header="Thông tin riêng tư">
-                <div class="grid">
-                    <div class="configuration__block col-6">
-                        <h3>THÔNG TIN LIÊN HỆ</h3>
-                        <p-divider/>
-                        <div class="block__detail flex justify-content-between align-items-center">
-                            <div class="block__title">
-                                <h4>Địa chỉ cá nhân</h4>
-                            </div>
-                            <div class="block__info flex-1">
-                                <input type="text" pInputText/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="configuration__block col-6">
-                        <h3>NGƯỜI PHÊ DUYỆT</h3>
-                        <p-divider/>
-                        <p><b>Tổng giám đốc</b>: Trần Quang A</p>
-                    </div>
-                </div>
-            </p-tabPanel>
-        </p-tabView>
-    </div>
+  </div>
+  <div class="profile__configuration mt-4">
+    <p-tabView>
+      <p-tabPanel header="Bảo mật tài khoản">
+        <div class="configuration__block">
+          <div class="title">
+            <h3>QUẢN LÝ MẬT KHẨU</h3>
+            <p-divider/>
+            <p-button label="Thay đổi mật khẩu" styleClass="p-button-secondary"></p-button>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Thông tin công việc">
+        <div class="configuration__block">
+          <h3>VỊ TRÍ</h3>
+          <p-divider/>
+          <div class="grid">
+            <div class="col-12 flex align-items-center">
+              <label class="information__label">Bộ phận:</label>
+              <p-dropdown [filter]="true" filterBy="value"
+                          [showClear]="true" class="flex-1" optionLabel="value"
+                          [options]="departments"
+                          placeholder="Chọn bộ phận"></p-dropdown>
+            </div>
+            <div class="col-12 flex align-items-center">
+              <label class="information__label">Địa chỉ làm việc:</label>
+              <p-dropdown [filter]="true" filterBy="value"
+                          [showClear]="true" class="flex-1" optionLabel="value"
+                          [options]="workingPlaces"
+                          placeholder="Chọn nơi làm việc"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4"></div>
+        <div class="configuration__block">
+          <h3>NGƯỜI PHÊ DUYỆT</h3>
+          <p-divider/>
+          <p><b>Tổng giám đốc</b>: Trần Quang A</p>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Thông tin riêng tư">
+        <div class="grid personal-information">
+          <div class="configuration__block col-6 flex flex-column row-gap-2">
+            <h3>THÔNG TIN LIÊN HỆ <br>
+              <p-divider/>
+            </h3>
+
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Địa chỉ cá nhân</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="Đường 1"/>
+                <input type="text" pInputText placeholder="Đường 2"/>
+                <p-dropdown [filter]="true" filterBy="value"
+                            [showClear]="true" class="flex-1" optionLabel="value"
+                            [options]="vietnamCities"
+                            placeholder="Chọn thành phố"></p-dropdown>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Email</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="user@example.com"/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Điện thoại</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="Số điện thoại"/>
+              </div>
+            </div>
+          </div>
+          <div class="configuration__block col-6 flex flex-column row-gap-2">
+            <h3>CÔNG DÂN <br>
+              <p-divider/>
+            </h3>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Quốc gia</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Số CMND</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Số an sinh xã hội</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Số hộ chiếu</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Giới tính</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Ngày sinh</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Nơi sinh</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+          </div>
+          <div class="configuration__block col-6 flex flex-column row-gap-2">
+            <h3>GIÁO DỤC<br>
+              <p-divider/>
+            </h3>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Trình độ</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Chuyên ngành</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Trường</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder=""/>
+              </div>
+            </div>
+          </div>
+          <div class="configuration__block col-6 flex flex-column row-gap-2">
+            <h3>LIÊN HỆ KHẨN CẤP<br>
+              <p-divider/>
+            </h3>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Tên liên hệ</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="Tên người liên hệ"/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Số điện thoại</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="Số điện thoại"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
 </div>
