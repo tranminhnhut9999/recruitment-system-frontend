@@ -4,6 +4,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {RecruitmentComponent} from "./components/dashboard/recruitment/recruitment.component";
 import {JobPostingComponent} from "./components/dashboard/job-posting/job-posting.component";
+import {AccountProfileComponent} from "./components/dashboard/account-profile/account-profile.component";
 
 const routes: Routes = [
     {
@@ -25,7 +26,10 @@ const routes: Routes = [
             {
                 path: "job-posting",
                 component: JobPostingComponent
-            }
+            },
+            {
+                path: 'account', component: AccountProfileComponent
+            },
         ]
     },
     {

@@ -32,6 +32,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
+import { AccountProfileComponent } from './components/dashboard/account-profile/account-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
     DashboardSidebarComponent,
     RecruitmentHeaderComponent,
     JobPostingComponent,
+    AccountProfileComponent,
   ],
     imports: [
         BrowserModule,
