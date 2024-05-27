@@ -64,12 +64,16 @@ export class DashboardHeaderComponent implements OnInit {
                     },
                     {
                         label: 'Các loại kĩ năng'
+                    },
+                    {separator: true},
+                    {
+                        label: 'Nhân sự'
                     }
                 ]
             }
         ];
         this.profileMenuItems = [
-            {label: "Thông tin cá nhân"},
+            {label: "Thông tin cá nhân", routerLink: "account"},
             {
                 label: "Đăng xuất",
                 command: () => this.router.navigateByUrl("/login")

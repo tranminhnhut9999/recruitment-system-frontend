@@ -69,13 +69,16 @@
             </p>
         </p-tabPanel>
         <p-tabPanel header="Từ khóa kĩ năng">
-            <p-multiSelect
-                    class="flex-1 flex flex-row-reverse"
-                    [options]="recruiters"
-                    placeholder="Người tuyển dụng"
-                    optionLabel="value"
-                    display="chip"
-                    [showClear]="true"/>
+            <div class="skill-keyword-container">
+                <p-multiSelect
+                        class="flex-1 flex flex-row-reverse"
+                        [options]="skillKeywords"
+                        placeholder="Từ khóa kĩ năng"
+                        display="chip"
+                        filterBy="value"
+                        optionLabel="value"
+                        [showClear]="true"/>
+            </div>
         </p-tabPanel>
     </p-tabView>
     <div class="job-posting__footer">

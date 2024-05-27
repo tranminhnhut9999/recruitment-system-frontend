@@ -33,7 +33,11 @@
   ::ng-deep p-multiselect, p-dropdown {
     width: calc(100% - 30%);
   }
-
+  .skill-keyword-container {
+    ::ng-deep p-multiselect, p-dropdown {
+      width: 100%;
+    }
+  }
   ::ng-deep .p-multiselect {
     width: 100%;
     max-width: 100%;
