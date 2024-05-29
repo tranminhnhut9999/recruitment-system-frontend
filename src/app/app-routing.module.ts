@@ -5,6 +5,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {RecruitmentComponent} from "./components/dashboard/recruitment/recruitment.component";
 import {JobPostingComponent} from "./components/dashboard/job-posting/job-posting.component";
 import {AccountProfileComponent} from "./components/dashboard/account-profile/account-profile.component";
+import {JobListComponent} from "./components/job-list/job-list.component";
 
 const routes: Routes = [
     {
@@ -34,6 +35,9 @@ const routes: Routes = [
     },
     {
         path: "login", component: LoginComponent
+    },
+    {
+      path: "jobs", component: JobListComponent
     },
     {path: '', redirectTo: 'login', pathMatch: "full"},
 ];

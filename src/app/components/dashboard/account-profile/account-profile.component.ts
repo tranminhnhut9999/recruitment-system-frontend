@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {ConfirmationService} from "primeng/api";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-account-profile',
@@ -63,4 +65,21 @@ export class AccountProfileComponent {
     {"value": "Vinh Long"},
     {"value": "Yen Bai"}
   ];
+  constructor(private confirmService: ConfirmationService, private location: Location) {
+  }
+  handleClickingBack() {
+    this.confirmService.confirm({
+      message: 'Trở về sẽ mất dữ liệu chưa lưu trữ, bạn có muốn trở về ? ',
+      header: 'Xác nhận',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon:"none",
+      rejectIcon:"none",
+      acceptLabel: "Xác nhận",
+      rejectLabel: "Hủy",
+      rejectButtonStyleClass:"p-button-text",
+      accept: () => {
+        this.location.back();
+      }
+    });
+  }
 }

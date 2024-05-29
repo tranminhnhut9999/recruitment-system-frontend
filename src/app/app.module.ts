@@ -33,6 +33,7 @@ import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import { AccountProfileComponent } from './components/dashboard/account-profile/account-profile.component';
+import { JobListComponent } from './components/job-list/job-list.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AccountProfileComponent } from './components/dashboard/account-profile/
     RecruitmentHeaderComponent,
     JobPostingComponent,
     AccountProfileComponent,
+    JobListComponent,
   ],
     imports: [
         BrowserModule,
