@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-job-list',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent {
-
+  departments: any[] = [{value: "Bộ phận IT"}, {value: "Bộ phận kế toán"}, {value: "Bộ phận bảo vệ"}, {value: "Bộ phận bán hàng"}]
 }

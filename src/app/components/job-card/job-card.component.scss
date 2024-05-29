@@ -1,0 +1,35 @@
+.job-card {
+  width: 50rem;
+
+  .sal-range {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--green-500);
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .additional-info {
+    width: max-content;
+    background: aliceblue;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+  }
+
+  ::ng-deep p-card, .p-card {
+    width: 100%;
+  }
+  ::ng-deep .p-card .p-card-body {
+    padding: 0;
+  }
+  ::ng-deep .p-button-text {
+
+  }
+}

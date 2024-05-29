@@ -1,6 +1,8 @@
 .job-list {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   .background {
     height: 40%;
     img {
@@ -8,6 +10,17 @@
       height: 100%;
       object-fit: cover;
     }
+  }
+  .search-section {
+    width: 100%;
+    padding: 1rem;
+    //background: var(--surface-50);
+    margin: 0 auto;
+  }
+  .job-result {
+    flex: 1;
+    background: var(--surface-50);
+    padding: 3rem 1rem 1rem;
   }
 
 }
