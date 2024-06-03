@@ -34,6 +34,10 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import { AccountProfileComponent } from './components/dashboard/account-profile/account-profile.component';
 import { JobListComponent } from './components/job-list/job-list.component';
+import { JobCardComponent } from './components/job-card/job-card.component';
+import {CardModule} from "primeng/card";
+import {ChipsModule} from "primeng/chips";
+import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,34 +51,38 @@ import { JobListComponent } from './components/job-list/job-list.component';
     JobPostingComponent,
     AccountProfileComponent,
     JobListComponent,
+    JobCardComponent,
+    JobDetailComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        PanelModule,
-        FormsModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        PasswordModule,
-        ButtonModule,
-        NgOptimizedImage,
-        MenubarModule,
-        AvatarModule,
-        MenuModule,
-        SidebarModule,
-        TableModule,
-        ToolbarModule,
-        DividerModule,
-        TabViewModule,
-        EditorModule,
-        DropdownModule,
-        PaginatorModule,
-        MultiSelectModule,
-        ToastModule,
-        ConfirmDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    PanelModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    NgOptimizedImage,
+    MenubarModule,
+    AvatarModule,
+    MenuModule,
+    SidebarModule,
+    TableModule,
+    ToolbarModule,
+    DividerModule,
+    TabViewModule,
+    EditorModule,
+    DropdownModule,
+    PaginatorModule,
+    MultiSelectModule,
+    ToastModule,
+    ConfirmDialogModule,
+    CardModule,
+    ChipsModule
+  ],
   providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
