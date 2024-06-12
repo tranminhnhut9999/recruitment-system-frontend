@@ -1,0 +1,12 @@
+.job-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .job-result {
+    flex: 1;
+    background: var(--surface-50);
+    padding: 0 1rem;
+  }
+
+}

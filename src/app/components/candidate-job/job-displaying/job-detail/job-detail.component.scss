@@ -1,5 +1,9 @@
 .job-detail {
-  padding: 1rem 2rem;
+
+  .search-section {
+    padding: 1rem 2rem;
+    background: #ffffff;
+  }
 
   &__left {
     .overall {
@@ -44,5 +48,15 @@
         }
       }
     }
+  }
+
+  .section {
+    background: #ffffff;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+  }
+  .grid {
+    margin: 0;
   }
 }

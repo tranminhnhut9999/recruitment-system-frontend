@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem, MenuItemCommandEvent} from "primeng/api";
 import {Router} from "@angular/router";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
     selector: 'app-dashboard-header',
@@ -11,7 +12,7 @@ export class DashboardHeaderComponent implements OnInit {
     headerMenuItems: MenuItem[] | undefined;
     profileMenuItems: MenuItem[] | undefined;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private authService: AuthService) {
 
     }
 
@@ -76,7 +77,10 @@ export class DashboardHeaderComponent implements OnInit {
             {label: "Thông tin cá nhân", routerLink: "account"},
             {
                 label: "Đăng xuất",
-                command: () => this.router.navigateByUrl("/login")
+                command: () => {
+                    this.authService.logout();
+                    this.router.navigateByUrl("/login");
+                }
             }
         ]
     }

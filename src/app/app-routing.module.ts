@@ -5,15 +5,18 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {RecruitmentComponent} from "./components/dashboard/recruitment/recruitment.component";
 import {JobPostingComponent} from "./components/dashboard/job-posting/job-posting.component";
 import {AccountProfileComponent} from "./components/dashboard/account-profile/account-profile.component";
-import {JobListComponent} from "./components/job-list/job-list.component";
-import {JobDetailComponent} from "./components/job-detail/job-detail.component";
+import {JobListComponent} from "./components/candidate-job/job-displaying/job-list/job-list.component";
+import {JobDetailComponent} from "./components/candidate-job/job-displaying/job-detail/job-detail.component";
+import {JobDisplayingComponent} from "./components/candidate-job/job-displaying/job-displaying.component";
+import {AuthGuard} from "./shared/guards/auth.guard";
 
 const routes: Routes = [
   {
-    path: "dashboard", component: DashboardComponent, children: [
+    path: "dashboard", component: DashboardComponent,canActivate: [AuthGuard], children: [
       {
         path: "recruitment",
         component: RecruitmentComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -42,9 +45,20 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: JobListComponent
+        component: JobDisplayingComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: "full",
+            component: JobListComponent
+          },
+          {
+            path: ":id",
+            component: JobDetailComponent
+          }
+        ]
       },
-      {path: ':id', component: JobDetailComponent}
+
     ]
   },
   {path: '', redirectTo: 'login', pathMatch: "full"},
