@@ -1,48 +1,41 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {JobOverviewModel} from "../../../shared/model/job-overview.model";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
-    selector: 'app-recruitment',
-    templateUrl: './recruitment.component.html',
-    styleUrls: ['./recruitment.component.scss']
+  selector: 'app-recruitment',
+  templateUrl: './recruitment.component.html',
+  styleUrls: ['./recruitment.component.scss']
 })
-export class RecruitmentComponent {
-    selectedJobOverview: JobOverviewModel[] = [];
-    jobOverviews: JobOverviewModel[] = [
-        {
-            id: "1",
-            name: "Software Engineer",
-            department: "Engineering",
-            targetCandidate: 5,
-            candidateNumber: 1
-        },
-        {
-            id: "2",
-            name: "Product Manager",
-            department: "Product",
-            targetCandidate: 3,
-            candidateNumber: 1
-        },
-        {
-            id: "3",
-            name: "Data Scientist",
-            department: "Data",
-            targetCandidate: 4,
-            candidateNumber: 3
-        },
-        {
-            id: "4",
-            name: "Marketing Specialist",
-            department: "Marketing",
-            targetCandidate: 2,
-            candidateNumber: 2
-        },
-        {
-            id: "5",
-            name: "UX Designer",
-            department: "Design",
-            targetCandidate: 3,
-            candidateNumber: 2
-        }
-    ];
+export class RecruitmentComponent implements OnInit {
+  selectedJobOverview: JobOverviewModel[] = [];
+  jobOverviews: JobOverviewModel[] = [];
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    const token = localStorage.getItem("access_token"); // Retrieve your token from wherever you store it
+    // @ts-ignore
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"','')}`);
+
+    this.http.get("http://localhost:8082/api/jobs", {headers: headers}).subscribe((response: any) => {
+      let jobList = response.data;
+      this.extractJobOverviews(jobList);
+    })
+  }
+
+  extractJobOverviews(jobListResponse: any[]) {
+    this.jobOverviews = [];
+    for (let jobListResponseElement of jobListResponse) {
+      let jobOverview = {
+        id: jobListResponseElement.id,
+        name: jobListResponseElement.name,
+        department: jobListResponseElement.department,
+        targetCandidate: 4,
+        candidateNumber: 3
+      };
+      this.jobOverviews.push(jobOverview);
+    }
+  }
 }
