@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobOverviewModel} from "../../../shared/model/job-overview.model";
+import {JobResponse} from "../../../shared/model/job.response";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
@@ -8,8 +8,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./recruitment.component.scss']
 })
 export class RecruitmentComponent implements OnInit {
-  selectedJobOverview: JobOverviewModel[] = [];
-  jobOverviews: JobOverviewModel[] = [];
+  selectedJobOverview: JobResponse[] = [];
+  jobOverviews: JobResponse[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -17,25 +17,17 @@ export class RecruitmentComponent implements OnInit {
   ngOnInit() {
     const token = localStorage.getItem("access_token"); // Retrieve your token from wherever you store it
     // @ts-ignore
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"','')}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"', '')}`);
 
     this.http.get("http://localhost:8082/api/jobs", {headers: headers}).subscribe((response: any) => {
       let jobList = response.data;
       this.extractJobOverviews(jobList);
-    })
+    });
   }
 
   extractJobOverviews(jobListResponse: any[]) {
-    this.jobOverviews = [];
-    for (let jobListResponseElement of jobListResponse) {
-      let jobOverview = {
-        id: jobListResponseElement.id,
-        name: jobListResponseElement.name,
-        department: jobListResponseElement.department,
-        targetCandidate: 4,
-        candidateNumber: 3
-      };
-      this.jobOverviews.push(jobOverview);
-    }
+    this.jobOverviews = [...jobListResponse];
   }
+
+
 }

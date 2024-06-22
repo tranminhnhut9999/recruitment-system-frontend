@@ -1,94 +1,148 @@
-<form class="job-posting" [formGroup]="jobInformationFormGroup">
-    <div class="job-posting__title">
-        <h4>Chức vụ</h4>
-        <input id="title__input" type="text" pInputText formControlName="jobTitle"
-               placeholder="VD: Nhân viên bán hàng"/>
-    </div>
-    <p-divider></p-divider>
-    <p-tabView>
-        <p-tabPanel header="Tuyển dụng">
-            <form class="grid job-posting__form justify-content-between">
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Bộ phận</label>
-                    <p-dropdown [filter]="true" filterBy="value"
-                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
-                                [options]="departments"
-                                placeholder="Chọn bộ phận"></p-dropdown>
-                </div>
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Mục tiêu</label>
-                    <p-inputNumber
-                            [min]="1"
-                            class="flex-1 flex flex-row-reverse"
-                            mode="decimal"
-                            inputId="withoutgrouping"
-                            placeholder="Số lượng tuyển dụng"
-                            [useGrouping]="false"/>
-                </div>
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Nơi làm việc</label>
-                    <p-dropdown [filter]="true" filterBy="value"
-                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
-                                [options]="workingPlaces"
-                                placeholder="Chọn nơi làm việc"></p-dropdown>
-                </div>
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Recruiter</label>
-                    <p-multiSelect
-                            class="flex-1 flex flex-row-reverse"
-                            [options]="recruiters"
-                            placeholder="Người tuyển dụng"
-                            optionLabel="value"
-                            display="chip"
-                            [showClear]="true"/>
-                </div>
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Loại việc làm</label>
-                    <p-dropdown [filter]="true" filterBy="value"
-                                [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
-                                [options]="jobTypes"
-                                placeholder="Loại việc làm"></p-dropdown>
-                </div>
-                <div class="job-posting__form-info col-6 flex">
-                    <label class="align-self-center">Người phỏng vấn</label>
-                    <p-multiSelect
-                            class="flex-1 flex flex-row-reverse"
-                            [options]="interviewers"
-                            placeholder="Người phỏng vấn"
-                            optionLabel="value"
-                            display="chip"
-                            [showClear]="true"
+<form class="job-posting" *ngIf="jobForm" [formGroup]="jobForm"
+      (ngSubmit)="handleSubmit()">
+  <div class="job-posting__title">
+    <h4>Chức vụ</h4>
+    <input id="title__input" type="text" pInputText formControlName="title"
+           placeholder="VD: Nhân viên bán hàng"
 
-                    />
-                </div>
-            </form>
-        </p-tabPanel>
-        <p-tabPanel header="Mô tả công việc">
-            <p>
-                <p-editor formControlName="jobDescription" [style]="{ height: '320px', width: '100%' }"/>
-            </p>
-        </p-tabPanel>
-        <p-tabPanel header="Từ khóa kĩ năng">
-            <div class="skill-keyword-container">
-                <p-multiSelect
-                        class="flex-1 flex flex-row-reverse"
-                        [options]="skillKeywords"
-                        placeholder="Từ khóa kĩ năng"
-                        display="chip"
-                        filterBy="value"
-                        optionLabel="value"
-                        [showClear]="true"/>
-            </div>
-        </p-tabPanel>
-    </p-tabView>
-    <div class="job-posting__footer">
-        <div class="actions flex flex-row-reverse column-gap-3">
-            <div class="action-item">
-                <p-button styleClass="p-button-primary" label="Lưu"></p-button>
-            </div>
-            <div class="action-item">
-                <p-button styleClass="p-button-secondary" label="Trở về" (click)="handleClickingBack()"></p-button>
-            </div>
+           [ngClass]="{'ng-invalid ng-dirty': jobForm.get('title')?.invalid && jobForm.get('title')?.dirty}"/>
+  </div>
+  <p-divider></p-divider>
+  <p-tabView>
+    <p-tabPanel header="Tuyển dụng">
+      <div class="grid job-posting__form justify-content-between">
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Bộ phận</label>
+          <p-dropdown [filter]="true" filterBy="value"
+                      [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                      [options]="departments"
+                      placeholder="Chọn bộ phận" formControlName="department"
+                      [ngClass]="{'invalid-control': jobForm.get('department')?.invalid && jobForm.get('department')?.touched}"></p-dropdown>
         </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Mục tiêu</label>
+          <p-inputNumber
+            [min]="1"
+            class="flex-1 flex flex-row-reverse"
+            mode="decimal"
+            inputId="withoutgrouping"
+            placeholder="Số lượng tuyển dụng"
+            [useGrouping]="false"
+            formControlName="targetNumber"
+            [ngClass]="{'invalid-control': jobForm.get('targetNumber')?.invalid && jobForm.get('targetNumber')?.touched}"/>
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Nơi làm việc</label>
+          <p-dropdown [filter]="true" filterBy="value"
+                      [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                      [options]="workingPlaces"
+                      formControlName="workingPlace"
+                      placeholder="Chọn nơi làm việc"></p-dropdown>
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Ngày bắt đầu</label>
+          <p-calendar
+            class="flex-1 flex flex-row-reverse"
+            formControlName="startDate"
+            (onSelect)="handleSelectStartDate()"
+          />
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Người phỏng vấn</label>
+          <p-multiSelect
+            class="flex-1 flex flex-row-reverse"
+            [options]="recruiters"
+            placeholder="Người phỏng vấn"
+            optionLabel="name"
+            display="chip"
+            [showClear]="true"
+            formControlName="recruiters"
+          />
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Ngày kết thúc</label>
+          <p-calendar
+            class="flex-1 flex flex-row-reverse"
+            formControlName="endDate"
+          />
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Mức lương tối thiểu</label>
+          <p-inputNumber
+            class="flex-1 flex flex-row-reverse"
+            mode="currency"
+            currency="VND"
+            locale="vi-VN"
+            formControlName="salaryRangeFrom"/>
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Mức lương tối đa</label>
+          <p-inputNumber
+            class="flex-1 flex flex-row-reverse"
+            mode="currency"
+            currency="VND"
+            locale="vi-VN"
+            formControlName="salaryRangeTo"/>
+        </div>
+
+        <!--        <div class="job-posting__form-info col-6 flex">-->
+        <!--          <label class="align-self-center">Bắt đầu ngay</label>-->
+        <!--          <p-checkbox-->
+        <!--            [binary]="true"-->
+        <!--            class="flex-1 flex flex-row"-->
+        <!--            (onChange)="handleChangeCheckBox()"-->
+        <!--          />-->
+        <!--        </div>-->
+
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Loại việc làm</label>
+          <p-dropdown [filter]="true" filterBy="value"
+                      [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="value"
+                      [options]="jobTypes"
+                      placeholder="Loại việc làm"
+                      formControlName="jobType"></p-dropdown>
+        </div>
+        <div class="job-posting__form-info col-6 flex">
+          <label class="align-self-center">Trạng thái</label>
+          <p-selectButton
+            class="flex-1 flex flex-row-reverse"
+            formControlName="status"
+            [options]="stateOptions"
+            optionLabel="label"
+            optionValue="value"
+            (onChange)="handleChangeStatus()"/>
+        </div>
+      </div>
+
+    </p-tabPanel>
+    <p-tabPanel header="Mô tả công việc">
+      <p>
+        <p-editor #editorText (onTextChange)="onChangeDescription($event)" formControlName="description"
+                  [style]="{ height: '320px', width: '100%' }"/>
+      </p>
+    </p-tabPanel>
+    <p-tabPanel header="Từ khóa kĩ năng">
+      <div class="skill-keyword-container">
+        <p-multiSelect
+          class="flex-1 flex flex-row-reverse"
+          [options]="skillKeywords"
+          placeholder="Từ khóa kĩ năng"
+          display="chip"
+          filterBy="value"
+          optionLabel="value"
+          [showClear]="true"
+          formControlName="keywords"/>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <div class="job-posting__footer">
+    <div class="actions flex flex-row-reverse column-gap-3">
+      <div class="action-item">
+        <p-button type="submit" styleClass="p-button-primary" label="Lưu"></p-button>
+      </div>
+      <div class="action-item">
+        <p-button styleClass="p-button-secondary" label="Trở về" (click)="handleClickingBack()"></p-button>
+      </div>
     </div>
+  </div>
 </form>

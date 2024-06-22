@@ -42,6 +42,10 @@ import {ChipsModule} from "primeng/chips";
 import {JobDetailComponent} from './components/candidate-job/job-displaying/job-detail/job-detail.component';
 import {JobDisplayingComponent} from './components/candidate-job/job-displaying/job-displaying.component';
 import {HttpClientModule} from "@angular/common/http";
+import {CalendarModule} from "primeng/calendar";
+import {CheckboxModule} from "primeng/checkbox";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {SelectButtonModule} from "primeng/selectbutton";
 
 @NgModule({
     declarations: [
@@ -59,36 +63,40 @@ import {HttpClientModule} from "@angular/common/http";
         JobDetailComponent,
         JobDisplayingComponent,
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        PanelModule,
-        FormsModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        PasswordModule,
-        ButtonModule,
-        NgOptimizedImage,
-        MenubarModule,
-        AvatarModule,
-        MenuModule,
-        SidebarModule,
-        TableModule,
-        ToolbarModule,
-        DividerModule,
-        TabViewModule,
-        EditorModule,
-        DropdownModule,
-        PaginatorModule,
-        MultiSelectModule,
-        ToastModule,
-        ConfirmDialogModule,
-        CardModule,
-        ChipsModule,
-        HttpClientModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    PanelModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    NgOptimizedImage,
+    MenubarModule,
+    AvatarModule,
+    MenuModule,
+    SidebarModule,
+    TableModule,
+    ToolbarModule,
+    DividerModule,
+    TabViewModule,
+    EditorModule,
+    DropdownModule,
+    PaginatorModule,
+    MultiSelectModule,
+    ToastModule,
+    ConfirmDialogModule,
+    CardModule,
+    ChipsModule,
+    HttpClientModule,
+    CalendarModule,
+    CheckboxModule,
+    ToggleButtonModule,
+    SelectButtonModule
+  ],
     providers: [ConfirmationService, MessageService],
     bootstrap: [AppComponent]
 })

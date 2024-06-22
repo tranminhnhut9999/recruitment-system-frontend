@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-job-list',
@@ -6,5 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent {
-  departments: any[] = [{value: "Bộ phận IT"}, {value: "Bộ phận kế toán"}, {value: "Bộ phận bảo vệ"}, {value: "Bộ phận bán hàng"}]
+  departments: any[] = [{value: "Bộ phận IT"}, {value: "Bộ phận kế toán"}, {value: "Bộ phận bảo vệ"}, {value: "Bộ phận bán hàng"}];
+  constructor(private http: HttpClient) {
+  }
 }
