@@ -1,86 +1,87 @@
 <div class="job-detail ">
-    <div class="grid row-gap-4 column-gap-4 justify-content-center">
-        <div class="job-detail__left col-8 flex flex-column row-gap-4">
-            <div class="section">
-                <h2 class="job-title">
-                    Nhân Viên Bán Hàng
-                </h2>
-                <div class="overall flex flex-row column-gap-4 row-gap-4">
-                    <div class="detail-info flex column-gap-2 align-items-center">
-                        <i class="ph ph-currency-circle-dollar"></i>
-                        <span>Mức lương <br> <b>Trên 3 triệu</b></span>
-                    </div>
-                    <div class="detail-info flex column-gap-2 align-items-center">
-                        <i class="ph ph-currency-circle-dollar"></i>
-                        <span>Địa điểm <br> <b>Hồ Chí Minh</b></span>
+  <div class="grid row-gap-4 column-gap-4 justify-content-center">
+    <div class="job-detail__left col-8 flex flex-column row-gap-4">
+      <div class="section">
+        <h2 class="job-title">
+          {{ job.title }}
+        </h2>
+        <div class="overall flex flex-row column-gap-4 row-gap-4">
+          <div class="detail-info flex column-gap-2 align-items-center">
+            <i class="ph ph-currency-circle-dollar"></i>
+            <span>Mức lương <br> <b>Trên 3 triệu</b></span>
+          </div>
+          <div class="detail-info flex column-gap-2 align-items-center">
+            <i class="ph ph-currency-circle-dollar"></i>
+            <span>Địa điểm <br> <b>Hồ Chí Minh</b></span>
 
-                    </div>
-                    <div class="detail-info flex column-gap-2 align-items-center">
-                        <i class="ph ph-currency-circle-dollar"></i>
-                        <span>Kinh nghiệm <br> <b>2 năm</b></span>
-                    </div>
-                </div>
-                <div class="quick-apply-section">
-                    <p-button class="quick-apply-btn" icon="ph ph-telegram-logo" label="Ứng tuyển ngay"
-                              styleClass="p-button-success"></p-button>
-                </div>
-            </div>
-            <div class="job-description section">
-                <h2>Chi tiết tuyển dụng</h2>
-                <div class="content" [innerHTML]="jobDescription"></div>
-            </div>
+          </div>
+          <div class="detail-info flex column-gap-2 align-items-center">
+            <i class="ph ph-currency-circle-dollar"></i>
+            <span>Kinh nghiệm <br> <b>2 năm</b></span>
+          </div>
         </div>
-        <div class="job-detail__right col-3 ">
-            <div class="section">
-                <h2>Thông tin chung</h2>
-                <ul class="common-informations flex flex-column row-gap-4 column-gap-4">
-                    <li class="information flex align-items-center column-gap-4">
-                        <div class="icon-information">
-                            <i class="ph ph-hourglass-high"></i>
-                        </div>
-                        <div class="detail flex flex-column row-gap-3">
-                            <span>Cấp bậc</span>
-                            <b>Nhân viên</b>
-                        </div>
-                    </li>
-                    <li class="information flex align-items-center column-gap-4">
-                        <div class="icon-information">
-                            <i class="ph ph-hourglass-high"></i>
-                        </div>
-                        <div class="detail flex flex-column row-gap-2">
-                            <span>Kinh nghiệm</span>
-                            <b>1 năm</b>
-                        </div>
-                    </li>
-                    <li class="information flex align-items-center column-gap-4">
-                        <div class="icon-information">
-                            <i class="ph ph-hourglass-high"></i>
-                        </div>
-                        <div class="detail flex flex-column row-gap-2">
-                            <span>Số lượng tuyển</span>
-                            <b>20 người</b>
-                        </div>
-                    </li>
-                    <li class="information flex align-items-center column-gap-4">
-                        <div class="icon-information">
-                            <i class="ph ph-hourglass-high"></i>
-                        </div>
-                        <div class="detail flex flex-column row-gap-2">
-                            <span>Hình thức làm việc</span>
-                            <b>Toàn thời gian</b>
-                        </div>
-                    </li>
-                    <li class="information flex align-items-center column-gap-4">
-                        <div class="icon-information">
-                            <i class="ph ph-hourglass-high"></i>
-                        </div>
-                        <div class="detail flex flex-column row-gap-2">
-                            <span>Giới tính</span>
-                            <b>Không yêu cầu</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div class="quick-apply-section">
+          <p-button class="quick-apply-btn" icon="ph ph-telegram-logo" label="Ứng tuyển ngay"
+                    styleClass="p-button-success"></p-button>
         </div>
+      </div>
+      <div class="job-description section">
+        <h2>Chi tiết tuyển dụng</h2>
+        <div class="content" [innerHTML]="job.description"></div>
+      </div>
     </div>
+    <div class="job-detail__right col-3 ">
+      <div class="section">
+        <h2>Thông tin chung</h2>
+        <ul class="common-informations flex flex-column row-gap-4 column-gap-4">
+          <!--                    <li class="information flex align-items-center column-gap-4">-->
+          <!--                        <div class="icon-information">-->
+          <!--                            <i class="ph ph-hourglass-high"></i>-->
+          <!--                        </div>-->
+          <!--                        <div class="detail flex flex-column row-gap-3">-->
+          <!--                            <span>Cấp bậc</span>-->
+          <!--                            <b>Nhân viên</b>-->
+          <!--                        </div>-->
+          <!--                    </li>-->
+          <li class="information flex align-items-center column-gap-4">
+            <div class="icon-information">
+              <i class="ph ph-hourglass-high"></i>
+            </div>
+            <div class="detail flex flex-column row-gap-2">
+              <span>Kinh nghiệm</span>
+              <b>1 năm</b>
+            </div>
+          </li>
+          <li class="information flex align-items-center column-gap-4">
+            <div class="icon-information">
+              <i class="ph ph-hourglass-high"></i>
+            </div>
+            <div class="detail flex flex-column row-gap-2">
+              <span>Số lượng tuyển</span>
+              <b>{{ job.targetNumber }}</b>
+            </div>
+          </li>
+          <li class="information flex align-items-center column-gap-4">
+            <div class="icon-information">
+              <i class="ph ph-hourglass-high"></i>
+            </div>
+            <div class="detail flex flex-column row-gap-2">
+              <span>Hình thức làm việc</span>
+              <b>{{ job.jobType }}</b>
+            </div>
+          </li>
+          <li class="information flex align-items-center column-gap-4">
+            <div class="icon-information">
+              <i class="ph ph-hourglass-high"></i>
+            </div>
+            <div class="detail flex flex-column row-gap-2">
+              <span>Giới tính</span>
+              <b>Không yêu cầu</b>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <app-apply-job-form [appliedJob]="job"></app-apply-job-form>
 </div>

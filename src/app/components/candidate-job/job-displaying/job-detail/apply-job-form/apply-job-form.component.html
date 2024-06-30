@@ -1,0 +1,62 @@
+<div class="card flex justify-content-center">
+  <p-button (click)="showDialog()" label="Show"/>
+  <p-dialog
+    header="Header"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '49rem' }"
+    [resizable]="false">
+    <ng-template pTemplate="header">
+      <h2>Ứng tuyển xin việc</h2>
+    </ng-template>
+    <form [formGroup]="applyForm">
+      <span class="p-text-secondary block mb-5">Xin vui lòng điền đầy đủ thông tin dưới đây</span>
+      <div class="grid">
+        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">
+          <label for="fullName" class="font-semibold">
+            Họ và Tên
+          </label>
+          <input formControlName="name" pInputText id="fullName" class="flex-auto" autocomplete="off"/>
+        </div>
+        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">
+          <label for="phoneNumber" class="font-semibold">
+            Số Điện Thoại
+          </label>
+          <input formControlName="phoneNumber" pInputText id="phoneNumber" class="flex-auto" autocomplete="off"/>
+        </div>
+        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">
+          <label for="dateOfBirth" class="font-semibold">
+            Ngày Sinh
+          </label>
+          <p-calendar id="dateOfBirth" formControlName="dateOfBirth"></p-calendar>
+        </div>
+        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">
+          <label for="email" class="font-semibold">Email</label>
+          <input formControlName="email" pInputText id="email" class="flex-auto" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3">
+        <label for="cvFileUpload" class="font-semibold">Tải CV</label>
+        <p-fileUpload
+          id="cvFileUpload"
+          mode="basic"
+          chooseLabel="Chọn"
+          chooseIcon="ph ph-upload-simple"
+          accept="image/*"
+          [maxFileSize]="1000000"
+          formControlName="cvFile"/>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Hủy"
+        styleClass="p-button-secondary"
+        (click)="visible = false"/>
+      <p-button
+        label="Nộp"
+        styleClass="p-button-primary"
+        (click)="handleSubmit()"
+      />
+    </ng-template>
+  </p-dialog>
+</div>
