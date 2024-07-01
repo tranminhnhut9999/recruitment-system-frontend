@@ -1,4 +1,4 @@
-<div class="job-detail ">
+<div *ngIf="job" class="job-detail ">
   <div class="grid row-gap-4 column-gap-4 justify-content-center">
     <div class="job-detail__left col-8 flex flex-column row-gap-4">
       <div class="section">
@@ -21,7 +21,8 @@
           </div>
         </div>
         <div class="quick-apply-section">
-          <p-button class="quick-apply-btn" icon="ph ph-telegram-logo" label="Ứng tuyển ngay"
+          <p-button (onClick)="handleClickApply()" class="quick-apply-btn" icon="ph ph-telegram-logo"
+                    label="Ứng tuyển ngay"
                     styleClass="p-button-success"></p-button>
         </div>
       </div>
@@ -83,5 +84,6 @@
       </div>
     </div>
   </div>
-  <app-apply-job-form [appliedJob]="job"></app-apply-job-form>
+  <app-apply-job-form *ngIf="job" (onCloseForm)="handleCloseApplyForm()" [visible]="formVisible"
+                      [appliedJob]="job"></app-apply-job-form>
 </div>

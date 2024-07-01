@@ -5,7 +5,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 import {ProfileResponse} from "../../../shared/model/account.model";
-import {JobResponse} from "../../../shared/model/job.response";
+import {Job} from "../../../shared/model/job";
 import {JobService} from "../../../shared/services/job.service";
 import {DateValidator} from "../../../shared/validators/DateValidator";
 import {StringValidator} from "../../../shared/validators/StringValidator";
@@ -23,7 +23,7 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   value1: number = 1500;
   @ViewChild('editorText', {static: false}) editorText!: any;
   formType: "ADDING" | "UPDATING" = "ADDING";
-  job?: JobResponse;
+  job?: Job;
   jobForm: FormGroup | undefined;
   hrStaffs: ProfileResponse[] = [];
   onlyReadStartDate: boolean = false;

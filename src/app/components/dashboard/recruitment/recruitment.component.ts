@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobResponse} from "../../../shared/model/job.response";
+import {Job} from "../../../shared/model/job";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
@@ -8,8 +8,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./recruitment.component.scss']
 })
 export class RecruitmentComponent implements OnInit {
-  selectedJobOverview: JobResponse[] = [];
-  jobOverviews: JobResponse[] = [];
+  selectedJobOverview: Job[] = [];
+  jobOverviews: Job[] = [];
 
   constructor(private http: HttpClient) {
   }

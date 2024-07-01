@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobResponse} from "../../../../shared/model/job.response";
+import {Job} from "../../../../shared/model/job";
 import {JobService} from "../../../../shared/services/job.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -9,8 +9,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./job-detail.component.scss']
 })
 export class JobDetailComponent implements OnInit {
-  job!: JobResponse;
+  job!: Job;
   jobId: string = "";
+  formVisible: boolean = false;
 
   constructor(private jobService: JobService, private route: ActivatedRoute) {
     this.jobId = route.snapshot.paramMap.get('id') as string;
@@ -20,5 +21,12 @@ export class JobDetailComponent implements OnInit {
     this.jobService.getHiringDetailJob(this.jobId).subscribe(response => {
       this.job = response.data;
     })
+  }
+
+  handleClickApply() {
+    this.formVisible = true;
+  }
+  handleCloseApplyForm(){
+    this.formVisible = false;
   }
 }

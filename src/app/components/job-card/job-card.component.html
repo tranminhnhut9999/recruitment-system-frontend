@@ -2,26 +2,20 @@
   <p-card styleClass="pr-4 pl-4">
     <ng-template [pTemplate]="'header'">
       <div class="header flex justify-content-between ">
-        <h2>Nhân viên bán hàng</h2>
-        <h4 class="sal-range ">15-60 triệu</h4>
+        <h2>{{ job.title }}</h2>
+        <h4 class="sal-range ">{{job.salaryRangeFrom + ' - ' + job.salaryRangeTo+' VND'}}</h4>
       </div>
       <div class="body">
-        <h4>BỘ PHẬN SALE</h4>
+        <h4>{{ job.department }}</h4>
       </div>
     </ng-template>
     <div class="footer">
-      <div class="additional-info">
-        Java
-      </div>
-      <div class="additional-info">
-        Problem Solving
-      </div>
-      <div class="additional-info">
-        Critical Thinking
+      <div *ngFor="let key of job.keywords" class="additional-info">
+        {{ key }}
       </div>
     </div>
     <div class="actions flex flex-row-reverse">
-      <p-button label="Xem chi tiết" styleClass="p-button-text" routerLink="25"></p-button>
+      <p-button label="Xem chi tiết" styleClass="p-button-text" routerLink="{{job.id}}"></p-button>
     </div>
   </p-card>
 </div>

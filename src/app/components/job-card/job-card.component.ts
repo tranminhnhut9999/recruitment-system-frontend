@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Job} from "../../shared/model/job";
 
 @Component({
   selector: 'app-job-card',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./job-card.component.scss']
 })
 export class JobCardComponent {
+  @Input({required: true}) job!: Job;
   values: any[] = ["Hồ Chí Minh", "Ứng tuyeenr"]
 }

@@ -2,9 +2,6 @@
   <div class="job-result flex justify-content-center flex-column align-items-center row-gap-4">
     <!--    Search Results:-->
     <!--    Sorry, no results were found based on your search request.-->
-    <app-job-card></app-job-card>
-    <app-job-card></app-job-card>
-    <app-job-card></app-job-card>
-    <app-job-card></app-job-card>
+    <app-job-card [job]="hiringJob" *ngFor="let hiringJob of hiringJobs"></app-job-card>
   </div>
 </div>

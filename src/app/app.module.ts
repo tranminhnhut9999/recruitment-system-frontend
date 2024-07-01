@@ -46,6 +46,9 @@ import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
+import { ApplyJobFormComponent } from './components/candidate-job/job-displaying/job-detail/apply-job-form/apply-job-form.component';
+import {DialogModule} from "primeng/dialog";
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
     declarations: [
@@ -62,6 +65,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
         JobCardComponent,
         JobDetailComponent,
         JobDisplayingComponent,
+        ApplyJobFormComponent,
     ],
   imports: [
     BrowserModule,
@@ -95,7 +99,9 @@ import {SelectButtonModule} from "primeng/selectbutton";
     CalendarModule,
     CheckboxModule,
     ToggleButtonModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DialogModule,
+    FileUploadModule
   ],
     providers: [ConfirmationService, MessageService],
     bootstrap: [AppComponent]

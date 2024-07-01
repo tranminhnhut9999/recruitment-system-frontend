@@ -1,6 +1,7 @@
 <div class="card flex justify-content-center">
   <p-button (click)="showDialog()" label="Show"/>
   <p-dialog
+    (onHide)="handleOnHideDialog()"
     header="Header"
     [(visible)]="visible"
     [modal]="true"
@@ -28,7 +29,7 @@
           <label for="dateOfBirth" class="font-semibold">
             Ngày Sinh
           </label>
-          <p-calendar id="dateOfBirth" formControlName="dateOfBirth"></p-calendar>
+          <p-calendar appendTo="body" id="dateOfBirth" formControlName="dateOfBirth"></p-calendar>
         </div>
         <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">
           <label for="email" class="font-semibold">Email</label>
@@ -44,7 +45,7 @@
           chooseIcon="ph ph-upload-simple"
           accept="image/*"
           [maxFileSize]="1000000"
-          formControlName="cvFile"/>
+          (onUpload)="onFileUpload($event)"/>
       </div>
     </form>
     <ng-template pTemplate="footer">
