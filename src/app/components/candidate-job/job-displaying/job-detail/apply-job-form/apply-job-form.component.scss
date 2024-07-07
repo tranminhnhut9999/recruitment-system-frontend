@@ -1,0 +1,28 @@
+.job-dialog {
+  overflow: hidden;
+
+  #address {
+    width: 100%;
+  }
+
+  .file-input {
+    border: solid 1px var(--gray-400);
+    border-radius: var(--border-radius);
+    &__button {
+      width: fit-content;
+      flex-shrink: 0;
+      background: #3B82F6;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      color: #fff;
+      padding: 0.75rem 0.75rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__display {
+      flex-grow: 1;
+      padding: 0.75rem 0.75rem;
+    }
+  }
+}

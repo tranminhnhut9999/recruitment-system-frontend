@@ -9,10 +9,11 @@ import {JobListComponent} from "./components/candidate-job/job-displaying/job-li
 import {JobDetailComponent} from "./components/candidate-job/job-displaying/job-detail/job-detail.component";
 import {JobDisplayingComponent} from "./components/candidate-job/job-displaying/job-displaying.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
+import {ApplicationComponent} from "./components/dashboard/application/application.component";
 
 const routes: Routes = [
   {
-    path: "dashboard", component: DashboardComponent,canActivate: [AuthGuard], children: [
+    path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard], children: [
       {
         path: "recruitment",
         component: RecruitmentComponent,
@@ -35,6 +36,12 @@ const routes: Routes = [
       {
         path: 'account', component: AccountProfileComponent
       },
+      {
+        path: 'jobs/:id/candidates', component: ApplicationComponent
+      },
+      {
+        path: 'candidates/:id', component: ApplicationComponent
+      }
     ]
   },
   {

@@ -1,4 +1,4 @@
-<div class="card flex justify-content-center">
+<div class="job-dialog card flex justify-content-center">
   <p-button (click)="showDialog()" label="Show"/>
   <p-dialog
     (onHide)="handleOnHideDialog()"
@@ -35,17 +35,47 @@
           <label for="email" class="font-semibold">Email</label>
           <input formControlName="email" pInputText id="email" class="flex-auto" autocomplete="off"/>
         </div>
+        <!--        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-6">-->
+        <!--          <label for="email" class="font-semibold">Email</label>-->
+        <!--          <input formControlName="email" pInputText id="email" class="flex-auto" autocomplete="off"/>-->
+        <!--        </div>-->
+        <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3 col-12">
+          <label for="address" class="font-semibold">
+            Địa Chỉ
+          </label>
+          <input formControlName="address" pInputText id="address" class="flex-auto" autocomplete="off"/>
+        </div>
       </div>
       <div class="flex flex-column justify-content-start  align-items-start gap-3 mb-3">
-        <label for="cvFileUpload" class="font-semibold">Tải CV</label>
-        <p-fileUpload
-          id="cvFileUpload"
-          mode="basic"
-          chooseLabel="Chọn"
-          chooseIcon="ph ph-upload-simple"
-          accept="image/*"
-          [maxFileSize]="1000000"
-          (onUpload)="onFileUpload($event)"/>
+        <!--        <label for="cvFileUpload" class="font-semibold">Tải CV</label>-->
+        <!--        <p-fileUpload-->
+        <!--          id="cvFileUpload"-->
+        <!--          mode="basic"-->
+        <!--          chooseLabel="Chọn"-->
+        <!--          chooseIcon="ph ph-upload-simple"-->
+        <!--          [maxFileSize]="1000000"-->
+        <!--          (uploadHandler)="onFileUpload($event)"-->
+        <!--          [customUpload]="true"-->
+
+        <!--        />-->
+        <div class="flex flex-column items-center justify-center w-full">
+          <div class="file-input flex flex-row">
+            <label for="cvFile" class="font-semibold file-input__button">
+              Upload CV:
+            </label>
+            <span class="file-input__display" *ngIf="this.fileToUpload">
+            {{ this.fileToUpload.name }}
+          </span>
+          </div>
+          <div class="">
+            <input
+              (change)="onFileUpload($event)"
+              [style]="{opacity: '0'}"
+              class=""
+              formControlName="cvFile"
+              id="cvFile" type="file">
+          </div>
+        </div>
       </div>
     </form>
     <ng-template pTemplate="footer">

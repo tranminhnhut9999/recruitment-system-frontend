@@ -1,0 +1,1 @@
+export type JobStatus = "APPLYING" | "EXECUTING" | "REJECTED" | "CONTRACTING" | "INTERVIEWING" | "ACCEPTED" | 'ALL';

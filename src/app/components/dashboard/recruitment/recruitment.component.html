@@ -19,6 +19,7 @@
             <th>Mục tiêu</th>
             <th>Ứng viên</th>
             <th>Trạng thái</th>
+            <th>Cài đặt</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-job>
@@ -27,14 +28,19 @@
               <p-tableCheckbox [value]="job"></p-tableCheckbox>
             </td>
             <td>
-              <a class="job-detail-btn" [routerLink]="'/dashboard/jobs/'+job.id">{{ job.title }}</a>
+              <a class="job-detail-btn" [routerLink]="'/dashboard/jobs/'+job.id+'/candidates'">{{ job.title }}</a>
             </td>
             <td>{{ job.department }}</td>
             <td>{{ job.targetNumber }}</td>
-            <td>{{ job.candidateNumber }}</td>
+            <td>{{ job.numberApplications }}</td>
             <td
               [ngStyle]="{'color': (job.status==true) ? 'green' : 'red'}">
               {{ job.status == true ? "Đang tuyển" : "Đã đóng" }}
+            </td>
+            <td>
+             <span [routerLink]="'/dashboard/jobs/'+job.id" class="setting-icon">
+              <i class="ph ph-gear"></i>
+             </span>
             </td>
           </tr>
         </ng-template>

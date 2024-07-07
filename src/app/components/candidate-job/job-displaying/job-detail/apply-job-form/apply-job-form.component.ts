@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Job} from "../../../../../shared/model/job";
 import {JobService} from "../../../../../shared/services/job.service";
 import {ApiResponse} from "../../../../../shared/model/api.model";
-import {MessageService} from "primeng/api";
+import {MessageService, PrimeNGConfig} from "primeng/api";
 
 @Component({
   selector: 'app-apply-job-form',
@@ -17,8 +17,10 @@ export class ApplyJobFormComponent implements OnInit {
   job!: Job;
   fileToUpload: File | null = null;
 
-
-  constructor(private fb: FormBuilder, private jobService: JobService, private messageService: MessageService) {
+  constructor(private fb: FormBuilder,
+              private jobService: JobService,
+              private messageService: MessageService,
+              private config: PrimeNGConfig) {
   }
 
   @Input({required: true})
@@ -77,30 +79,38 @@ export class ApplyJobFormComponent implements OnInit {
     formData.append('name', this.applyForm.get('name')?.value);
     formData.append('email', this.applyForm.get('email')?.value);
     formData.append('phoneNumber', this.applyForm.get('phoneNumber')?.value);
-    formData.append('dateOfBirth',this.convertToUTC(this.applyForm.get('dateOfBirth')?.value as Date));
+    formData.append('dateOfBirth', this.convertToUTC(this.applyForm.get('dateOfBirth')?.value as Date));
     formData.append('address', this.applyForm.get('address')?.value);
     formData.append('jobId', this.job.id as any);
+    // formData.append('cvFile', this.applyForm.get('cvFile')?.value as any);
+
     if (this.fileToUpload) {
       formData.append('cvFile', this.fileToUpload, this.fileToUpload.name);
+    } else {
+      console.log("File upliad result:" + this.fileToUpload);
     }
     return formData;
   }
 
   onFileUpload(event: any) {
+    console.log("UPLOAD FILE")
+    console.log('onUpload', event);
+
     if (event.target.files.length > 0) {
       this.fileToUpload = event.target.files[0];
       this.applyForm.patchValue({
         cvFile: this.fileToUpload
       });
     }
+
   }
 
   handleOnHideDialog() {
     this.onCloseForm.emit(false);
   }
+
   convertToUTC(date: Date): string {
     return new Date(date).toISOString();
   }
-
   protected readonly Date = Date;
 }

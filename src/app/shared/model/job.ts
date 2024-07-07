@@ -15,4 +15,5 @@ export interface Job {
   jobType: string,
   workingPlace: string;
   recruiters: string[];
+  numberApplications: number
 }

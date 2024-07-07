@@ -1,13 +1,27 @@
 .recruitment {
   height: 100%;
-  .content{
+
+  .content {
     padding-top: .25rem;
   }
+
   &__jobs {
     flex-grow: 1;
   }
+
   .job-detail-btn {
     text-decoration: none;
     color: #495057;
+  }
+
+  .setting-icon {
+    font-size: 1.25rem;
+    color: var(--gray-500);
+
+    :hover {
+      cursor: pointer;
+      color: var(--gray-900);
+
+    }
   }
 }

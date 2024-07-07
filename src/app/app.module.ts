@@ -21,7 +21,7 @@ import {SidebarModule} from "primeng/sidebar";
 import {TableModule} from "primeng/table";
 import {DashboardSidebarComponent} from './components/dashboard-sidebar/dashboard-sidebar.component';
 import {
-    RecruitmentHeaderComponent
+  RecruitmentHeaderComponent
 } from './components/dashboard/recruitment/recruitment-header/recruitment-header.component';
 import {ToolbarModule} from "primeng/toolbar";
 import {JobPostingComponent} from './components/dashboard/job-posting/job-posting.component';
@@ -46,27 +46,31 @@ import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
-import { ApplyJobFormComponent } from './components/candidate-job/job-displaying/job-detail/apply-job-form/apply-job-form.component';
+import {
+  ApplyJobFormComponent
+} from './components/candidate-job/job-displaying/job-detail/apply-job-form/apply-job-form.component';
 import {DialogModule} from "primeng/dialog";
 import {FileUploadModule} from "primeng/fileupload";
+import {ApplicationComponent} from "./components/dashboard/application/application.component";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        DashboardComponent,
-        DashboardHeaderComponent,
-        RecruitmentComponent,
-        DashboardSidebarComponent,
-        RecruitmentHeaderComponent,
-        JobPostingComponent,
-        AccountProfileComponent,
-        JobListComponent,
-        JobCardComponent,
-        JobDetailComponent,
-        JobDisplayingComponent,
-        ApplyJobFormComponent,
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    DashboardHeaderComponent,
+    RecruitmentComponent,
+    DashboardSidebarComponent,
+    RecruitmentHeaderComponent,
+    JobPostingComponent,
+    AccountProfileComponent,
+    JobListComponent,
+    JobCardComponent,
+    JobDetailComponent,
+    JobDisplayingComponent,
+    ApplyJobFormComponent,
+    ApplicationComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -103,8 +107,8 @@ import {FileUploadModule} from "primeng/fileupload";
     DialogModule,
     FileUploadModule
   ],
-    providers: [ConfirmationService, MessageService],
-    bootstrap: [AppComponent]
+  providers: [ConfirmationService, MessageService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

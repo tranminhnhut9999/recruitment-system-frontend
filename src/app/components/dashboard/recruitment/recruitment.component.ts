@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Job} from "../../../shared/model/job";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {JobService} from "../../../shared/services/job.service";
 
 @Component({
   selector: 'app-recruitment',
@@ -11,7 +12,7 @@ export class RecruitmentComponent implements OnInit {
   selectedJobOverview: Job[] = [];
   jobOverviews: Job[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private jobService: JobService) {
   }
 
   ngOnInit() {
@@ -19,7 +20,7 @@ export class RecruitmentComponent implements OnInit {
     // @ts-ignore
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"', '')}`);
 
-    this.http.get("http://localhost:8082/api/jobs", {headers: headers}).subscribe((response: any) => {
+    this.jobService.getAllJobs().subscribe((response: any) => {
       let jobList = response.data;
       this.extractJobOverviews(jobList);
     });
@@ -28,6 +29,4 @@ export class RecruitmentComponent implements OnInit {
   extractJobOverviews(jobListResponse: any[]) {
     this.jobOverviews = [...jobListResponse];
   }
-
-
 }

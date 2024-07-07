@@ -60,4 +60,12 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"', '')}`);
     return this.http.get<ApiResponse<ProfileResponse[]>>(API_URL.GET_HR_STAFF, {headers: headers});
   }
+
+  getLoginEmail() {
+    let currentUserRawData = localStorage.getItem("current_user");
+    if (currentUserRawData) {
+      let currentUser = JSON.parse(currentUserRawData);
+      return currentUser?.data?.email ?? null;
+    }
+  }
 }
