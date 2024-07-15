@@ -8,5 +8,6 @@ export const API_URL = {
   GET_HR_STAFF: "http://localhost:8081/api/accounts/recruiters",
   CREATE_APPLICATION: "http://localhost:8083/api/applications",
   GET_APPLICATION: "http://localhost:8083/api/applications",
+  CREATE_STATUS_APPLICATION: "http://localhost:8083/api/applications/<ID>/status",
 }
 

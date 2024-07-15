@@ -1,0 +1,39 @@
+.detail-application {
+  padding: 2rem;
+  width: 100%;
+
+  .status-label {
+    min-width: fit-content;
+  }
+
+  .detail {
+    width: 50%;
+
+    .information-block {
+      width: 100%;
+      max-width: 30rem;
+    }
+  }
+
+  .status-log {
+    max-height: 100%;
+    overflow: auto;
+
+    ::ng-deep .p-card .p-card-body {
+      padding: 1rem;
+    }
+
+    ::ng-deep .p-card .p-card-content {
+      padding: 0;
+    }
+  }
+
+  .content {
+    .content-input {
+      height: 10rem;
+    }
+  }
+  .sending-email-toggle {
+    margin: 2rem 0;
+  }
+}

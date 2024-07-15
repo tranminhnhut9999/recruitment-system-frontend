@@ -1,4 +1,4 @@
-import {JobStatus} from "../types/type.definition";
+import {ApplyStatus} from "../types/type.definition";
 import {StatusLogResponse} from "./status-log.model";
 
 export interface CandidateApplication {
@@ -12,6 +12,6 @@ export interface CandidateApplication {
   jobId: number;
   applyDate: string; // Assuming Instant is stored as an ISO string
   interviewer: string;
-  status: JobStatus;
+  status: ApplyStatus;
   statusLogs: StatusLogResponse[];
 }

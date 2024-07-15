@@ -52,6 +52,14 @@ import {
 import {DialogModule} from "primeng/dialog";
 import {FileUploadModule} from "primeng/fileupload";
 import {ApplicationComponent} from "./components/dashboard/application/application.component";
+import {AccordionModule} from "primeng/accordion";
+import { UtcToDatePipe } from './shared/pipes/utc-to-date.pipe';
+import { DetailApplicationComponent } from './components/dashboard/detail-application/detail-application.component';
+import { UtcToLocalPipe } from './shared/pipes/utc-to-local.pipe';
+import { ApplicationStateLabelPipe } from './shared/pipes/application-state-label.pipe';
+import { ApplicationStateComponent } from './components/dashboard/application-state/application-state.component';
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {StyleClassModule} from "primeng/styleclass";
 
 @NgModule({
   declarations: [
@@ -70,6 +78,11 @@ import {ApplicationComponent} from "./components/dashboard/application/applicati
     JobDisplayingComponent,
     ApplyJobFormComponent,
     ApplicationComponent,
+    UtcToDatePipe,
+    DetailApplicationComponent,
+    UtcToLocalPipe,
+    ApplicationStateLabelPipe,
+    ApplicationStateComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +118,10 @@ import {ApplicationComponent} from "./components/dashboard/application/applicati
     ToggleButtonModule,
     SelectButtonModule,
     DialogModule,
-    FileUploadModule
+    FileUploadModule,
+    AccordionModule,
+    InputTextareaModule,
+    StyleClassModule
   ],
   providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]

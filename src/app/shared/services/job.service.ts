@@ -7,6 +7,7 @@ import {PerformJobRequest} from "../model/perform-job-request";
 import {getHttpRestOption} from "../utils/http.util";
 import {GetJobsQuery} from "../model/get-jobs-query.model";
 import {CandidateApplication} from "../model/candidate-application.model";
+import {StatusLogResponse} from "../model/status-log.model";
 
 @Injectable({
   providedIn: 'root'
@@ -59,11 +60,23 @@ export class JobService {
 
   getCandidateApplication(params: any) {
     const httpOptions = getHttpRestOption();
-    let paramsURL: string = "?";
-    paramsURL += `jobId=${params?.jobId}&`;
-    paramsURL += `interviewEmail=${params?.interviewEmail}&`;
-    paramsURL += `status=${params?.status ?? "ALL"}`;
+    let paramsURL: string = "";
+    if (params) {
+      paramsURL += `?jobId=${params?.jobId}&`;
+      paramsURL += `interviewEmail=${params?.interviewEmail}&`;
+      paramsURL += `status=${params?.status ?? "ALL"}`;
+    }
 
     return this.http.get<ApiResponse<CandidateApplication[]>>(API_URL.GET_APPLICATION + `${paramsURL}`, httpOptions);
+  }
+
+  getCandidateApplicationById(id: any) {
+    const httpOptions = getHttpRestOption();
+    return this.http.get<ApiResponse<CandidateApplication>>(API_URL.GET_APPLICATION + "/" + `${id}`, httpOptions);
+  }
+
+  changeStatusApplicationById(candidateId: any, params: any) {
+    const httpOptions = getHttpRestOption();
+    return this.http.put<ApiResponse<StatusLogResponse>>(API_URL.CREATE_STATUS_APPLICATION.replace("<ID>", candidateId), params, httpOptions);
   }
 }

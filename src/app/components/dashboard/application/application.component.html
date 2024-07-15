@@ -1,6 +1,12 @@
-<div *ngFor="let key of getKeys(classifiedApplications)">
-  <h3>{{ key }}</h3>
-  <ul>
-<!--    <li *ngFor="let value of myDictionary[key]">{{ value }}</li>-->
-  </ul>
+<div class="applications">
+  <p-accordion [activeIndex]="0">
+    <app-application-state [state]="'APPLYING'" [applications]="classifiedApplications['APPLYING']"></app-application-state>
+    <app-application-state [state]="'EXECUTING'" [applications]="classifiedApplications['EXECUTING']"></app-application-state>
+    <app-application-state [state]="'INTERVIEWING'" [applications]="classifiedApplications['INTERVIEWING']"></app-application-state>
+    <app-application-state [state]="'CONTRACTING'" [applications]="classifiedApplications['CONTRACTING']"></app-application-state>
+    <app-application-state [state]="'ACCEPTED'" [applications]="classifiedApplications['ACCEPTED']"></app-application-state>
+    <app-application-state [state]="'REJECTED'" [applications]="classifiedApplications['REJECTED']"></app-application-state>
+  </p-accordion>
 </div>
+
+

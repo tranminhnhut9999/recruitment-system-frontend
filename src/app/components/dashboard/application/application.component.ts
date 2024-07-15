@@ -4,6 +4,8 @@ import {JobService} from "../../../shared/services/job.service";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 import {Dictionary} from "../../../shared/model/dictionary";
+import {StatusLogResponse} from "../../../shared/model/status-log.model";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -12,12 +14,17 @@ import {Dictionary} from "../../../shared/model/dictionary";
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent implements OnInit {
+// Array of mock candidate applications
   applications: CandidateApplication[] = [];
   jobId: any;
   classifiedApplications: Dictionary<CandidateApplication[]> = {};
 
-  constructor(private jobService: JobService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
-    this.jobId = activatedRoute.snapshot.paramMap.get("id");
+  constructor(private jobService: JobService,
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
+              private http: HttpClient) {
+    this.jobId = activatedRoute.snapshot.paramMap.get("jobId");
+
   }
 
   ngOnInit(): void {
@@ -29,18 +36,17 @@ export class ApplicationComponent implements OnInit {
       });
   }
 
-  classifyApplication(applications: CandidateApplication[]) {
+  classifyApplication(applications: CandidateApplication[] = []) {
     for (let application of applications) {
       let status = application.status;
-      let applycationByStatus = this.classifiedApplications[status];
-      if (applycationByStatus) {
-        this.classifiedApplications[status].push(application);
+      let applycationsByStatus = this.classifiedApplications[status];
+      if (applycationsByStatus) {
+        if (applycationsByStatus) {
+          this.classifiedApplications[status].push(application);
+        }
       } else {
         this.classifiedApplications[status] = [application];
       }
     }
-  }
-  getKeys(dictionary: Dictionary<CandidateApplication[]>): string[] {
-    return Object.keys(dictionary);
   }
 }

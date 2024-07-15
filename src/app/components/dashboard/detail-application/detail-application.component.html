@@ -1,0 +1,103 @@
+<div class="detail-application">
+  <div class="top grid align-items-center">
+    <div class="candidate-name col-8">
+      <h2>Ứng Viên: {{ application?.name }}</h2>
+    </div>
+    <div class="status-dropdown col-3 flex column-gap-3 align-items-center">
+      <span class="status-label font-bold">Trạng Thái</span>
+      <p-dropdown
+        [options]="applicationStates"
+        [(ngModel)]="currentSelectItem"
+        optionLabel="label"
+        placeholder="Change application state"
+        [style]="{width: '15rem'}"
+        (onChange)="handleOnChangeStatus($event)"/>
+    </div>
+  </div>
+  <div class="bottom grid">
+    <div class="detail col-8">
+      <h3>Thông tin ứng viên</h3>
+      <div class="flex flex-column row-gap-5">
+        <div class="information-block flex justify-content-between">
+          <span class="font-semibold">Email:</span>
+          <span>{{ application?.email }}</span>
+        </div>
+        <div class="information-block flex justify-content-between">
+          <span class="font-semibold">Phone Number:</span>
+          <span>{{ application?.phoneNumber }}</span>
+
+        </div>
+        <div class="information-block flex justify-content-between">
+          <span class="font-semibold">Date of Birth:</span>
+          <span>{{ application?.dateOfBirth | utcToDate }}</span>
+
+        </div>
+        <div class="information-block flex justify-content-between">
+          <span class="font-semibold">Address:</span>
+          <span>{{ application?.address }}</span>
+
+        </div>
+        <div class="information-block flex justify-content-between">
+          <span class="font-semibold">Apply Date:</span>
+          <span>{{ application?.applyDate | utcToLocal }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-log col-3">
+      <h3>Quản lý tiến độ</h3>
+      <div class="flex flex-column justify-self-center row-gap-4">
+        <p-card *ngFor="let statusLog of application?.statusLogs">
+          <ng-template pTemplate="header">
+            <div class="p-3">
+              <span>Cập nhật trạng thái:   </span>
+              <span class="font-semibold ml-2">{{ statusLog.status | applicationStateLabel }}</span>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <span class="font-semibold">Ghi Chú</span>
+            <p>
+              {{ statusLog.note | applicationStateLabel }}
+            </p>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex flex-row justify-content-end">
+              <span>Ngày thay đổi: </span>
+              <span class="ml-2 font-semibold">{{ statusLog.createTime | utcToLocal }}</span>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
+  <p-dialog (onHide)="resetDialogState()" [draggable]="false" [resizable]="false" [modal]="true" appendTo="body"
+            header="Xác nhận đổi trạng thái ứng viên" [(visible)]="isVisibleChangeStatusDialog"
+            [style]="{ width: '50rem' }">
+    <div class="content">
+      <div class="content-header">
+        <h3>Ghi chú</h3>
+      </div>
+      <div [style]="{height: '10rem'}" class="content-input">
+    <textarea
+      style="resize: none; height: 100%; width: 100%; overflow: auto;"
+      pInputTextarea
+      [(ngModel)]="statusChangeLog"
+      [autoResize]="false">
+    </textarea>
+      </div>
+      <div [style]="{margin: '2rem 0'}" class="sending-email-toggle">
+        <label>Gửi cho ứng viên: </label>
+        <p-checkbox
+          [(ngModel)]="willSendMail"
+          [binary]="true"
+          inputId="binary"/>
+      </div>
+      <p-editor *ngIf="willSendMail == true" #editorText [(ngModel)]="emailContent"
+                [style]="{ height: '320px', width: '100%' }"/>
+
+    </div>
+    <div class="footer flex flex-row-reverse mt-3">
+      <p-button (onClick)="handleAcceptChange()" styleClass="p-button-primary" label="Đồng ý"></p-button>
+    </div>
+  </p-dialog>
+</div>

@@ -1,9 +1,9 @@
 // Interface for StatusLogResponse
-import {JobStatus} from "../types/type.definition";
+import {ApplyStatus} from "../types/type.definition";
 
 export interface StatusLogResponse {
   id: number;
-  status: JobStatus;
+  status: ApplyStatus;
   createTime: string; // Assuming Instant is stored as an ISO string
   note: string;
 }

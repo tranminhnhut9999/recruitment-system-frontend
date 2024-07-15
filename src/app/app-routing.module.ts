@@ -10,6 +10,7 @@ import {JobDetailComponent} from "./components/candidate-job/job-displaying/job-
 import {JobDisplayingComponent} from "./components/candidate-job/job-displaying/job-displaying.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {ApplicationComponent} from "./components/dashboard/application/application.component";
+import {DetailApplicationComponent} from "./components/dashboard/detail-application/detail-application.component";
 
 const routes: Routes = [
   {
@@ -37,10 +38,19 @@ const routes: Routes = [
         path: 'account', component: AccountProfileComponent
       },
       {
-        path: 'jobs/:id/candidates', component: ApplicationComponent
-      },
-      {
-        path: 'candidates/:id', component: ApplicationComponent
+        path: 'jobs/:jobId/candidates',
+        children: [
+          {
+            path: "",
+            pathMatch: "full",
+            component: ApplicationComponent
+          },
+          {
+            path: ":applicationId",
+            pathMatch: "full",
+            component: DetailApplicationComponent
+          }
+        ]
       }
     ]
   },

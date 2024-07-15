@@ -1,0 +1,50 @@
+<p-accordionTab>
+  <ng-template pTemplate="header">
+    <div class="flex flex-row justify-content-between w-full">
+      <span class="font-bold white-space-nowrap">
+        {{ getStateLabel(state) }}
+      </span>
+      <span>
+        Số Lượng Hồ Sơ {{ applications ? applications.length : 0 }}
+      </span>
+    </div>
+  </ng-template>
+  <span *ngIf="!applications || applications.length === 0" class="not-found-mesg">
+    No records found!
+  </span>
+  <p-table [paginator]="true" [rows]="5" *ngIf="applications && applications.length > 0" [value]="applications">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Date of Birth</th>
+        <th>Address</th>
+        <th>Apply Date</th>
+        <th class="align-self-center">Tệp</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-application let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ application.name }}</td>
+        <td>{{ application.email }}</td>
+        <td>{{ application.phoneNumber }}</td>
+        <td>{{ application.dateOfBirth | utcToDate }}</td>
+        <td>{{ application.address }}</td>
+        <td>{{ application.applyDate | utcToDate }}</td>
+        <td>
+          <p-button [disabled]="!application.cvUrl || application.cvUrl === ''"
+                    (onClick)="downloadFile(application.cvUrl)">
+            Tải CV
+          </p-button>
+        </td>
+        <td>
+          <p-button [routerLink]="application.id" label="Chi tiết" styleClass="p-button-secondary"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-accordionTab>

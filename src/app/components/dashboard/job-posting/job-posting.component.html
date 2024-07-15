@@ -117,7 +117,7 @@
     </p-tabPanel>
     <p-tabPanel header="Mô tả công việc">
       <p>
-        <p-editor #editorText (onTextChange)="onChangeDescription($event)" formControlName="description"
+        <p-editor (onTextChange)="onChangeDescription($event)" formControlName="description"
                   [style]="{ height: '320px', width: '100%' }"/>
       </p>
     </p-tabPanel>

@@ -18,3 +18,52 @@ body {
   margin: 0;
 }
 
+// Custom Scroll Bar
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;  /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;  /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;  /* Color of the scroll thumb */
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;  /* Padding around the scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;  /* Color of the scroll thumb on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;  /* Sets the scrollbar width */
+  scrollbar-color: #888 #f1f1f1;  /* Thumb color and track color */
+}
+
+/* For Edge and Internet Explorer */
+body {
+  -ms-overflow-style: scrollbar;  /* Show standard scrollbars in IE */
+}
+
+::-ms-scrollbar {
+  width: 12px;  /* Width of the entire scrollbar */
+}
+
+::-ms-scrollbar-track {
+  background: #f1f1f1;  /* Background of the scrollbar track */
+}
+
+::-ms-scrollbar-thumb {
+  background-color: #888;  /* Color of the scroll thumb */
+}
+
+::-ms-scrollbar-thumb:hover {
+  background: #555;  /* Color of the scroll thumb on hover */
+}
+
+
