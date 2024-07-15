@@ -78,6 +78,7 @@ export class DetailApplicationComponent implements OnInit {
     this.isVisibleChangeStatusDialog = false;
     this.revertStateBackToSelecting();
     this.emailContent = "";
+    this.willSendMail = false;
   }
 
   handleAcceptChange() {
