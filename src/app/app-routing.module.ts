@@ -11,6 +11,9 @@ import {JobDisplayingComponent} from "./components/candidate-job/job-displaying/
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {ApplicationComponent} from "./components/dashboard/application/application.component";
 import {DetailApplicationComponent} from "./components/dashboard/detail-application/detail-application.component";
+import {
+  JobTypeConfigurationComponent
+} from "./components/dashboard/configuration/job-type-configuration/job-type-configuration.component";
 
 const routes: Routes = [
   {
@@ -51,6 +54,10 @@ const routes: Routes = [
             component: DetailApplicationComponent
           }
         ]
+      },
+      {
+        path: "job-types",
+        component: JobTypeConfigurationComponent
       }
     ]
   },

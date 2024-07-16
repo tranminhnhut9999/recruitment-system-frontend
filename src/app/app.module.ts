@@ -60,6 +60,8 @@ import { ApplicationStateLabelPipe } from './shared/pipes/application-state-labe
 import { ApplicationStateComponent } from './components/dashboard/application-state/application-state.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {StyleClassModule} from "primeng/styleclass";
+import { JobTypeConfigurationComponent } from './components/dashboard/configuration/job-type-configuration/job-type-configuration.component';
+import { CastPipe } from './shared/pipes/cast.pipe';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import {StyleClassModule} from "primeng/styleclass";
     UtcToLocalPipe,
     ApplicationStateLabelPipe,
     ApplicationStateComponent,
+    JobTypeConfigurationComponent,
+    CastPipe,
   ],
   imports: [
     BrowserModule,
