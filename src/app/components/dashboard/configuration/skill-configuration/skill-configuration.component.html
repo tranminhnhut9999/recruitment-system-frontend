@@ -1,0 +1,56 @@
+<div class="job-type-form p-5">
+  <h2>Tạo Kĩ Năng</h2>
+  <form [formGroup]="skillForm" (ngSubmit)="onSubmit()">
+    <div class="form-group flex column-gap-2 align-items-center">
+      <label for="name">Tên Kĩ Năng</label>
+      <input
+        [pTooltip]="skillForm.get('name')?.invalid && skillForm.get('name')?.touched ? 'Không được để trông kĩ năng' : ''"
+        pInputText id="name" type="text" formControlName="name" class="form-control"/>
+      <button label="Tạo Mới" pButton type="submit" class="btn btn-primary ml-3"
+              [disabled]="skillForm.invalid"></button>
+      <!--      <div *ngIf="jobTypeForm.get('name')?.invalid && jobTypeForm.get('name')?.touched" class="text-danger">-->
+      <!--        Không được để trống loại công việc-->
+      <!--      </div>-->
+    </div>
+  </form>
+
+  <div class="existed-job-type-table mt-6">
+    <p-table [value]="displaySkills"
+             [tableStyle]="{ 'min-width': '50rem' }"
+             [paginator]="true"
+             [rows]="5"
+             [globalFilterFields]="['name']"
+             [loading]="loading"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <i class="ph ph-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="filterTable($event)"
+            placeholder="Search keyword"/>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+          <th>Tên Kĩ Năng</th>
+          <th>Xóa</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ skill.name }}</td>
+          <td>
+            <button (click)="deleteSkill(skill)" pButton label="Xóa" [pStyleClass]="'p-button-error'"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="not-found-record text-center" *ngIf="!skills || skills.length == 0">
+      <p>Không tìm thấy bất kì kĩ năng</p>
+    </div>
+  </div>
+</div>

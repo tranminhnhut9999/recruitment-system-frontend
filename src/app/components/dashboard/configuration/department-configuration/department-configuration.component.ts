@@ -1,33 +1,31 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {JobType} from "../../../../shared/model/job-type.model";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
-import {Observable, Subject} from "rxjs";
 import {MessageService} from "primeng/api";
 import {Department} from "../../../../shared/model/department.model";
 
 @Component({
-  selector: 'app-job-type-configuration',
-  templateUrl: './job-type-configuration.component.html',
-  styleUrls: ['./job-type-configuration.component.scss']
+  selector: 'app-department-configuration',
+  templateUrl: './department-configuration.component.html',
+  styleUrls: ['./department-configuration.component.scss']
 })
-export class JobTypeConfigurationComponent {
-  jobTypeForm: FormGroup;
-  jobTypes: JobType[] = [];
-  displayJobTypes: JobType[] = [];
+export class DepartmentConfigurationComponent {
+  departmentForm: FormGroup;
+  departments: Department[] = [];
+  displayDepartment: Department[] = [];
   loading: boolean = true;
 
   constructor(private fb: FormBuilder, private configurationService: ConfigurationService, private messageService: MessageService) {
-    this.jobTypeForm = this.fb.group({
+    this.departmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]],
     });
-    this.configurationService.jobTypes$.subscribe(jobTypes => {
-      if (jobTypes) {
-        this.jobTypes = jobTypes;
-        this.displayJobTypes = [...jobTypes];
-      } else {
-        this.jobTypes = [];
-        this.displayJobTypes = [];
+    this.configurationService.departments$.subscribe(departments => {
+      if (departments) {
+        this.departments = departments;
+        this.displayDepartment = [...departments];
+      }else{
+        this.departments = [];
+        this.displayDepartment = [];
       }
       this.loading = false
     });
@@ -35,31 +33,31 @@ export class JobTypeConfigurationComponent {
   }
 
   onSubmit() {
-    if (this.jobTypeForm.valid) {
-      const jobType: JobType = this.jobTypeForm.value;
-      if (this.isExistJobType(jobType.name)) {
+    if (this.departmentForm.valid) {
+      const department: Department = this.departmentForm.value;
+      if (this.isExistDepartment(department.name)) {
         this.messageService.add({
           severity: 'error',
           summary: 'Thất Bại',
-          detail: 'Loại Công Việc Đã Tồn Tại',
+          detail: 'Bộ Phận Đã Tồn Tại',
         });
         return;
       }
-      this.configurationService.createJobType(jobType).subscribe(
+      this.configurationService.createDepartment(department).subscribe(
         (response: any) => {
-          this.configurationService.loadJobType();
-          this.jobTypeForm.reset();
+          this.configurationService.loadDepartment();
+          this.departmentForm.reset();
           this.messageService.add({
             severity: 'success',
             summary: 'Thành Công',
-            detail: 'Tạo loại công việc thành công',
+            detail: 'Tạo bộ phận thành công',
           });
         },
         (error: any) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Thất Bại',
-            detail: 'Tạo loại công việc thất bại',
+            detail: 'Tạo bộ phận thất bại',
           });
         }
       );
@@ -67,39 +65,40 @@ export class JobTypeConfigurationComponent {
   }
 
   filterTable(event: Event) {
-
     let filterWord = (event.target as HTMLInputElement).value;
     if (filterWord.length > 0) {
-      this.displayJobTypes = this.displayJobTypes
+      this.displayDepartment = this.displayDepartment
         .filter(jb => jb.name.toLowerCase().includes(filterWord) || filterWord.toLowerCase().includes(jb.name));
     } else {
-      this.displayJobTypes = [...this.jobTypes];
+      this.displayDepartment = [...this.departments];
     }
   }
 
-  isExistJobType(newName: string) {
-    return this.jobTypes.filter(jb => jb.name.toLowerCase() == newName.toLowerCase()).length > 0;
+  isExistDepartment(newName: string) {
+    return this.departments.filter(jb => jb.name.toLowerCase() == newName.toLowerCase()).length > 0;
   }
 
-  deleteJobType(jobType: JobType) {
-    if (jobType && jobType.id) {
-      this.configurationService.deleteJobType(jobType.id).subscribe(
+  deleteDepartment(department: Department) {
+    if (department && department.id) {
+      this.configurationService.deleteDepartment(department.id).subscribe(
         (response: any) => {
           this.configurationService.loadDepartment();
           this.messageService.add({
             severity: 'success',
             summary: 'Thành Công',
-            detail: 'Xóa loại công việc thành công',
+            detail: 'Xóa bộ phận thành công',
           });
         },
         (error: any) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Thất Bại',
-            detail: 'Xóa loại công việc thất bại',
+            detail: 'Xóa bộ phận thất bại',
           });
         }
       );
     }
   }
+
+  protected readonly HTMLInputElement = HTMLInputElement;
 }
