@@ -1,0 +1,51 @@
+<div class="p-5">
+  <h2>Quản Lý Tài Khoản Nhân Viên</h2>
+  <div class="mt-6">
+    <p-table [value]="accounts" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'">
+      <ng-template pTemplate="caption">
+
+        <p-toolbar>
+          <div class="p-toolbar-group-start">
+            <div class="flex">
+              <i class="ph ph-search"></i>
+              <input
+                pInputText
+                type="text"
+                placeholder="Search keyword"/>
+            </div>
+          </div>
+          <div class="p-toolbar-group-center">
+          </div>
+          <div class="p-toolbar-group-end">
+            <p-button routerLink="/dashboard/staff-register" label="Thêm tài khoản mới"
+                      styleClass="p-button-primary"></p-button>
+          </div>
+        </p-toolbar>
+
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">{{ col.header }}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-account>
+        <tr>
+          <td>{{ account.id }}</td>
+          <td>{{ account.firstname }}</td>
+          <td>{{ account.lastname }}</td>
+          <td>{{ account.email }}</td>
+          <td>{{ account.role.roleName }}</td>
+          <td>
+            <div class="flex column-gap-3">
+              <p-button type="button" styleClass="p-button-info" (click)="viewDetails(account)"
+                        label="Chi Tiết"></p-button>
+              <p-button type="button" styleClass="p-button-danger" (click)="deactivateAccount(account)"
+                        label="Vô Hiệu"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>

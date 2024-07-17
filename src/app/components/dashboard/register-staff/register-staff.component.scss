@@ -1,0 +1,29 @@
+.profile {
+  padding: 3rem;
+
+  .information__label {
+    display: inline-block;
+    font-weight: bold;
+    width: 200px;
+  }
+
+
+  ::ng-deep .p-dropdown {
+    width: 15rem;
+  }
+
+
+  .block__detail {
+    .block__title {
+      width: 200px;
+    }
+  }
+
+  .input-label-min-width {
+    min-width: 8rem;
+  }
+
+  .inputor-min-width {
+    width: 15rem;
+  }
+}

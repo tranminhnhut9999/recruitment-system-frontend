@@ -62,6 +62,10 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {StyleClassModule} from "primeng/styleclass";
 import { JobTypeConfigurationComponent } from './components/dashboard/configuration/job-type-configuration/job-type-configuration.component';
 import { CastPipe } from './shared/pipes/cast.pipe';
+import { DepartmentConfigurationComponent } from './components/dashboard/configuration/department-configuration/department-configuration.component';
+import { SkillConfigurationComponent } from './components/dashboard/configuration/skill-configuration/skill-configuration.component';
+import { StaffManagementComponent } from './components/dashboard/staff-management/staff-management.component';
+import { RegisterStaffComponent } from './components/dashboard/register-staff/register-staff.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +91,10 @@ import { CastPipe } from './shared/pipes/cast.pipe';
     ApplicationStateComponent,
     JobTypeConfigurationComponent,
     CastPipe,
+    DepartmentConfigurationComponent,
+    SkillConfigurationComponent,
+    StaffManagementComponent,
+    RegisterStaffComponent,
   ],
   imports: [
     BrowserModule,

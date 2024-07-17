@@ -1,7 +1,7 @@
-interface RoleResponse {
+export interface RoleResponse {
   // Define properties of RoleResponse based on its Java definition
-  id: number;
-  roleName: string;
+  code: string;
+  name: string;
 }
 
 export interface ProfileResponse {
@@ -9,7 +9,6 @@ export interface ProfileResponse {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
   role: RoleResponse;
   status: string; // Assuming EAccountStatus.ACTIVATE is a string enum value
   compPhone: string;

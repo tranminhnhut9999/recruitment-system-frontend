@@ -14,6 +14,14 @@ import {DetailApplicationComponent} from "./components/dashboard/detail-applicat
 import {
   JobTypeConfigurationComponent
 } from "./components/dashboard/configuration/job-type-configuration/job-type-configuration.component";
+import {
+  DepartmentConfigurationComponent
+} from "./components/dashboard/configuration/department-configuration/department-configuration.component";
+import {
+  SkillConfigurationComponent
+} from "./components/dashboard/configuration/skill-configuration/skill-configuration.component";
+import {StaffManagementComponent} from "./components/dashboard/staff-management/staff-management.component";
+import {RegisterStaffComponent} from "./components/dashboard/register-staff/register-staff.component";
 
 const routes: Routes = [
   {
@@ -58,6 +66,22 @@ const routes: Routes = [
       {
         path: "job-types",
         component: JobTypeConfigurationComponent
+      },
+      {
+        path: "departments",
+        component: DepartmentConfigurationComponent
+      },
+      {
+        path: "skills",
+        component: SkillConfigurationComponent
+      },
+      {
+        path: "staff-management",
+        component: StaffManagementComponent
+      },
+      {
+        path: "staff-register",
+        component: RegisterStaffComponent
       }
     ]
   },

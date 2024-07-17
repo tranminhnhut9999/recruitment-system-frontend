@@ -19,14 +19,12 @@ export class DashboardHeaderComponent implements OnInit {
   ngOnInit() {
     this.headerMenuItems = [
       {
-        label: 'Ứng viên',
+        label: 'Quản lý',
         icon: 'pi pi-home',
         items: [
           {
-            label: 'Theo vị trí công việc',
-          },
-          {
-            label: 'Tất cả đơn xin việc',
+            label: 'Các công việc',
+            routerLink: 'recruitment'
           }
         ]
       },
@@ -63,13 +61,16 @@ export class DashboardHeaderComponent implements OnInit {
           {separator: true},
           {
             label: 'Phòng ban',
+            routerLink: 'departments'
           },
           {
-            label: 'Các loại kĩ năng'
+            label: 'Các loại kĩ năng',
+            routerLink: 'skills'
           },
           {separator: true},
           {
-            label: 'Nhân sự'
+            label: 'Nhân viên',
+            routerLink: 'staff-management'
           }
         ]
       }
