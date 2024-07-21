@@ -34,13 +34,20 @@
           <td>{{ account.firstname }}</td>
           <td>{{ account.lastname }}</td>
           <td>{{ account.email }}</td>
-          <td>{{ account.role.roleName }}</td>
+          <td>{{ account.role.name }}</td>
+          <td
+            class="{{account.status == 'ACTIVATE'? 'activate-color-text' : 'inactivate-color-text'}}">{{ account.status == 'ACTIVATE' ? 'Đang hoạt động' : 'Vô hiệu hóa' }}
+          </td>
           <td>
             <div class="flex column-gap-3">
               <p-button type="button" styleClass="p-button-info" (click)="viewDetails(account)"
                         label="Chi Tiết"></p-button>
-              <p-button type="button" styleClass="p-button-danger" (click)="deactivateAccount(account)"
+              <p-button *ngIf="account.status == AccountStatus.ACTIVATE" type="button" styleClass="p-button-danger"
+                        (click)="deactivateAccount(account)"
                         label="Vô Hiệu"></p-button>
+              <p-button *ngIf="account.status == AccountStatus.INACTIVATE" type="button" styleClass="p-button-success"
+                        (click)="activateAccount(account)"
+                        label="Kích hoạt"></p-button>
             </div>
           </td>
         </tr>

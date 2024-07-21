@@ -11,6 +11,8 @@ import {ApiResponse} from "../model/api.model";
 export class AccountService {
   private BASE_URL = 'http://localhost:8081/api/';
   private ACCOUNT_URL = this.BASE_URL + 'accounts';
+  private CHANGE_STATUS_URL = this.ACCOUNT_URL + "/change-status";
+
   accounts$: ReplaySubject<ProfileResponse[]> = new ReplaySubject(1);
 
   constructor(private http: HttpClient) {
@@ -32,5 +34,17 @@ export class AccountService {
   getAccount(request?: any) {
     let httpRestOption = getHttpRestOption();
     return this.http.get<ApiResponse<ProfileResponse[]>>(this.ACCOUNT_URL, httpRestOption);
+  }
+
+  changeStatusAccount(params?: any) {
+    let httpRestOption = getHttpRestOption();
+    let paramsURL = "";
+    if (params) {
+      paramsURL = "?";
+      Object.keys(params).forEach(key => {
+        paramsURL += `${key}=${params[key]}`;
+      })
+    }
+    return this.http.put<ApiResponse<string>>(this.CHANGE_STATUS_URL, params, httpRestOption);
   }
 }
