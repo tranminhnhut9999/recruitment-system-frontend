@@ -6,6 +6,7 @@ import {ApiResponse} from "../model/api.model";
 import {getHttpRestOption} from "../utils/http.util";
 import {Department} from "../model/department.model";
 import {Skill} from "../model/skill.model";
+import {WorkingAddress} from "../model/working-address.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,18 @@ export class ConfigurationService {
   private JOB_TYPE_URL = `${this.CONFIGURATION_BASE_URL}/job-types`;
   private DEPARTMENT_URL = `${this.CONFIGURATION_BASE_URL}/departments`;
   private SKILL_URL = `${this.CONFIGURATION_BASE_URL}/skills`;
-
+  private WORKING_ADDRESS_URL = `${this.CONFIGURATION_BASE_URL}/working-addresses`;
 
   jobTypes$: Subject<JobType[]> = new ReplaySubject<JobType[]>(1);
   departments$: Subject<Department[]> = new ReplaySubject<Department[]>(1);
   skill$: Subject<Skill[]> = new ReplaySubject<Skill[]>(1);
+  workingAddresses$: Subject<WorkingAddress[]> = new ReplaySubject<WorkingAddress[]>(1);
 
   constructor(private http: HttpClient) {
     this.loadJobType();
     this.loadDepartment();
     this.loadSkill();
+    this.loadWorkingAddress();
   }
 
   /** JOB TYPE CONFIGURATION */
@@ -94,5 +97,27 @@ export class ConfigurationService {
   deleteSkill(id: number) {
     let httpRestOption = getHttpRestOption();
     return this.http.delete<ApiResponse<any>>(this.SKILL_URL + `/${id}`, httpRestOption);
+  }
+
+  /**  WORKING ADDRESS CONFIGURATION  */
+  createWorkingAddress(workingAddress: WorkingAddress): Observable<WorkingAddress> {
+    let httpRestOption = getHttpRestOption();
+    return this.http.post<WorkingAddress>(this.WORKING_ADDRESS_URL, workingAddress, httpRestOption);
+  }
+
+  loadWorkingAddress() {
+    this.http.get<ApiResponse<WorkingAddress[]>>(this.WORKING_ADDRESS_URL).subscribe({
+      next: response => {
+        this.workingAddresses$.next(response.data);
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
+
+  deleteWorkingAddress(id: number) {
+    let httpRestOption = getHttpRestOption();
+    return this.http.delete<ApiResponse<any>>(this.WORKING_ADDRESS_URL + `/${id}`, httpRestOption);
   }
 }

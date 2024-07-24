@@ -45,8 +45,8 @@
             <div class="col-12 flex align-items-center">
               <label class="information__label">Địa chỉ làm việc:</label>
               <p-dropdown [filter]="true" filterBy="value"
-                          [showClear]="true" class="flex-1" optionLabel="value" optionValue="value"
-                          [options]="workingPlaces"
+                          [showClear]="true" class="flex-1" optionLabel="address" optionValue="address"
+                          [options]="workingAddress$ | async"
                           formControlName="workingAddress"
                           placeholder="Chọn nơi làm việc"></p-dropdown>
             </div>

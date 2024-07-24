@@ -25,6 +25,10 @@ export class DashboardHeaderComponent implements OnInit {
           {
             label: 'Các công việc',
             routerLink: 'recruitment'
+          },
+          {
+            label: 'Nhân viên',
+            routerLink: 'staff-management'
           }
         ]
       },
@@ -67,11 +71,10 @@ export class DashboardHeaderComponent implements OnInit {
             label: 'Các loại kĩ năng',
             routerLink: 'skills'
           },
-          {separator: true},
           {
-            label: 'Nhân viên',
-            routerLink: 'staff-management'
-          }
+            label: 'Địa chỉ làm việc',
+            routerLink: 'working-address'
+          },
         ]
       }
     ];

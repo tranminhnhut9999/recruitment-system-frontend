@@ -1,9 +1,10 @@
 import {Component, Input} from '@angular/core';
-import {ConfirmationService} from "primeng/api";
+import {Confirmation, ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 import {ProfileResponse} from "../../../../shared/model/account.model";
 import {Department} from "../../../../shared/model/department.model";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
+import {AccountService} from "../../../../shared/services/account.service";
 
 @Component({
   selector: 'app-staff-detail',
@@ -28,7 +29,9 @@ export class StaffDetailComponent {
 
   constructor(private confirmService: ConfirmationService,
               private location: Location,
-              private configurationService: ConfigurationService) {
+              private configurationService: ConfigurationService,
+              private accountService: AccountService,
+              private messageService: MessageService) {
   }
 
   @Input()
@@ -83,5 +86,35 @@ export class StaffDetailComponent {
         break;
       }
     }
+  }
+
+  handleClickResetPassword() {
+    let confirmation: Confirmation = {
+      header: "Xác nhận",
+      message: "Bạn có muốn reset mật khẩu của nhân viên này ?",
+      acceptLabel: "Reset",
+      rejectIcon: "Hủy",
+      acceptButtonStyleClass: "p-button-primary",
+      rejectButtonStyleClass: "p-button-secondary",
+      accept: () => {
+        this.accountService.resetPassword(this._profile?.id as number).subscribe({
+          next: value => {
+            this.messageService.add({
+              severity: 'success',
+              summary: "Thành công",
+              detail: "Reset mật khẩu thành công"
+            });
+          },
+          error: err => {
+            this.messageService.add({
+              severity: 'error',
+              summary: "Thất bại",
+              detail: "Reset mật khẩu thất bại"
+            });
+          }
+        })
+      }
+    };
+    this.confirmService.confirm(confirmation);
   }
 }

@@ -74,6 +74,7 @@ import {StaffManagementComponent} from './components/dashboard/staff-management/
 import {RegisterStaffComponent} from './components/dashboard/register-staff/register-staff.component';
 import {StaffDetailComponent} from './components/dashboard/staff-management/staff-detail/staff-detail.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { WorkingAddressComponent } from './components/dashboard/configuration/working-address/working-address.component';
 
 
 export const authInterceptorProvider: Provider =
@@ -109,6 +110,7 @@ export const authInterceptorProvider: Provider =
     StaffManagementComponent,
     RegisterStaffComponent,
     StaffDetailComponent,
+    WorkingAddressComponent,
   ],
   imports: [
     BrowserModule,

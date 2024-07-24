@@ -3,9 +3,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 import {RoleService} from "../../../shared/services/role.service";
-import {ReplaySubject} from "rxjs";
+import {Observable, ReplaySubject, Subject} from "rxjs";
 import {RoleResponse} from "../../../shared/model/account.model";
 import {AccountService} from "../../../shared/services/account.service";
+import {ConfigurationService} from "../../../shared/services/configuration.service";
+import {WorkingAddress} from "../../../shared/model/working-address.model";
 
 @Component({
   selector: 'app-register-staff',
@@ -79,13 +81,15 @@ export class RegisterStaffComponent {
       value: 'Đại học',
       code: 'POSTGRADUATE'
     }, {value: 'Sau đại học', code: 'DOCTORATE'}]
+  workingAddress$?: Subject<WorkingAddress[]>;
 
   constructor(private confirmService: ConfirmationService,
               private location: Location,
               private fb: FormBuilder,
               private roleService: RoleService,
               private accountService: AccountService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private configurationService: ConfigurationService) {
     this.registerNewAccountForm = this.fb.group({
       email: new FormControl("", [Validators.required, Validators.email]),
       firstName: new FormControl("", [Validators.required]),
@@ -120,6 +124,7 @@ export class RegisterStaffComponent {
 
   subscribeEvents() {
     this.role$ = this.roleService.roles$;
+    this.workingAddress$ = this.configurationService.workingAddresses$;
   }
 
   handleSubmit() {

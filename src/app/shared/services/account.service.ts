@@ -12,15 +12,14 @@ export class AccountService {
   private BASE_URL = 'http://localhost:8081/api/';
   private ACCOUNT_URL = this.BASE_URL + 'accounts';
   private CHANGE_STATUS_URL = this.ACCOUNT_URL + "/change-status";
-
+  private RESET_PASSWORD_URL = this.ACCOUNT_URL + "/reset-password";
   accounts$: ReplaySubject<ProfileResponse[]> = new ReplaySubject(1);
 
   constructor(private http: HttpClient) {
   }
 
   createAccount(request: any) {
-    let httpRestOption = getHttpRestOption();
-    return this.http.post(this.ACCOUNT_URL, request, httpRestOption);
+    return this.http.post(this.ACCOUNT_URL, request);
   }
 
   loadAccount(request?: any) {
@@ -37,7 +36,6 @@ export class AccountService {
   }
 
   changeStatusAccount(params?: any) {
-    let httpRestOption = getHttpRestOption();
     let paramsURL = "";
     if (params) {
       paramsURL = "?";
@@ -45,6 +43,10 @@ export class AccountService {
         paramsURL += `${key}=${params[key]}`;
       })
     }
-    return this.http.put<ApiResponse<string>>(this.CHANGE_STATUS_URL, params, httpRestOption);
+    return this.http.put<ApiResponse<string>>(this.CHANGE_STATUS_URL, params);
+  }
+
+  resetPassword(accountId: number) {
+    return this.http.put<ApiResponse<string>>(this.RESET_PASSWORD_URL, {accountId: accountId});
   }
 }

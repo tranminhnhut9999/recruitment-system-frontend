@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {AuthService} from "../../shared/services/auth.service";
 import {MessageService} from "primeng/api";
+import {ErrorResponse} from "../../shared/model/api.model";
 
 @Component({
     selector: 'app-login',
@@ -38,9 +39,12 @@ export class LoginComponent implements OnInit {
                     this.router.navigateByUrl('/dashboard');
                 },
                 error: err => {
+                  let errorResponse: ErrorResponse = err?.error;
+
                     this.messageService.add({
                         severity: 'error',
-                        summary: 'Failed to login',
+                        detail: errorResponse.error_message,
+                        summary: "Đăng nhập thất bại",
                         life: 1000
                     })
                 }

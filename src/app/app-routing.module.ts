@@ -22,6 +22,7 @@ import {
 } from "./components/dashboard/configuration/skill-configuration/skill-configuration.component";
 import {StaffManagementComponent} from "./components/dashboard/staff-management/staff-management.component";
 import {RegisterStaffComponent} from "./components/dashboard/register-staff/register-staff.component";
+import {WorkingAddressComponent} from "./components/dashboard/configuration/working-address/working-address.component";
 
 const routes: Routes = [
   {
@@ -82,6 +83,10 @@ const routes: Routes = [
       {
         path: "staff-register",
         component: RegisterStaffComponent
+      },
+      {
+        path: "working-address",
+        component: WorkingAddressComponent
       }
     ]
   },
