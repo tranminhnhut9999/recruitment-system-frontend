@@ -1,0 +1,29 @@
+.profile {
+  padding: 3rem;
+  .information__label {
+    display: inline-block;
+    font-weight: bold;
+    width: 200px;
+  }
+  ::ng-deep p-dropdown {
+    width: 100%;
+    max-width: 22rem;
+  }
+  ::ng-deep .p-dropdown{
+    width: 100%;
+  }
+  .block__detail {
+    .block__title {
+      width: 25%;
+    }
+  }
+  .personal-information {
+    ::ng-deep .p-dropdown, p-dropdown{
+      width: 100%;
+      max-width: none;
+    }
+  }
+  ::ng-deep .p-calendar {
+    width: 100%;
+  }
+}

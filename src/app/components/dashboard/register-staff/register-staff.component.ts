@@ -72,6 +72,13 @@ export class RegisterStaffComponent {
   ];
   registerNewAccountForm!: FormGroup;
   role$?: ReplaySubject<RoleResponse[]>;
+  eduOptions: any[] = [
+    {value: 'Tiểu học', code: 'PRIMARY'},
+    {value: 'Trung học cơ sở', code: 'SECONDARY'},
+    {value: 'Đang học đại học', code: 'UNDERGRADUATE'}, {
+      value: 'Đại học',
+      code: 'POSTGRADUATE'
+    }, {value: 'Sau đại học', code: 'DOCTORATE'}]
 
   constructor(private confirmService: ConfirmationService,
               private location: Location,
@@ -86,9 +93,10 @@ export class RegisterStaffComponent {
       workingAddress: new FormControl("", [Validators.required]),
       role: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
-      department: new FormControl("", [Validators.required]),
+      // department: new FormControl("", [Validators.required]),
       dob: new FormControl([Validators.required]),
       citizenID: new FormControl("", [Validators.required]),
+      eduLevelCode: new FormControl("", [Validators.required]),
     });
 
     this.subscribeEvents();

@@ -13,6 +13,8 @@ import {AccountStatus} from "../../../shared/enums/account-status.enum";
 export class StaffManagementComponent implements OnInit {
   accounts: ProfileResponse[] = [];
   cols: any[] = [];
+  shouldShowAccountDetail: boolean = false;
+  viewedAccount?: ProfileResponse;
 
   constructor(private accountService: AccountService,
               private confirmationService: ConfirmationService,
@@ -102,12 +104,11 @@ export class StaffManagementComponent implements OnInit {
     })
   }
 
-  viewDetails(account
-                :
-                ProfileResponse
-  ) {
+  viewDetails(account: ProfileResponse) {
     // Add your view details logic here
     console.log('Viewing details for', account);
+    this.viewedAccount = account;
+    this.shouldShowAccountDetail = true;
   }
 
   protected readonly AccountStatus = AccountStatus;

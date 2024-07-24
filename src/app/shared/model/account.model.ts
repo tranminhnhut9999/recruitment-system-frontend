@@ -24,4 +24,5 @@ export interface ProfileResponse {
   eduLevelDescription: string;
   genderCode: string;
   genderDescription: string;
+  dob: any;
 }

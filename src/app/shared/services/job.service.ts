@@ -18,31 +18,28 @@ export class JobService {
   }
 
   getJobByID(id: number) {
-    const httpOptions = getHttpRestOption();
-    return this.http.get<ApiResponse<Job>>("http://localhost:8082/api/jobs/" + id, httpOptions);
+    return this.http.get<ApiResponse<Job>>("http://localhost:8082/api/jobs/" + id);
   }
 
   getAllJobs(params?: GetJobsQuery) {
-    const headers = getHttpRestOption();
+    // const headers = getHttpRestOption();
     let paramsURL: string = "";
     if (params) {
       paramsURL += `jobId=${params?.jobId}&`;
       paramsURL += `interviewEmail=${params?.interviewEmail}&`;
       paramsURL += `status=${params?.status}&`;
     }
-    return this.http.get("http://localhost:8082/api/jobs?" + paramsURL, headers);
+    return this.http.get("http://localhost:8082/api/jobs?" + paramsURL);
   }
 
   createJob(job: PerformJobRequest) {
-    const httpOptions = getHttpRestOption();
 
-    return this.http.post(API_URL.CREATE_JOB, job, httpOptions);
+    return this.http.post(API_URL.CREATE_JOB, job);
   }
 
   update(id: number, job: PerformJobRequest) {
-    const httpOptions = getHttpRestOption();
 
-    return this.http.put(API_URL.UPDATE_JOB + `/${id}`, job, httpOptions);
+    return this.http.put(API_URL.UPDATE_JOB + `/${id}`, job);
   }
 
   getHiringJobs() {
@@ -54,12 +51,10 @@ export class JobService {
   }
 
   applyToJob(formData: FormData) {
-    const httpOptions = getHttpRestOption();
     return this.http.post<ApiResponse<any>>(API_URL.CREATE_APPLICATION, formData);
   }
 
   getCandidateApplication(params: any) {
-    const httpOptions = getHttpRestOption();
     let paramsURL: string = "";
     if (params) {
       paramsURL += `?jobId=${params?.jobId}&`;
@@ -67,16 +62,14 @@ export class JobService {
       paramsURL += `status=${params?.status ?? "ALL"}`;
     }
 
-    return this.http.get<ApiResponse<CandidateApplication[]>>(API_URL.GET_APPLICATION + `${paramsURL}`, httpOptions);
+    return this.http.get<ApiResponse<CandidateApplication[]>>(API_URL.GET_APPLICATION + `${paramsURL}`);
   }
 
   getCandidateApplicationById(id: any) {
-    const httpOptions = getHttpRestOption();
-    return this.http.get<ApiResponse<CandidateApplication>>(API_URL.GET_APPLICATION + "/" + `${id}`, httpOptions);
+    return this.http.get<ApiResponse<CandidateApplication>>(API_URL.GET_APPLICATION + "/" + `${id}`);
   }
 
   changeStatusApplicationById(candidateId: any, params: any) {
-    const httpOptions = getHttpRestOption();
-    return this.http.put<ApiResponse<StatusLogResponse>>(API_URL.CREATE_STATUS_APPLICATION.replace("<ID>", candidateId), params, httpOptions);
+    return this.http.put<ApiResponse<StatusLogResponse>>(API_URL.CREATE_STATUS_APPLICATION.replace("<ID>", candidateId), params);
   }
 }

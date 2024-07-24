@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -41,7 +41,7 @@ import {CardModule} from "primeng/card";
 import {ChipsModule} from "primeng/chips";
 import {JobDetailComponent} from './components/candidate-job/job-displaying/job-detail/job-detail.component';
 import {JobDisplayingComponent} from './components/candidate-job/job-displaying/job-displaying.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {ToggleButtonModule} from "primeng/togglebutton";
@@ -53,19 +53,32 @@ import {DialogModule} from "primeng/dialog";
 import {FileUploadModule} from "primeng/fileupload";
 import {ApplicationComponent} from "./components/dashboard/application/application.component";
 import {AccordionModule} from "primeng/accordion";
-import { UtcToDatePipe } from './shared/pipes/utc-to-date.pipe';
-import { DetailApplicationComponent } from './components/dashboard/detail-application/detail-application.component';
-import { UtcToLocalPipe } from './shared/pipes/utc-to-local.pipe';
-import { ApplicationStateLabelPipe } from './shared/pipes/application-state-label.pipe';
-import { ApplicationStateComponent } from './components/dashboard/application-state/application-state.component';
+import {UtcToDatePipe} from './shared/pipes/utc-to-date.pipe';
+import {DetailApplicationComponent} from './components/dashboard/detail-application/detail-application.component';
+import {UtcToLocalPipe} from './shared/pipes/utc-to-local.pipe';
+import {ApplicationStateLabelPipe} from './shared/pipes/application-state-label.pipe';
+import {ApplicationStateComponent} from './components/dashboard/application-state/application-state.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {StyleClassModule} from "primeng/styleclass";
-import { JobTypeConfigurationComponent } from './components/dashboard/configuration/job-type-configuration/job-type-configuration.component';
-import { CastPipe } from './shared/pipes/cast.pipe';
-import { DepartmentConfigurationComponent } from './components/dashboard/configuration/department-configuration/department-configuration.component';
-import { SkillConfigurationComponent } from './components/dashboard/configuration/skill-configuration/skill-configuration.component';
-import { StaffManagementComponent } from './components/dashboard/staff-management/staff-management.component';
-import { RegisterStaffComponent } from './components/dashboard/register-staff/register-staff.component';
+import {
+  JobTypeConfigurationComponent
+} from './components/dashboard/configuration/job-type-configuration/job-type-configuration.component';
+import {CastPipe} from './shared/pipes/cast.pipe';
+import {
+  DepartmentConfigurationComponent
+} from './components/dashboard/configuration/department-configuration/department-configuration.component';
+import {
+  SkillConfigurationComponent
+} from './components/dashboard/configuration/skill-configuration/skill-configuration.component';
+import {StaffManagementComponent} from './components/dashboard/staff-management/staff-management.component';
+import {RegisterStaffComponent} from './components/dashboard/register-staff/register-staff.component';
+import {StaffDetailComponent} from './components/dashboard/staff-management/staff-detail/staff-detail.component';
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+
+
+export const authInterceptorProvider: Provider =
+  {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true};
+
 
 @NgModule({
   declarations: [
@@ -95,6 +108,7 @@ import { RegisterStaffComponent } from './components/dashboard/register-staff/re
     SkillConfigurationComponent,
     StaffManagementComponent,
     RegisterStaffComponent,
+    StaffDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,7 +149,7 @@ import { RegisterStaffComponent } from './components/dashboard/register-staff/re
     InputTextareaModule,
     StyleClassModule
   ],
-  providers: [ConfirmationService, MessageService],
+  providers: [ConfirmationService, MessageService, authInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {
