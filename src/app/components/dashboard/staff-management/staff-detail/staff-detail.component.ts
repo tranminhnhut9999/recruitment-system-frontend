@@ -93,7 +93,7 @@ export class StaffDetailComponent {
       header: "Xác nhận",
       message: "Bạn có muốn reset mật khẩu của nhân viên này ?",
       acceptLabel: "Reset",
-      rejectIcon: "Hủy",
+      rejectLabel: "Hủy",
       acceptButtonStyleClass: "p-button-primary",
       rejectButtonStyleClass: "p-button-secondary",
       accept: () => {

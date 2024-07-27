@@ -6,6 +6,7 @@ import {JwtUtilService} from "./jwt.service";
 import {AccountProfileComponent} from "../../components/dashboard/account-profile/account-profile.component";
 import {ProfileResponse} from "../model/account.model";
 import {ApiResponse} from "../model/api.model";
+import {ChangePasswordRequest} from "../model/change-password.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(API_URL.LOGIN, {username, password})
+    return this.http.post<any>(API_URL.AUTH.LOGIN, {username, password})
       .pipe(map(response => {
         if (response && response.data.token) {
           localStorage.setItem('current_user', JSON.stringify(response));
@@ -53,12 +54,7 @@ export class AuthService {
   }
 
   getHrStaff() {
-    let token: string = localStorage.getItem('access_token') as string;
-    if (!token) {
-      token = '';
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token.replaceAll('"', '')}`);
-    return this.http.get<ApiResponse<ProfileResponse[]>>(API_URL.GET_HR_STAFF, {headers: headers});
+    return this.http.get<ApiResponse<ProfileResponse[]>>(API_URL.AUTH.GET_HR_STAFF);
   }
 
   getLoginEmail() {
@@ -68,4 +64,6 @@ export class AuthService {
       return currentUser?.data?.email ?? null;
     }
   }
+
+
 }

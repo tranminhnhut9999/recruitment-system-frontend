@@ -75,6 +75,7 @@ import {RegisterStaffComponent} from './components/dashboard/register-staff/regi
 import {StaffDetailComponent} from './components/dashboard/staff-management/staff-detail/staff-detail.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { WorkingAddressComponent } from './components/dashboard/configuration/working-address/working-address.component';
+import { ChangePasswordDialogComponent } from './components/dashboard/account-profile/change-password-dialog/change-password-dialog.component';
 
 
 export const authInterceptorProvider: Provider =
@@ -111,6 +112,7 @@ export const authInterceptorProvider: Provider =
     RegisterStaffComponent,
     StaffDetailComponent,
     WorkingAddressComponent,
+    ChangePasswordDialogComponent,
   ],
   imports: [
     BrowserModule,

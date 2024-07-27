@@ -1,13 +1,23 @@
-export const API_URL = {
-  LOGIN: "http://localhost:8081/api/auth/login",
-  GET_JOBS: "http://localhost:8082/api/jobs",
-  GET_HIRING_JOB: "http://localhost:8082/api/jobs/hiring",
-  CREATE_JOB: "http://localhost:8082/api/jobs",
-  UPDATE_JOB: "http://localhost:8082/api/jobs",
-  DELETE_JOB: "http://localhost:8082/api/jobs",
-  GET_HR_STAFF: "http://localhost:8081/api/accounts/recruiters",
-  CREATE_APPLICATION: "http://localhost:8083/api/applications",
-  GET_APPLICATION: "http://localhost:8083/api/applications",
-  CREATE_STATUS_APPLICATION: "http://localhost:8083/api/applications/<ID>/status",
-}
+const BASE_URL_AUTH = "http://localhost:8081/api";
+const BASE_URL_JOBS = "http://localhost:8082/api";
+const BASE_URL_APPLICATIONS = "http://localhost:8083/api";
 
+export const API_URL = {
+  AUTH: {
+    LOGIN: `${BASE_URL_AUTH}/auth/login`,
+    GET_HR_STAFF: `${BASE_URL_AUTH}/accounts/recruiters`,
+    CHANGE_PASSWORD: `${BASE_URL_AUTH}/accounts/password`,
+  },
+  JOBS: {
+    GET_JOBS: `${BASE_URL_JOBS}/jobs`,
+    GET_HIRING_JOB: `${BASE_URL_JOBS}/jobs/hiring`,
+    CREATE_JOB: `${BASE_URL_JOBS}/jobs`,
+    UPDATE_JOB: `${BASE_URL_JOBS}/jobs`,
+    DELETE_JOB: `${BASE_URL_JOBS}/jobs`,
+  },
+  APPLICATIONS: {
+    CREATE_APPLICATION: `${BASE_URL_APPLICATIONS}/applications`,
+    GET_APPLICATION: `${BASE_URL_APPLICATIONS}/applications`,
+    CREATE_STATUS_APPLICATION: (id: number) => `${BASE_URL_APPLICATIONS}/applications/${id}/status`,
+  },
+};
