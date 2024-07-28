@@ -1,13 +1,14 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
-import {ProfileResponse} from "../../../shared/model/account.model";
+import {ProfileResponse, RoleResponse} from "../../../shared/model/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {WorkingAddress} from "../../../shared/model/working-address.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {firstValueFrom, Subject} from "rxjs";
 import {Department} from "../../../shared/model/department.model";
 import {ConfigurationService} from "../../../shared/services/configuration.service";
+import {RoleService} from "../../../shared/services/role.service";
 
 @Component({
   selector: 'app-account-profile',
@@ -36,33 +37,38 @@ export class AccountProfileComponent implements OnInit {
               private ctr: ChangeDetectorRef,
               private fb: FormBuilder,
               private configurationService: ConfigurationService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+  ) {
     this.profileForm = this.fb.group({
-      email: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      email: [{value: '', disabled: true}, Validators.required],
+      firstname: [{value: '', disabled: true}, Validators.required],
+      lastname: [{value: '', disabled: true}, Validators.required],
       compPhone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       perPhone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       perAddress1: ['', Validators.required],
       perAddress2: [''],
-      citizenID: ['', Validators.required],
+      citizenID: [{value: '', disabled: true}, Validators.required],
       emergencyContactName: ['', Validators.required],
       emergencyPhoneNumber: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       avatarImg: [null],
-      workingPlace: [''],
+      workingPlace: [{value: '', disabled: true}],
       eduLevel: ['', Validators.required],
-      gender: ['', Validators.required],
-      dob: [],
+      gender: [{value: '', disabled: true}, Validators.required],
+      dob: [{value: '', disabled: true}],
     });
 
   }
 
   ngOnInit() {
+    this.loadProfileData();
+    this.loadConfigurationData();
+  }
+
+  private loadProfileData() {
     this.accountService.getAccountProfile().subscribe(profileResponse => {
       this.accountProfile = profileResponse?.data;
       this.setValueToForm(this.accountProfile);
     });
-    this.loadConfigurationData();
   }
 
   loadConfigurationData() {
@@ -129,7 +135,7 @@ export class AccountProfileComponent implements OnInit {
   }
 
   getFullName(firstName?: string, lastName?: string) {
-    return (firstName || "") == "" ? (lastName || "") : +" " + (lastName || "");
+    return (firstName || "") == "" ? (lastName || "") : firstName + " " + (lastName || "");
   }
 
   onFileSelected(event: any) {
@@ -157,6 +163,7 @@ export class AccountProfileComponent implements OnInit {
 
     this.accountService.updateProfile(this.accountProfile?.id, this.buildFormData(this.profileForm)).subscribe({
       next: value => {
+        this.loadProfileData();
         this.messageService.add({
           severity: "success",
           summary: "Thành công",
@@ -193,4 +200,6 @@ export class AccountProfileComponent implements OnInit {
 
     return formData;
   }
+
+
 }

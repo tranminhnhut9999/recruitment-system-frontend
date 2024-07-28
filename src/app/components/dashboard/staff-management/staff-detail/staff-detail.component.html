@@ -1,9 +1,9 @@
-<div class="profile" *ngIf="_profile">
+<form [formGroup]="profileForm" class="profile" *ngIf="_profile">
   <div class="profile__information">
     <div class="information__main flex justify-content-between">
       <div>
-        <h2>{{ _profile?.firstname + ' ' + _profile?.lastname }}</h2>
-        <h3>{{ _profile?.role?.name }}</h3>
+        <h2>{{ getFullName(_profile?.firstname, _profile?.lastname) }}</h2>
+        <h3>{{ _profile?.role.name }}</h3>
       </div>
       <div>
         <p-avatar label="N" size="xlarge"/>
@@ -18,10 +18,10 @@
         <label class="information__label">Email:</label>
         <span class="information__value">{{ _profile?.email }}</span>
       </div>
-<!--      <div class="col-6">-->
-<!--        <label class="information__label">Di động công ty:</label>-->
-<!--        <span class="information__value">{{ _profile?.compPhone }}</span>-->
-<!--      </div>-->
+      <!--      <div class="col-6">-->
+      <!--        <label class="information__label">Di động công ty:</label>-->
+      <!--        <span class="information__value">{{ _profile?.compPhone }}</span>-->
+      <!--      </div>-->
       <div class="col-6">
         <label class="information__label">Địa điểm làm việc:</label>
         <span class="information__value">{{ _profile?.workingPlace }}
@@ -42,13 +42,14 @@
           <div class="title">
             <h3>QUẢN LÝ MẬT KHẨU</h3>
             <p-divider/>
-            <p-button label="Reset mật khẩu" styleClass="p-button-secondary" (onClick)="handleClickResetPassword()"></p-button>
+            <p-button label="Reset mật khẩu" styleClass="p-button-secondary"
+                      (onClick)="handleClickResetPassword()"></p-button>
           </div>
         </div>
       </p-tabPanel>
       <p-tabPanel header="Thông tin công việc">
         <div class="configuration__block">
-          <h3>VỊ TRÍ</h3>
+          <h3>THÔNG TIN CÔNG VIỆC</h3>
           <p-divider/>
           <div class="grid">
             <!--            <div class="col-12 flex align-items-center">-->
@@ -62,19 +63,24 @@
             <div class="col-12 flex align-items-center">
               <label class="information__label">Địa chỉ làm việc:</label>
               <p-dropdown [filter]="true" filterBy="value"
-                          [showClear]="true" class="flex-1" optionLabel="value"
+                          [showClear]="true" class="flex-1" optionLabel="address"
+                          optionValue="address"
                           [options]="workingPlaces"
-                          [(ngModel)]="selectedWorkingPlace"
+                          formControlName="workingPlace"
                           placeholder="Chọn nơi làm việc"></p-dropdown>
+            </div>
+            <div class="col-12 flex align-items-center">
+              <label class="information__label">Vai trò:</label>
+              <p-dropdown [filter]="true" filterBy="value"
+                          class="flex-1" optionLabel="name"
+                          optionValue="code"
+                          [options]="roles"
+                          formControlName="role"
+                          placeholder="Chọn vai trò"></p-dropdown>
             </div>
           </div>
         </div>
         <div class="mt-4"></div>
-        <!--        <div class="configuration__block">-->
-        <!--          <h3>NGƯỜI PHÊ DUYỆT</h3>-->
-        <!--          <p-divider/>-->
-        <!--          <p><b>Tổng giám đốc</b>: Trần Quang A</p>-->
-        <!--        </div>-->
       </p-tabPanel>
       <p-tabPanel header="Thông tin riêng tư">
         <div class="grid personal-information">
@@ -88,8 +94,8 @@
                 <b>Địa chỉ cá nhân</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <input type="text" pInputText placeholder="Đường 1" [readOnly]="true" [value]="_profile?.perAddress1"/>
-                <input type="text" pInputText placeholder="Đường 2" [readOnly]="true" [value]="_profile?.perAddress2"/>
+                <input type="text" pInputText placeholder="Đường 1" formControlName="perAddress1"/>
+                <input type="text" pInputText placeholder="Đường 2" formControlName="perAddress2"/>
               </div>
             </div>
             <div class="block__detail flex justify-content-between align-items-center">
@@ -125,10 +131,26 @@
             <!--            </div>-->
             <div class="block__detail flex justify-content-between align-items-center">
               <div class="block__title">
+                <b>Tên đầu</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="" formControlName="firstname"/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
+                <b>Tên cuối</b>
+              </div>
+              <div class="block__info flex-1 flex flex-column row-gap-2">
+                <input type="text" pInputText placeholder="" formControlName="lastname"/>
+              </div>
+            </div>
+            <div class="block__detail flex justify-content-between align-items-center">
+              <div class="block__title">
                 <b>Số CMND</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <input type="text" pInputText placeholder="" [readOnly]="true" [value]="_profile?.citizenID"/>
+                <input type="text" pInputText placeholder="" formControlName="citizenID"/>
               </div>
             </div>
             <!--            <div class="block__detail flex justify-content-between align-items-center">-->
@@ -152,9 +174,10 @@
                 <b>Giới tính</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <p-dropdown [showClear]="true" class="flex-1" optionLabel="label"
+                <p-dropdown class="flex-1" optionLabel="label"
+                            optionValue="code"
                             [options]="genderOptions"
-                            [(ngModel)]="selectedGender"
+                            formControlName="gender"
                             placeholder="Chọn giới tính"></p-dropdown>
               </div>
             </div>
@@ -163,7 +186,7 @@
                 <b>Ngày sinh</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <p-calendar placeholder="Date of Birth" [(ngModel)]="dob"/>
+                <p-calendar placeholder="Date of Birth" formControlName="dob"/>
               </div>
             </div>
             <!--            <div class="block__detail flex justify-content-between align-items-center">-->
@@ -175,35 +198,35 @@
             <!--              </div>-->
             <!--            </div>-->
           </div>
-          <div class="configuration__block col-6 flex flex-column row-gap-2">
-            <h3>GIÁO DỤC<br>
-              <p-divider/>
-            </h3>
-            <div class="block__detail flex justify-content-between align-items-center">
-              <div class="block__title">
-                <b>Trình độ</b>
-              </div>
-              <div class="block__info flex-1 flex flex-column row-gap-2">
-                <input type="text" pInputText placeholder="" [value]="_profile.eduLevelDescription"/>
-              </div>
-            </div>
-<!--            <div class="block__detail flex justify-content-between align-items-center">-->
-<!--              <div class="block__title">-->
-<!--                <b>Chuyên ngành</b>-->
-<!--              </div>-->
-<!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
-<!--                <input type="text" pInputText placeholder=""/>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="block__detail flex justify-content-between align-items-center">-->
-<!--              <div class="block__title">-->
-<!--                <b>Trường</b>-->
-<!--              </div>-->
-<!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
-<!--                <input type="text" pInputText placeholder=""/>-->
-<!--              </div>-->
-<!--            </div>-->
-          </div>
+          <!--          <div class="configuration__block col-6 flex flex-column row-gap-2">-->
+          <!--            <h3>GIÁO DỤC<br>-->
+          <!--              <p-divider/>-->
+          <!--            </h3>-->
+          <!--            <div class="block__detail flex justify-content-between align-items-center">-->
+          <!--              <div class="block__title">-->
+          <!--                <b>Trình độ</b>-->
+          <!--              </div>-->
+          <!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
+          <!--                <input type="text" pInputText placeholder="" [value]="_profile.eduLevelDescription"/>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="block__detail flex justify-content-between align-items-center">-->
+          <!--              <div class="block__title">-->
+          <!--                <b>Chuyên ngành</b>-->
+          <!--              </div>-->
+          <!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
+          <!--                <input type="text" pInputText placeholder=""/>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="block__detail flex justify-content-between align-items-center">-->
+          <!--              <div class="block__title">-->
+          <!--                <b>Trường</b>-->
+          <!--              </div>-->
+          <!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
+          <!--                <input type="text" pInputText placeholder=""/>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
           <div class="configuration__block col-6 flex flex-column row-gap-2">
             <h3>LIÊN HỆ KHẨN CẤP<br>
               <p-divider/>
@@ -213,8 +236,7 @@
                 <b>Tên liên hệ</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <input type="text" pInputText placeholder="Tên người liên hệ" [readOnly]="true"
-                       [value]="_profile?.emergencyContactName"/>
+                <input formControlName="emergencyContactName" type="text" pInputText placeholder="Tên người liên hệ"/>
               </div>
             </div>
             <div class="block__detail flex justify-content-between align-items-center">
@@ -222,8 +244,7 @@
                 <b>Số điện thoại</b>
               </div>
               <div class="block__info flex-1 flex flex-column row-gap-2">
-                <input type="text" pInputText placeholder="Số điện thoại" [readOnly]="true"
-                       [value]="_profile?.emergencyPhoneNumber"/>
+                <input formControlName="emergencyPhoneNumber" type="text" pInputText placeholder="Số điện thoại"/>
               </div>
             </div>
           </div>
@@ -233,10 +254,10 @@
   </div>
   <div class="actions flex flex-row-reverse column-gap-3">
     <div class="action-item">
-      <p-button styleClass="p-button-primary" label="Lưu"></p-button>
+      <p-button styleClass="p-button-primary" label="Lưu" (onClick)="onClickUpdate()"></p-button>
     </div>
-    <div class="action-item">
-      <p-button styleClass="p-button-secondary" label="Trở về" (click)="handleClickingBack()"></p-button>
-    </div>
+<!--    <div class="action-item">-->
+<!--      <p-button styleClass="p-button-secondary" label="Trở về" (click)="handleClickingBack()"></p-button>-->
+<!--    </div>-->
   </div>
-</div>
+</form>

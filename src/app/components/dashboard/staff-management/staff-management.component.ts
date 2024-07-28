@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ProfileResponse} from "../../../shared/model/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {firstValueFrom} from "rxjs";
 import {AccountStatus} from "../../../shared/enums/account-status.enum";
 
 @Component({
@@ -35,12 +34,15 @@ export class StaffManagementComponent implements OnInit {
 
     ];
 
-    this.accountService.accounts$.subscribe(accounts => this.accounts = accounts);
+    this.accountService.accounts$.subscribe(accounts => {
+      this.accounts = accounts;
+      if (this.shouldShowAccountDetail && this.viewedAccount) {
+        this.viewedAccount = this.accounts.find(account => account.id === this.viewedAccount?.id);
+      }
+    });
   }
 
-  deactivateAccount(account
-                      :
-                      ProfileResponse
+  deactivateAccount(account: ProfileResponse
   ) {
     console.log('Deactivating account', account);
     this.confirmationService.confirm({
