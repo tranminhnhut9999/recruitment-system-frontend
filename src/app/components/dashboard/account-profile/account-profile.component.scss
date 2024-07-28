@@ -1,26 +1,77 @@
 .profile {
   padding: 3rem;
+
   .information__label {
     display: inline-block;
     font-weight: bold;
     width: 200px;
   }
+
   ::ng-deep p-dropdown {
     width: 100%;
     max-width: 22rem;
   }
-  ::ng-deep .p-dropdown{
+
+  ::ng-deep .p-dropdown {
     width: 100%;
   }
+
   .block__detail {
     .block__title {
       width: 25%;
     }
   }
+
   .personal-information {
-    ::ng-deep .p-dropdown, p-dropdown{
+    ::ng-deep .p-dropdown, p-dropdown {
       width: 100%;
       max-width: none;
+    }
+  }
+
+  ::ng-deep .p-calendar {
+    width: 100%;
+  }
+
+  .avatar-information {
+    position: relative;
+
+    .avatar-content {
+      padding: .5rem;
+      width: 7rem;
+      height: 8rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        box-shadow: 2px 2px 5px 0px rgba(120, 118, 118, 0.75);
+        -webkit-box-shadow: 2px 2px 5px 0px rgba(120, 118, 118, 0.75);
+        -moz-box-shadow: 2px 2px 5px 0px rgba(120, 118, 118, 0.75);
+      }
+    }
+
+    .avatar-action {
+      position: absolute;
+      width: 7rem;
+      height: 8rem;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+      opacity: 0;
+      transition: opacity 0.25s;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        opacity: 0.5;
+      }
+
+      i {
+        font-size: 1.5rem;
+        color: black
+      }
     }
   }
 }

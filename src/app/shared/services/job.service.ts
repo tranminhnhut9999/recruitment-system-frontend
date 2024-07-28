@@ -53,7 +53,11 @@ export class JobService {
   }
 
   applyToJob(formData: FormData) {
-    return this.http.post<ApiResponse<any>>(API_URL.APPLICATIONS.CREATE_APPLICATION, formData);
+    return this.http.post<ApiResponse<any>>(API_URL.APPLICATIONS.CREATE_APPLICATION, formData, {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    });
   }
 
   getCandidateApplication(params: any) {

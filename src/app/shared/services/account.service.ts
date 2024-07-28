@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {getHttpRestOption} from "../utils/http.util";
 import {ReplaySubject} from "rxjs";
 import {ProfileResponse} from "../model/account.model";
@@ -16,7 +16,7 @@ export class AccountService {
   private CHANGE_STATUS_URL = this.ACCOUNT_URL + "/change-status";
   private RESET_PASSWORD_URL = this.ACCOUNT_URL + "/reset-password";
   private PROFILE_URL = this.ACCOUNT_URL + "/profile";
-
+  private UPDATE_PROFILE_URL = this.ACCOUNT_URL + "/{id}/profile";
   accounts$: ReplaySubject<ProfileResponse[]> = new ReplaySubject(1);
 
   constructor(private http: HttpClient) {
@@ -59,5 +59,13 @@ export class AccountService {
 
   changePassword(request: ChangePasswordRequest) {
     return this.http.put<ApiResponse<any>>(API_URL.AUTH.CHANGE_PASSWORD, request);
+  }
+
+  updateProfile(id: any, formData: FormData) {
+    return this.http.post<ApiResponse<any>>(this.UPDATE_PROFILE_URL.replace("{id}", id), formData, {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    });
   }
 }

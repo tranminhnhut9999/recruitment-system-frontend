@@ -5,15 +5,12 @@ export function getHttpRestOption() {
   if (token) {
     return {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token!.replaceAll('"', '')}` : ""
       })
     }
   } else {
     return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders({})
     }
   }
 }
