@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Job} from "../model/job";
 import {ApiResponse} from "../model/api.model";
 import {API_URL} from "../constants/api";
@@ -9,6 +8,7 @@ import {GetJobsQuery} from "../model/get-jobs-query.model";
 import {CandidateApplication} from "../model/candidate-application.model";
 import {StatusLogResponse} from "../model/status-log.model";
 import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +40,10 @@ export class JobService {
   }
 
   update(id: number, job: PerformJobRequest) {
-
-    return this.http.put(API_URL.JOBS.UPDATE_JOB + `/${id}`, job);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.put(API_URL.JOBS.UPDATE_JOB + `/${id}`, job, httpOptions);
   }
 
   getHiringJobs(params: any) {

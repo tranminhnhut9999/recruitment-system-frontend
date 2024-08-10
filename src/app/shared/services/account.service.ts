@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {getHttpRestOption} from "../utils/http.util";
+import {getHttpMultiPartOption, getHttpRestOption} from "../utils/http.util";
 import {ReplaySubject} from "rxjs";
 import {ProfileResponse} from "../model/account.model";
 import {ApiResponse} from "../model/api.model";
@@ -62,10 +62,6 @@ export class AccountService {
   }
 
   updateProfile(id: any, formData: FormData) {
-    return this.http.post<ApiResponse<any>>(this.UPDATE_PROFILE_URL.replace("{id}", id), formData, {
-      headers: new HttpHeaders({
-        'enctype': 'multipart/form-data'
-      })
-    });
+    return this.http.post<ApiResponse<any>>(this.UPDATE_PROFILE_URL.replace("{id}", id), formData, getHttpMultiPartOption());
   }
 }

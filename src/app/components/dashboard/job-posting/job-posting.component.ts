@@ -117,7 +117,6 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
         this.jobForm.controls['status'].setValue(this.job.status);
         this.jobForm.controls['salaryRangeFrom'].setValue(this.job.salaryRangeFrom);
         this.jobForm.controls['salaryRangeTo'].setValue(this.job.salaryRangeTo);
-
         // Set init data for single selection field
         for (let department of this.departments) {
           if (department.name == this.job.department) {
@@ -211,7 +210,10 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleUpdateJob() {
-    if (this.jobForm?.valid) {
+    let isValidStartDate = !this.jobForm?.get("startDate")?.dirty;
+    let isValidEndDate = this.jobForm?.get("endDate")?.dirty;
+    let isFormValidState = isValidStartDate || this.jobForm?.valid;
+    if (isFormValidState) {
       let request: PerformJobRequest = this.convertFormToJSON();
       this.jobService.update(Number.parseFloat(this.jobId), request).subscribe({
         next: (res) => {

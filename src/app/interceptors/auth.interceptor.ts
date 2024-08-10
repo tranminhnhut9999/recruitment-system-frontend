@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {getHttpRestOption} from "../shared/utils/http.util";
+import {getHttpMultiPartOption, getHttpRestOption} from "../shared/utils/http.util";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -9,8 +9,19 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    console.log("REQUEST HEADERS:", req.headers);
+
+    // Check if the request is a multipart request
+    const isFormData = req.body instanceof FormData;
+    let authReq;
+    if (isFormData) {
+      console.log("Request body is FormData");
+      authReq = req.clone(getHttpMultiPartOption());
+    } else {
+      console.log("Request body is not FormData");
+      authReq = req.clone(getHttpRestOption());
+    }
     // Get the auth token from the service.
-      const authReq = req.clone(getHttpRestOption());
-      return next.handle(authReq);
+    return next.handle(authReq);
   }
 }
