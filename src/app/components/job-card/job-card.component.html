@@ -3,7 +3,7 @@
     <ng-template [pTemplate]="'header'">
       <div class="header flex justify-content-between ">
         <h2>{{ job.title }}</h2>
-        <h4 class="sal-range ">{{job.salaryRangeFrom + ' - ' + job.salaryRangeTo+' VND'}}</h4>
+        <h4 class="sal-range ">{{ (job.salaryRangeFrom | vndShorthand) + '  - ' + (job.salaryRangeTo | vndShorthand) }}</h4>
       </div>
       <div class="body">
         <h4>{{ job.department }}</h4>
