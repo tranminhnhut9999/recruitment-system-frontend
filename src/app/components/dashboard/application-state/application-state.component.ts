@@ -1,19 +1,28 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dictionary} from "../../../shared/model/dictionary";
 import {FormBuilder} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../../../shared/services/auth.service";
+import {state} from "@angular/animations";
+import {ROLE} from "../../../shared/constants/role-config";
 
 @Component({
   selector: 'app-application-state',
   templateUrl: './application-state.component.html',
   styleUrls: ['./application-state.component.scss']
 })
-export class ApplicationStateComponent {
+export class ApplicationStateComponent implements OnInit {
   @Input({required: true}) state: string = "";
   @Input() applications: any[] = [];
   @Output() downloadFileEmmiter = new EventEmitter();
+  userRoles: ROLE[] = [];
+  isHrManager: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.isHrManager = this.authService.userHasRoles([ROLE.HR_MANAGER]);
   }
 
   // Mapping of state values to labels
@@ -43,4 +52,5 @@ export class ApplicationStateComponent {
       URL.revokeObjectURL(objectUrl);
     });
   }
+
 }

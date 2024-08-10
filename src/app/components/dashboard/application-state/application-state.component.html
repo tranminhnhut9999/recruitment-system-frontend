@@ -16,12 +16,12 @@
     <ng-template pTemplate="header">
       <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>Tên Ứng Viên</th>
         <th>Email</th>
-        <th>Phone Number</th>
-        <th>Date of Birth</th>
-        <th>Address</th>
-        <th>Apply Date</th>
+        <!--        <th>Phone Number</th>-->
+        <th>Ngày Sinh</th>
+        <th>Ngày Nộp</th>
+        <th *ngIf="isHrManager">Xử Lý Bởi</th>
         <th class="align-self-center">Tệp</th>
         <th></th>
       </tr>
@@ -31,10 +31,11 @@
         <td>{{ i + 1 }}</td>
         <td>{{ application.name }}</td>
         <td>{{ application.email }}</td>
-        <td>{{ application.phoneNumber }}</td>
+        <!--        <td>{{ application.phoneNumber }}</td>-->
         <td>{{ application.dateOfBirth | utcToDate }}</td>
-        <td>{{ application.address }}</td>
         <td>{{ application.applyDate | utcToDate }}</td>
+        <td *ngIf="isHrManager">{{ application.interviewer }}</td>
+
         <td>
           <p-button [disabled]="!application.cvUrl || application.cvUrl === ''"
                     (onClick)="downloadFile(application.cvUrl)">

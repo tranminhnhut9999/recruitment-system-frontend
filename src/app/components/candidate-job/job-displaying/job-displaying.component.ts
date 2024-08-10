@@ -11,12 +11,13 @@ import {Department} from "../../../shared/model/department.model";
 })
 export class JobDisplayingComponent {
   freeTxt: string = "";
-  departments: any[] = [{value: "Bộ phận IT"}, {value: "Bộ phận kế toán"}, {value: "Bộ phận bảo vệ"}, {value: "Bộ phận bán hàng"}];
+  departments: any[] = [];
   selectedDepartment?: Department;
-  departments$?: Observable<Department[]>;
 
   constructor(private jobService: JobService, private configurationService: ConfigurationService) {
-    this.departments$ = this.configurationService.departments$;
+    this.configurationService.departments$.subscribe(departments => {
+      this.departments = departments;
+    });
   }
 
   handleSearchByText() {
@@ -24,6 +25,9 @@ export class JobDisplayingComponent {
     // if (!this.freeTxt || "" === this.freeTxt.trim()) {
     //   return;
     // }
-    this.jobService.searchJob$.next({freeTxt: this.freeTxt, department: this.selectedDepartment?.name});
+    this.jobService.searchJob$.next({
+      query: this.freeTxt,
+      department: this.selectedDepartment ? this.selectedDepartment?.name : ""
+    });
   }
 }

@@ -6,7 +6,7 @@
     <input [(ngModel)]="freeTxt" type="text" pInputText placeholder="Nhập việc làm / position">
     <p-dropdown [filter]="true" filterBy="name"
                 [showClear]="true" optionLabel="name"
-                [options]="departments$ | async"
+                [options]="departments"
                 [(ngModel)]="selectedDepartment"
                 placeholder="Chọn bộ phận"></p-dropdown>
     <p-button (onClick)="handleSearchByText()" label="Tìm kiếm" styleClass="p-button-primary"></p-button>

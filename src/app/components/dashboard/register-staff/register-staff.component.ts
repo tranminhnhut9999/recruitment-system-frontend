@@ -3,11 +3,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 import {RoleService} from "../../../shared/services/role.service";
-import {Observable, ReplaySubject, Subject} from "rxjs";
+import {filter, Observable, ReplaySubject, Subject} from "rxjs";
 import {RoleResponse} from "../../../shared/model/account.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {ConfigurationService} from "../../../shared/services/configuration.service";
 import {WorkingAddress} from "../../../shared/model/working-address.model";
+import {AuthService} from "../../../shared/services/auth.service";
+import {ROLE} from "../../../shared/constants/role-config";
 
 @Component({
   selector: 'app-register-staff',
@@ -15,65 +17,9 @@ import {WorkingAddress} from "../../../shared/model/working-address.model";
   styleUrls: ['./register-staff.component.scss']
 })
 export class RegisterStaffComponent {
-  departments: any[] = [{value: "Bộ phận IT"}, {value: "Bộ phận kế toán"}, {value: "Bộ phận bảo vệ"}, {value: "Bộ phận bán hàng"}];
-  workingPlaces: any[] = [{value: "1460 Đ. Võ Văn Kiệt, Phường 1, Quận 6, Thành phố Hồ Chí Minh"}, {value: "Đường Nguyễn Văn Cừ, Hoà Hiệp Bắc, Liên Chiểu, Đà Nẵng"}, {value: "273 Nguyễn Tri Phương, Hòa Thuận Đông, Hải Châu, Đà Nẵng 550000"}];
-  vietnamCities: any[] = [
-    {"value": "Hanoi"},
-    {"value": "Ho Chi Minh City"},
-    {"value": "Da Nang"},
-    {"value": "Hai Phong"},
-    {"value": "Can Tho"},
-    {"value": "Bien Hoa"},
-    {"value": "Nha Trang"},
-    {"value": "Hue"},
-    {"value": "Vung Tau"},
-    {"value": "Quy Nhon"},
-    {"value": "Rach Gia"},
-    {"value": "Thai Nguyen"},
-    {"value": "Nam Dinh"},
-    {"value": "Buon Ma Thuot"},
-    {"value": "Vinh"},
-    {"value": "Ha Long"},
-    {"value": "Thanh Hoa"},
-    {"value": "Phan Thiet"},
-    {"value": "Cam Ranh"},
-    {"value": "Long Xuyen"},
-    {"value": "Thai Binh"},
-    {"value": "Dong Hoi"},
-    {"value": "Sa Dec"},
-    {"value": "Bac Lieu"},
-    {"value": "Bac Giang"},
-    {"value": "Bac Ninh"},
-    {"value": "Ben Tre"},
-    {"value": "Cao Lanh"},
-    {"value": "Da Lat"},
-    {"value": "Dong Ha"},
-    {"value": "Dong Xoai"},
-    {"value": "Ha Giang"},
-    {"value": "Ha Tinh"},
-    {"value": "Hoa Binh"},
-    {"value": "Hung Yen"},
-    {"value": "Kon Tum"},
-    {"value": "Lao Cai"},
-    {"value": "Long Khanh"},
-    {"value": "Mong Cai"},
-    {"value": "My Tho"},
-    {"value": "Phan Rang-Thap Cham"},
-    {"value": "Phu Ly"},
-    {"value": "Pleiku"},
-    {"value": "Quang Ngai"},
-    {"value": "Son La"},
-    {"value": "Tam Ky"},
-    {"value": "Tan An"},
-    {"value": "Tay Ninh"},
-    {"value": "Tuyen Quang"},
-    {"value": "Uong Bi"},
-    {"value": "Vi Thanh"},
-    {"value": "Vinh Long"},
-    {"value": "Yen Bai"}
-  ];
+  departments: any[] = [];
   registerNewAccountForm!: FormGroup;
-  role$?: ReplaySubject<RoleResponse[]>;
+  roles: RoleResponse[] = [];
   eduOptions: any[] = [
     {value: 'Tiểu học', code: 'PRIMARY'},
     {value: 'Trung học cơ sở', code: 'SECONDARY'},
@@ -89,7 +35,8 @@ export class RegisterStaffComponent {
               private roleService: RoleService,
               private accountService: AccountService,
               private messageService: MessageService,
-              private configurationService: ConfigurationService) {
+              private configurationService: ConfigurationService,
+              private authService: AuthService,) {
     this.registerNewAccountForm = this.fb.group({
       email: new FormControl("", [Validators.required, Validators.email]),
       firstName: new FormControl("", [Validators.required]),
@@ -123,7 +70,20 @@ export class RegisterStaffComponent {
   }
 
   subscribeEvents() {
-    this.role$ = this.roleService.roles$;
+    this.roleService.roles$.subscribe(roles => {
+      // ADMIN can create every user
+      let isAdmin = this.authService.userHasRoles([ROLE.ADMIN]);
+      this.roles = roles.filter(role => {
+        if (role.code == ROLE.ADMIN) {
+          return false;
+        } else if (isAdmin) {
+          return true;
+        } else if (role.code == ROLE.HR_MANAGER) {
+          return false
+        }
+        return true;
+      });
+    });
     this.workingAddress$ = this.configurationService.workingAddresses$;
   }
 

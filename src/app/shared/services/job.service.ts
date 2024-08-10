@@ -8,13 +8,13 @@ import {getHttpRestOption} from "../utils/http.util";
 import {GetJobsQuery} from "../model/get-jobs-query.model";
 import {CandidateApplication} from "../model/candidate-application.model";
 import {StatusLogResponse} from "../model/status-log.model";
-import {Observable, ReplaySubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  searchJob$: Subject<{ freeTxt?: string, department?: string }> = new ReplaySubject(1);
+  searchJob$: Subject<{ query: string, department: string }> = new BehaviorSubject({query: "", department: ""});
 
   constructor(private http: HttpClient) {
   }
@@ -44,8 +44,8 @@ export class JobService {
     return this.http.put(API_URL.JOBS.UPDATE_JOB + `/${id}`, job);
   }
 
-  getHiringJobs() {
-    return this.http.get<ApiResponse<Job[]>>(API_URL.JOBS.GET_HIRING_JOB);
+  getHiringJobs(params: any) {
+    return this.http.get<ApiResponse<Job[]>>(API_URL.JOBS.GET_HIRING_JOB, {params: params});
   }
 
   getHiringDetailJob(id: string) {

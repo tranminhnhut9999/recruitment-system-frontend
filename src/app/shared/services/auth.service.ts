@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {API_URL} from "../constants/api";
 import {JwtUtilService} from "./jwt.service";
-import {AccountProfileComponent} from "../../components/dashboard/account-profile/account-profile.component";
 import {ProfileResponse} from "../model/account.model";
 import {ApiResponse} from "../model/api.model";
-import {ChangePasswordRequest} from "../model/change-password.model";
+import {ROLE, ROLE_CONFIG} from '../constants/role-config';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +64,30 @@ export class AuthService {
     }
   }
 
+  getUserRoles() {
+    let currentUserRawData = this.getCurrentUser();
+    if (currentUserRawData) {
+      let currentUser = JSON.parse(currentUserRawData);
+      return currentUser?.data?.roleCodes ?? null;
+    } else {
+      return null;
+    }
+  }
 
+  private getCurrentUser() {
+    return localStorage.getItem("current_user");
+  }
+
+  userHasRoles(roles: ROLE[]) {
+    if (roles && roles.length > 0) {
+      let userRoles: ROLE[] = this.getUserRoles();
+      for (let userRole of userRoles) {
+        let matchRole = roles.find(role => role === userRole);
+        if (matchRole) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }

@@ -11,7 +11,7 @@
           <div class="role-selector col-5 flex align-items-center column-gap-3">
             <label class="input-label-min-width"><b>Vai trò</b></label>
             <p-dropdown
-              [options]="role$ | async"
+              [options]="roles"
               optionLabel="name"
               optionValue="code"
               formControlName="role"
@@ -56,7 +56,7 @@
       </p-tabPanel>
       <p-tabPanel header="Thông tin riêng tư">
         <div class="grid personal-information">
-          <div class="configuration__block col-6 flex flex-column row-gap-2">
+          <div class="configuration__block col flex flex-column row-gap-2">
             <h3>Thông tin<br>
               <p-divider/>
             </h3>
@@ -104,22 +104,22 @@
               </div>
             </div>
           </div>
-          <div class="configuration__block col-6 flex flex-column row-gap-2">
-            <h3>GIÁO DỤC<br>
-              <p-divider/>
-            </h3>
-            <div class="block__detail flex justify-content-between align-items-center">
-              <div class="block__title">
-                <b>Trình độ</b>
-              </div>
-              <div class="block__info flex-1 flex flex-column row-gap-2">
-                <p-dropdown formControlName="eduLevelCode" [showClear]="true" class="flex-1" optionValue="code"
-                            optionLabel="value"
-                            [options]="eduOptions"
-                            placeholder="Chọn cấp độ giáo dục"></p-dropdown>
-              </div>
-            </div>
-          </div>
+<!--          <div class="configuration__block col-6 flex flex-column row-gap-2">-->
+<!--            <h3>GIÁO DỤC<br>-->
+<!--              <p-divider/>-->
+<!--            </h3>-->
+<!--            <div class="block__detail flex justify-content-between align-items-center">-->
+<!--              <div class="block__title">-->
+<!--                <b>Trình độ</b>-->
+<!--              </div>-->
+<!--              <div class="block__info flex-1 flex flex-column row-gap-2">-->
+<!--                <p-dropdown formControlName="eduLevelCode" [showClear]="true" class="flex-1" optionValue="code"-->
+<!--                            optionLabel="value"-->
+<!--                            [options]="eduOptions"-->
+<!--                            placeholder="Chọn cấp độ giáo dục"></p-dropdown>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </p-tabPanel>
     </p-tabView>

@@ -8,16 +8,16 @@
         <div class="overall flex flex-row column-gap-4 row-gap-4">
           <div class="detail-info flex column-gap-2 align-items-center">
             <i class="ph ph-currency-circle-dollar"></i>
-            <span>Mức lương <br> <b>Trên 3 triệu</b></span>
+            <span>Mức lương <br> <b>{{ 6000000 | vndShorthand  }}</b></span>
           </div>
           <div class="detail-info flex column-gap-2 align-items-center">
-            <i class="ph ph-currency-circle-dollar"></i>
-            <span>Địa điểm <br> <b>Hồ Chí Minh</b></span>
+            <i class="ph ph-building"></i>
+            <span>Địa điểm <br> <b>{{ job.workingPlace }}</b></span>
 
           </div>
           <div class="detail-info flex column-gap-2 align-items-center">
-            <i class="ph ph-currency-circle-dollar"></i>
-            <span>Kinh nghiệm <br> <b>2 năm</b></span>
+            <i class="ph ph-hourglass-high"></i>
+            <span>Kinh nghiệm <br> <b>{{ !job.requiredExperience || job.requiredExperience == 0 ? 'Không yêu cầu' : job.requiredExperience }}</b></span>
           </div>
         </div>
         <div class="quick-apply-section">
@@ -35,27 +35,18 @@
       <div class="section">
         <h2>Thông tin chung</h2>
         <ul class="common-informations flex flex-column row-gap-4 column-gap-4">
-          <!--                    <li class="information flex align-items-center column-gap-4">-->
-          <!--                        <div class="icon-information">-->
-          <!--                            <i class="ph ph-hourglass-high"></i>-->
-          <!--                        </div>-->
-          <!--                        <div class="detail flex flex-column row-gap-3">-->
-          <!--                            <span>Cấp bậc</span>-->
-          <!--                            <b>Nhân viên</b>-->
-          <!--                        </div>-->
-          <!--                    </li>-->
           <li class="information flex align-items-center column-gap-4">
             <div class="icon-information">
               <i class="ph ph-hourglass-high"></i>
             </div>
             <div class="detail flex flex-column row-gap-2">
               <span>Kinh nghiệm</span>
-              <b>1 năm</b>
+              <b>{{ !job.requiredExperience || job.requiredExperience == 0 ? 'Không yêu cầu' : job.requiredExperience }}</b>
             </div>
           </li>
           <li class="information flex align-items-center column-gap-4">
             <div class="icon-information">
-              <i class="ph ph-hourglass-high"></i>
+              <i class="ph ph-users-three"></i>
             </div>
             <div class="detail flex flex-column row-gap-2">
               <span>Số lượng tuyển</span>
@@ -64,20 +55,11 @@
           </li>
           <li class="information flex align-items-center column-gap-4">
             <div class="icon-information">
-              <i class="ph ph-hourglass-high"></i>
+              <i class="ph ph-read-cv-logo"></i>
             </div>
             <div class="detail flex flex-column row-gap-2">
               <span>Hình thức làm việc</span>
               <b>{{ job.jobType }}</b>
-            </div>
-          </li>
-          <li class="information flex align-items-center column-gap-4">
-            <div class="icon-information">
-              <i class="ph ph-hourglass-high"></i>
-            </div>
-            <div class="detail flex flex-column row-gap-2">
-              <span>Giới tính</span>
-              <b>Không yêu cầu</b>
             </div>
           </li>
         </ul>

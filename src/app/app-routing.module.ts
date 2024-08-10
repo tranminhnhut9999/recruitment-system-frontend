@@ -30,7 +30,6 @@ const routes: Routes = [
       {
         path: "recruitment",
         component: RecruitmentComponent,
-        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -119,7 +118,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

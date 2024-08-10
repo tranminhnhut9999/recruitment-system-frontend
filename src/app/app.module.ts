@@ -76,6 +76,8 @@ import {StaffDetailComponent} from './components/dashboard/staff-management/staf
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { WorkingAddressComponent } from './components/dashboard/configuration/working-address/working-address.component';
 import { ChangePasswordDialogComponent } from './components/dashboard/account-profile/change-password-dialog/change-password-dialog.component';
+import { HrRoleGuardPipe } from './shared/pipes/hr-role-guard.pipe';
+import { VndShorthandPipe } from './shared/pipes/vnd-shorthand.pipe';
 
 
 export const authInterceptorProvider: Provider =
@@ -113,6 +115,8 @@ export const authInterceptorProvider: Provider =
     StaffDetailComponent,
     WorkingAddressComponent,
     ChangePasswordDialogComponent,
+    HrRoleGuardPipe,
+    VndShorthandPipe,
   ],
   imports: [
     BrowserModule,

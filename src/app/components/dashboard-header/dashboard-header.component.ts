@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem, MenuItemCommandEvent} from "primeng/api";
 import {Router} from "@angular/router";
 import {AuthService} from "../../shared/services/auth.service";
+import {ROLE} from "../../shared/constants/role-config";
 
 @Component({
   selector: 'app-dashboard-header',
@@ -20,44 +21,23 @@ export class DashboardHeaderComponent implements OnInit {
     this.headerMenuItems = [
       {
         label: 'Quản lý',
-        icon: 'pi pi-home',
         items: [
           {
             label: 'Các công việc',
-            routerLink: 'recruitment'
+            routerLink: 'recruitment',
+            visible: this.authService.userHasRoles([ROLE.HR_MANAGER, ROLE.HR_STAFF])
           },
           {
             label: 'Nhân viên',
-            routerLink: 'staff-management'
-          }
-        ]
-      },
-      {
-        label: 'Báo cáo',
-        icon: 'pi pi-star',
-        items: [
-          {
-            label: 'Phân tích tuyển dụng',
-          },
-          {
-            label: 'Phân tích nguồn',
-          },
-          {
-            label: 'Phân tích thời gian trong giai đoạn',
-          },
-          {
-            label: 'Hiệu suất của bộ phận',
+            routerLink: 'staff-management',
+            visible: this.authService.userHasRoles([ROLE.ADMIN, ROLE.HR_MANAGER])
           }
         ]
       },
       {
         label: 'Cấu hình',
-        icon: 'pi pi-search',
+        visible: this.authService.userHasRoles([ROLE.ADMIN]),
         items: [
-          {
-            label: 'Cài đặt',
-          },
-          {separator: true},
           {
             label: 'Loại việc làm',
             routerLink: 'job-types'

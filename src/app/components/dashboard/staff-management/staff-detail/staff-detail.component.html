@@ -6,7 +6,10 @@
         <h3>{{ _profile?.role.name }}</h3>
       </div>
       <div>
-        <p-avatar label="N" size="xlarge"/>
+        <div class="avatar-content">
+          <img src="{{_profile?.avatarImg ? _profile?.avatarImg : './assets/images/no-avt-pic.jpg'}}"
+               alt="Ảnh đại diện">
+        </div>
       </div>
     </div>
     <div class="information__others grid row-gap-3 mt-3">
