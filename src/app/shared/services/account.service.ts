@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {getHttpMultiPartOption, getHttpRestOption} from "../utils/http.util";
 import {ReplaySubject} from "rxjs";
-import {ProfileResponse} from "../model/account.model";
+import {ProfileResponse} from "../model/profile.model";
 import {ApiResponse} from "../model/api.model";
 import {ChangePasswordRequest} from "../model/change-password.model";
 import {API_URL} from "../constants/api";

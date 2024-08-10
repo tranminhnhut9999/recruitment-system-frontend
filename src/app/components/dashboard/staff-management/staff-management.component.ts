@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProfileResponse} from "../../../shared/model/account.model";
+import {ProfileResponse} from "../../../shared/model/profile.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {AccountStatus} from "../../../shared/enums/account-status.enum";
@@ -18,8 +18,7 @@ export class StaffManagementComponent implements OnInit {
   constructor(private accountService: AccountService,
               private confirmationService: ConfirmationService,
               private messageService: MessageService) {
-    accountService
-      .loadAccount();
+    accountService.loadAccount();
   }
 
   ngOnInit() {

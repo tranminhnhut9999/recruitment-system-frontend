@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Confirmation, ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
-import {ProfileResponse, RoleResponse} from "../../../../shared/model/account.model";
+import {ProfileResponse, RoleResponse} from "../../../../shared/model/profile.model";
 import {Department} from "../../../../shared/model/department.model";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
 import {AccountService} from "../../../../shared/services/account.service";

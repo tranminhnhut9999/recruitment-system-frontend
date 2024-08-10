@@ -13,7 +13,7 @@
       <div class="grid job-posting__form justify-content-between">
         <div class="job-posting__form-info col-6 flex">
           <label class="align-self-center">Bộ phận</label>
-          <p-dropdown [filter]="true" filterBy="value"
+          <p-dropdown [filter]="true" filterBy="name"
                       [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="name" optionValue="name"
                       [options]="departments"
                       placeholder="Chọn bộ phận" formControlName="department"
@@ -35,6 +35,7 @@
           <label class="align-self-center">Nơi làm việc</label>
           <p-dropdown [filter]="true" filterBy="address"
                       [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="address"
+                      optionValue="address"
                       [options]="workingPlaces"
                       formControlName="workingPlace"
                       placeholder="Chọn nơi làm việc"></p-dropdown>
@@ -53,7 +54,8 @@
             class="flex-1 flex flex-row-reverse"
             [options]="recruiters"
             placeholder="Người phỏng vấn"
-            optionLabel="name"
+            optionLabel="email"
+            optionValue="email"
             display="chip"
             [showClear]="true"
             formControlName="recruiters"
@@ -117,7 +119,7 @@
     </p-tabPanel>
     <p-tabPanel header="Mô tả công việc">
       <p>
-        <p-editor (onTextChange)="onChangeDescription($event)" formControlName="description"
+        <p-editor #editorText (onTextChange)="onChangeDescription($event)" formControlName="description"
                   [style]="{ height: '320px', width: '100%' }"/>
       </p>
     </p-tabPanel>
@@ -132,7 +134,8 @@
           optionLabel="name"
           optionValue="name"
           [showClear]="true"
-          formControlName="keywords"/>
+          formControlName="keywords"
+        />
       </div>
     </p-tabPanel>
   </p-tabView>

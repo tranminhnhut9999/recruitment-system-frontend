@@ -4,7 +4,6 @@ export class DateValidator {
   static startDateNotPast(control: AbstractControl): ValidationErrors | null {
     const startDate = new Date(control.value);
     const now = new Date();
-
     // Remove the time part for the comparison
     startDate.setHours(0, 0, 0, 0);
     now.setHours(0, 0, 0, 0);
@@ -22,7 +21,7 @@ export class DateValidator {
       // Remove the time part for the comparison
       startDate.setHours(0, 0, 0, 0);
       endDate.setHours(0, 0, 0, 0);
-      if(endDate <= startDate){
+      if (endDate <= startDate) {
         endDateControl.setErrors({endDateBeforeStartDate: true});
       }
       return endDate < startDate ? {endDateBeforeStartDate: true} : null;

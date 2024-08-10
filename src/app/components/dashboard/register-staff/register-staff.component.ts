@@ -4,7 +4,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {Location} from "@angular/common";
 import {RoleService} from "../../../shared/services/role.service";
 import {filter, Observable, ReplaySubject, Subject} from "rxjs";
-import {RoleResponse} from "../../../shared/model/account.model";
+import {RoleResponse} from "../../../shared/model/profile.model";
 import {AccountService} from "../../../shared/services/account.service";
 import {ConfigurationService} from "../../../shared/services/configuration.service";
 import {WorkingAddress} from "../../../shared/model/working-address.model";

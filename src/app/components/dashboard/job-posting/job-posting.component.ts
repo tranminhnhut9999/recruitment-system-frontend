@@ -4,7 +4,7 @@ import {Location} from "@angular/common";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
-import {ProfileResponse} from "../../../shared/model/account.model";
+import {ProfileResponse} from "../../../shared/model/profile.model";
 import {Job} from "../../../shared/model/job";
 import {JobService} from "../../../shared/services/job.service";
 import {DateValidator} from "../../../shared/validators/DateValidator";
@@ -17,6 +17,7 @@ import {Department} from "../../../shared/model/department.model";
 import {WorkingAddress} from "../../../shared/model/working-address.model";
 import {JobType} from "../../../shared/model/job-type.model";
 import {Skill} from "../../../shared/model/skill.model";
+import {AccountService} from "../../../shared/services/account.service";
 
 @Component({
   selector: 'app-job-posting',
@@ -30,7 +31,7 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   formType: "ADDING" | "UPDATING" = "ADDING";
   job?: Job;
   jobForm: FormGroup | undefined;
-  hrStaffs: ProfileResponse[] = [];
+  recruiters: ProfileResponse[] = [];
   onlyReadStartDate: boolean = false;
   jobId: string = "";
   subscription!: Subscription;
@@ -39,9 +40,7 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   departments: Department[] = []
   workingPlaces: WorkingAddress[] = []
   jobTypes: JobType[] = []
-  recruiters: any[] = []
   skillKeywords: Skill[] = [];
-
 
   constructor(private location: Location, private confirmService: ConfirmationService,
               private activatedRoute: ActivatedRoute,
@@ -49,7 +48,8 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
               private authService: AuthService,
               private jobService: JobService,
               private messageService: MessageService,
-              private configurationService: ConfigurationService) {
+              private configurationService: ConfigurationService,
+              private accountService: AccountService) {
     let path = this.activatedRoute.snapshot.url[0].path;
     if (path === "job-posting") {
       this.formType = "ADDING";
@@ -63,12 +63,15 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.jobForm = this.createFormControls();
     this.loadConfigurationData();
+    this.loadHrStaffs();
+  }
+
+  private loadHrStaffs() {
     this.subscription = this.authService.getHrStaff().subscribe(hrStaffs => {
       if (hrStaffs.data) {
-        this.hrStaffs = [...hrStaffs.data];
+        this.recruiters = [...hrStaffs.data];
       }
     });
-
   }
 
   handleClickingBack() {
@@ -117,43 +120,11 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
         this.jobForm.controls['status'].setValue(this.job.status);
         this.jobForm.controls['salaryRangeFrom'].setValue(this.job.salaryRangeFrom);
         this.jobForm.controls['salaryRangeTo'].setValue(this.job.salaryRangeTo);
-        // Set init data for single selection field
-        for (let department of this.departments) {
-          if (department.name == this.job.department) {
-            this.jobForm.controls['department'].setValue(department);
-            break;
-          }
-        }
-
-        for (let workingPlace of this.workingPlaces) {
-          if (workingPlace.address == this.job.workingPlace) {
-            this.jobForm.controls['workingPlace'].setValue(workingPlace);
-          }
-        }
-
-        for (let jobType of this.jobTypes) {
-          if (jobType.name == this.job.jobType) {
-            this.jobForm.controls['jobType'].setValue(jobType);
-          }
-        }
-
-        // set init data for multiple selection field
-        let selectedKeywords: any[] = [];
-        for (let keyword of this.skillKeywords) {
-          if (this.job.keywords.indexOf(keyword.name) >= 0) {
-            selectedKeywords.push(keyword);
-          }
-        }
-        this.jobForm.controls['keywords'].setValue(selectedKeywords);
-
-        let selectedInterviewers: any[] = [];
-        for (let recruiter of this.recruiters) {
-          if (this.job.recruiters.indexOf(recruiter.email) >= 0) {
-            selectedInterviewers.push(recruiter);
-          }
-        }
-        console.log("selectedKeywords", selectedInterviewers);
-        this.jobForm.controls['recruiters'].setValue(selectedInterviewers);
+        this.jobForm.controls['department'].setValue(this.job.department);
+        this.jobForm.controls['workingPlace'].setValue(this.job.workingPlace);
+        this.jobForm.controls['jobType'].setValue(this.job.jobType);
+        this.jobForm.controls['keywords'].setValue([...this.job.keywords]);
+        this.jobForm.controls['recruiters'].setValue([...this.job.recruiters]);
       }
     })
   }
@@ -210,23 +181,34 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleUpdateJob() {
-    let isValidStartDate = !this.jobForm?.get("startDate")?.dirty;
-    let isValidEndDate = this.jobForm?.get("endDate")?.dirty;
+    let startDateFormControl = this.jobForm?.get("startDate");
+    let isValidStartDate: boolean;
+
+    if (startDateFormControl?.dirty) {
+      isValidStartDate = startDateFormControl.valid;
+    } else {
+      isValidStartDate = true;
+    }
+
+
     let isFormValidState = isValidStartDate || this.jobForm?.valid;
     if (isFormValidState) {
       let request: PerformJobRequest = this.convertFormToJSON();
+      console.log("HANDLE UPDATE JOB:", request)
       this.jobService.update(Number.parseFloat(this.jobId), request).subscribe({
         next: (res) => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Cập nhật công việc thành công',
+            summary: 'Thành công',
+            detail: 'Cập nhật công việc thành công',
             life: 1000,
           });
         },
         error: err => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Cập nhật công việc thất bại',
+            summary: 'Thất bại',
+            detail: 'Cập nhật công việc thất bại',
             life: 1000,
           })
         }
@@ -235,8 +217,8 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
       this.messageService.add(
         {
           severity: "error",
-          summary: "Cập nhật thất bại",
-          detail: "Dữ liệu khônng hợp lệ, vui lòng kiểm tra lại"
+          summary: 'Thất bại',
+          detail: 'Cập nhật công việc thất bại',
         }
       );
       console.log(this.jobForm)
@@ -248,43 +230,12 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     const formValue = this.jobForm.value;
-
-    // Ensure arrays are properly converted
-    formValue.keywords = (this.jobForm.get('keywords')?.value as any[]).map(keyword => keyword.value);
-    formValue.recruiters = (this.jobForm.get('recruiters')?.value as any[]).map(recruiter => recruiter.email);
-    let departmentValue = this.jobForm.get('department')?.value;
-    if (departmentValue) {
-      formValue.department = departmentValue.value
-    }
-
-    let jobTypeValue = this.jobForm.get('jobType')?.value;
-    if (jobTypeValue) {
-      formValue.jobType = jobTypeValue.value
-    }
-
-    let workingPlaceValue = this.jobForm.get('workingPlace')?.value;
-    if (workingPlaceValue) {
-      formValue.workingPlace = workingPlaceValue.value
-    }
     // Convert the form values to JSON
     return JSON.stringify(formValue);
   }
 
   convertToUTC(date: Date): string {
     return new Date(date).toISOString();
-  }
-
-  handleChangeCheckBox() {
-    this.quickStartStatus = !this.quickStartStatus
-    if (this.quickStartStatus == true) {
-      let now: Date = new Date();
-      this.jobForm?.controls['startDate'].setValue(now);
-      this.onlyReadStartDate = true;
-      this.jobForm?.controls['status'].setValue(true);
-    } else {
-      this.onlyReadStartDate = false;
-      this.jobForm?.controls['status'].setValue(false);
-    }
   }
 
   ngOnDestroy() {

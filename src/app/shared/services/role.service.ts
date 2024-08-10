@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {API_URL} from "../constants/api";
 import {JwtUtilService} from "./jwt.service";
 import {AccountProfileComponent} from "../../components/dashboard/account-profile/account-profile.component";
-import {ProfileResponse, RoleResponse} from "../model/account.model";
+import {ProfileResponse, RoleResponse} from "../model/profile.model";
 import {ApiResponse} from "../model/api.model";
 
 @Injectable({

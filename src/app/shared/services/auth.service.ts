@@ -3,7 +3,7 @@ import {BehaviorSubject, map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "../constants/api";
 import {JwtUtilService} from "./jwt.service";
-import {ProfileResponse} from "../model/account.model";
+import {ProfileResponse} from "../model/profile.model";
 import {ApiResponse} from "../model/api.model";
 import {ROLE, ROLE_CONFIG} from '../constants/role-config';
 
