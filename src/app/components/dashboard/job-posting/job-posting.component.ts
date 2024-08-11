@@ -145,7 +145,7 @@ export class JobPostingComponent implements OnInit, OnDestroy, AfterViewInit {
         endDate: [Validators.required, DateValidator.endDateAfterStartDate],
         startDate: [Validators.required, DateValidator.startDateNotPast],
         status: [false, Validators.required],
-        requiredExperience: [0, [Validators.required, Validators.min(0)]],
+        requiredExperience: [0, [Validators.min(0), Validators.max(50)]],
         recruiters: [[], Validators.required],
         jobType: ['', Validators.required],
         workingPlace: ['', Validators.required],

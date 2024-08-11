@@ -3,6 +3,8 @@ import {MenuItem, MenuItemCommandEvent} from "primeng/api";
 import {Router} from "@angular/router";
 import {AuthService} from "../../shared/services/auth.service";
 import {ROLE} from "../../shared/constants/role-config";
+import {ProfileResponse} from "../../shared/model/profile.model";
+import {AccountService} from "../../shared/services/account.service";
 
 @Component({
   selector: 'app-dashboard-header',
@@ -12,12 +14,18 @@ import {ROLE} from "../../shared/constants/role-config";
 export class DashboardHeaderComponent implements OnInit {
   headerMenuItems: MenuItem[] | undefined;
   profileMenuItems: MenuItem[] | undefined;
+  accountProfile?: ProfileResponse;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router,
+              private authService: AuthService,
+              private accountService: AccountService) {
 
   }
 
   ngOnInit() {
+    this.accountService.getAccountProfile().subscribe(profile => {
+      this.accountProfile = profile.data
+    });
     this.headerMenuItems = [
       {
         label: 'Quản lý',

@@ -1,13 +1,15 @@
 <div class="dashboard-header">
-    <p-menubar [model]="headerMenuItems">
-        <ng-template pTemplate="start">
-            <a [routerLink]="'/home'">
-                <img alt="App logo" id="app-logo" src="./assets/images/app-logo.png">
-            </a>
-        </ng-template>
-        <ng-template pTemplate="end">
-            <p-avatar id="user-avt" (click)="menu.toggle($event)" image="./assets/images/default-user.jpg" shape="circle"/>
-            <p-menu autofocus="none" #menu [model]="profileMenuItems" [popup]="true" />
-        </ng-template>
-    </p-menubar>
+  <p-menubar [model]="headerMenuItems">
+    <ng-template pTemplate="start">
+      <a [routerLink]="'/home'">
+        <img alt="App logo" id="app-logo" src="./assets/images/app-logo.png">
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <p-avatar id="user-avt" (click)="menu.toggle($event)"
+                [image]="accountProfile && accountProfile?.avatarImg ? accountProfile.avatarImg : './assets/images/default-user.jpg' "
+                shape="circle"/>
+      <p-menu autofocus="none" #menu [model]="profileMenuItems" [popup]="true"/>
+    </ng-template>
+  </p-menubar>
 </div>

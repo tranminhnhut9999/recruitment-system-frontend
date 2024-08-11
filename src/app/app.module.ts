@@ -78,6 +78,7 @@ import { WorkingAddressComponent } from './components/dashboard/configuration/wo
 import { ChangePasswordDialogComponent } from './components/dashboard/account-profile/change-password-dialog/change-password-dialog.component';
 import { HrRoleGuardPipe } from './shared/pipes/hr-role-guard.pipe';
 import { VndShorthandPipe } from './shared/pipes/vnd-shorthand.pipe';
+import { MonthToYearPipePipe } from './shared/pipes/month-to-year-pipe.pipe';
 
 
 export const authInterceptorProvider: Provider =
@@ -117,6 +118,7 @@ export const authInterceptorProvider: Provider =
     ChangePasswordDialogComponent,
     HrRoleGuardPipe,
     VndShorthandPipe,
+    MonthToYearPipePipe,
   ],
   imports: [
     BrowserModule,

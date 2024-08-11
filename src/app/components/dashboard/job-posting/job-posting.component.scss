@@ -33,6 +33,9 @@
   ::ng-deep .p-calendar {
     width: 100%;
   }
+  ::ng-deep p-inputnumber {
+    width: 100%;
+  }
   ::ng-deep p-multiselect, p-dropdown {
     width: calc(100% - 30%);
   }
