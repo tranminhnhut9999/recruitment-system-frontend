@@ -45,7 +45,7 @@
           <td>{{ rowIndex + 1 }}</td>
           <td>{{ jobType.name }}</td>
           <td>
-            <button pButton label="Xóa" [pStyleClass]="'p-button-error'"></button>
+            <button (click)="deleteJobType(jobType)" pButton label="Xóa" [pStyleClass]="'p-button-error'"></button>
           </td>
         </tr>
       </ng-template>

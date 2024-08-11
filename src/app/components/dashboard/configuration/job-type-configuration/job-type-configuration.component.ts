@@ -85,7 +85,7 @@ export class JobTypeConfigurationComponent {
     if (jobType && jobType.id) {
       this.configurationService.deleteJobType(jobType.id).subscribe(
         (response: any) => {
-          this.configurationService.loadDepartment();
+          this.configurationService.loadJobType();
           this.messageService.add({
             severity: 'success',
             summary: 'Thành Công',
