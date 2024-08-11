@@ -1,6 +1,6 @@
-const BASE_URL_AUTH = "http://localhost:8081/api";
-const BASE_URL_JOBS = "http://localhost:8082/api";
-const BASE_URL_APPLICATIONS = "http://localhost:8083/api";
+const BASE_URL_AUTH = "http://localhost:8080/api";
+const BASE_URL_JOBS = "http://localhost:8080/api";
+const BASE_URL_APPLICATIONS = "http://localhost:8080/api";
 
 export const API_URL = {
   AUTH: {

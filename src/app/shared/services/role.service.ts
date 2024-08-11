@@ -22,6 +22,6 @@ export class RoleService {
   }
 
   getRoles() {
-    return this.http.get<ApiResponse<RoleResponse[]>>("http://localhost:8081/api/roles");
+    return this.http.get<ApiResponse<RoleResponse[]>>("http://localhost:8080/api/roles");
   }
 }

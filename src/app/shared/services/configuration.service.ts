@@ -12,7 +12,7 @@ import {WorkingAddress} from "../model/working-address.model";
   providedIn: 'root'
 })
 export class ConfigurationService {
-  private CONFIGURATION_BASE_URL = `http://localhost:8084/api/configuration`;
+  private CONFIGURATION_BASE_URL = `http://localhost:8080/api/configuration`;
   private JOB_TYPE_URL = `${this.CONFIGURATION_BASE_URL}/job-types`;
   private DEPARTMENT_URL = `${this.CONFIGURATION_BASE_URL}/departments`;
   private SKILL_URL = `${this.CONFIGURATION_BASE_URL}/skills`;

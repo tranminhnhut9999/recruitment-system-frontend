@@ -11,7 +11,7 @@ import {API_URL} from "../constants/api";
   providedIn: 'root'
 })
 export class AccountService {
-  private BASE_URL = 'http://localhost:8081/api/';
+  private BASE_URL = 'http://localhost:8080/api/';
   private ACCOUNT_URL = this.BASE_URL + 'accounts';
   private CHANGE_STATUS_URL = this.ACCOUNT_URL + "/change-status";
   private RESET_PASSWORD_URL = this.ACCOUNT_URL + "/reset-password";

@@ -20,7 +20,7 @@ export class JobService {
   }
 
   getJobByID(id: number) {
-    return this.http.get<ApiResponse<Job>>("http://localhost:8082/api/jobs/" + id);
+    return this.http.get<ApiResponse<Job>>("http://localhost:8080/api/jobs/" + id);
   }
 
   getAllJobs(params?: GetJobsQuery) {
@@ -31,7 +31,7 @@ export class JobService {
       paramsURL += `interviewEmail=${params?.interviewEmail}&`;
       paramsURL += `status=${params?.status}&`;
     }
-    return this.http.get("http://localhost:8082/api/jobs?" + paramsURL);
+    return this.http.get("http://localhost:8080/api/jobs?" + paramsURL);
   }
 
   createJob(job: PerformJobRequest) {
