@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Department} from "../../../../shared/model/department.model";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
 import {MessageService} from "primeng/api";
 import {WorkingAddress} from "../../../../shared/model/working-address.model";
+import {debounceTime, distinctUntilChanged, map} from "rxjs";
 
 @Component({
   selector: 'app-working-address',
@@ -13,8 +14,9 @@ import {WorkingAddress} from "../../../../shared/model/working-address.model";
 export class WorkingAddressComponent {
   workingAddressForm: FormGroup;
   workingAddresses: WorkingAddress[] = [];
-  displayWorkingAddresses: WorkingAddress[] = [];
+  filterWorkingAddresses: WorkingAddress[] = [];
   loading: boolean = true;
+  searchControl: FormControl = new FormControl('');
 
   constructor(private fb: FormBuilder, private configurationService: ConfigurationService, private messageService: MessageService) {
     this.workingAddressForm = this.fb.group({
@@ -23,14 +25,22 @@ export class WorkingAddressComponent {
     this.configurationService.workingAddresses$.subscribe(workingAddresses => {
       if (workingAddresses) {
         this.workingAddresses = workingAddresses;
-        this.displayWorkingAddresses = [...workingAddresses];
+        this.filterWorkingAddresses = [...workingAddresses];
       } else {
         this.workingAddresses = [];
-        this.displayWorkingAddresses = [];
+        this.filterWorkingAddresses = [];
       }
       this.loading = false
     });
 
+    this.searchControl.valueChanges.pipe(
+      debounceTime(1000), // 1-second delay
+      distinctUntilChanged(),
+      map((searchTerm) => this.filterWorkingAddress(searchTerm ? searchTerm : ""))
+    ).subscribe(filtered => {
+      console.log("FILTER JOB")
+      this.filterWorkingAddresses = filtered;
+    });
   }
 
   onSubmit() {
@@ -48,6 +58,7 @@ export class WorkingAddressComponent {
         (response: any) => {
           this.configurationService.loadWorkingAddress();
           this.workingAddressForm.reset();
+          this.searchControl.reset();
           this.messageService.add({
             severity: 'success',
             summary: 'Thành Công',
@@ -68,10 +79,10 @@ export class WorkingAddressComponent {
   filterTable(event: Event) {
     let filterWord = (event.target as HTMLInputElement).value;
     if (filterWord.length > 0) {
-      this.displayWorkingAddresses = this.displayWorkingAddresses
+      this.filterWorkingAddresses = this.filterWorkingAddresses
         .filter(jb => jb.address.toLowerCase().includes(filterWord) || filterWord.toLowerCase().includes(jb.address));
     } else {
-      this.displayWorkingAddresses = [...this.workingAddresses];
+      this.filterWorkingAddresses = [...this.workingAddresses];
     }
   }
 
@@ -99,5 +110,24 @@ export class WorkingAddressComponent {
         }
       );
     }
+  }
+
+  filterWorkingAddress(searchTerm: string): WorkingAddress[] {
+    if (!searchTerm || searchTerm.length == 0) {
+      return this.workingAddresses;
+    }
+
+    searchTerm = searchTerm.toLowerCase();
+
+    return this.workingAddresses.filter(workingAddress => {
+      const address = this.removeDiacritics(workingAddress.address).toLowerCase();
+
+      return address.includes(searchTerm);
+    });
+  }
+
+  // Helper function to remove diacritics for Vietnamese search
+  removeDiacritics(str: string): string {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 }

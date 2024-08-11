@@ -15,11 +15,12 @@
   </form>
 
   <div class="existed-job-type-table mt-6">
-    <p-table [value]="displayWorkingAddresses"
+    <p-table [value]="filterWorkingAddresses"
              [tableStyle]="{ 'min-width': '50rem' }"
              [paginator]="true"
              [rows]="5"
-             [globalFilterFields]="['name']"
+             [globalFilterFields]="['address']"
+             [filterLocale]="'vi'"
              [loading]="loading"
     >
       <ng-template pTemplate="caption">
@@ -28,7 +29,7 @@
           <input
             pInputText
             type="text"
-            (input)="filterTable($event)"
+            [formControl]="searchControl"
             placeholder="Search keyword"/>
         </div>
       </ng-template>

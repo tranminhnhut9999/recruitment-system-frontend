@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {JobType} from "../../../../shared/model/job-type.model";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
-import {Observable, Subject} from "rxjs";
 import {MessageService} from "primeng/api";
-import {Department} from "../../../../shared/model/department.model";
+import {debounceTime, distinctUntilChanged, map} from "rxjs";
 
 @Component({
   selector: 'app-job-type-configuration',
@@ -14,8 +13,9 @@ import {Department} from "../../../../shared/model/department.model";
 export class JobTypeConfigurationComponent {
   jobTypeForm: FormGroup;
   jobTypes: JobType[] = [];
-  displayJobTypes: JobType[] = [];
+  filteredJobTypes: JobType[] = [];
   loading: boolean = true;
+  searchControl: FormControl = new FormControl('');
 
   constructor(private fb: FormBuilder, private configurationService: ConfigurationService, private messageService: MessageService) {
     this.jobTypeForm = this.fb.group({
@@ -24,14 +24,20 @@ export class JobTypeConfigurationComponent {
     this.configurationService.jobTypes$.subscribe(jobTypes => {
       if (jobTypes) {
         this.jobTypes = jobTypes;
-        this.displayJobTypes = [...jobTypes];
+        this.filteredJobTypes = this.jobTypes;
       } else {
         this.jobTypes = [];
-        this.displayJobTypes = [];
+        this.filteredJobTypes = [];
       }
       this.loading = false
     });
-
+    this.searchControl.valueChanges.pipe(
+      debounceTime(1000), // 1-second delay
+      distinctUntilChanged(),
+      map((searchTerm) => this.filterJobTypes(searchTerm))
+    ).subscribe(filtered => {
+      this.filteredJobTypes = filtered;
+    });
   }
 
   onSubmit() {
@@ -70,10 +76,10 @@ export class JobTypeConfigurationComponent {
 
     let filterWord = (event.target as HTMLInputElement).value;
     if (filterWord.length > 0) {
-      this.displayJobTypes = this.displayJobTypes
+      this.filteredJobTypes = this.filteredJobTypes
         .filter(jb => jb.name.toLowerCase().includes(filterWord) || filterWord.toLowerCase().includes(jb.name));
     } else {
-      this.displayJobTypes = [...this.jobTypes];
+      this.filteredJobTypes = [...this.jobTypes];
     }
   }
 
@@ -101,5 +107,24 @@ export class JobTypeConfigurationComponent {
         }
       );
     }
+  }
+
+  filterJobTypes(searchTerm: string): JobType[] {
+    if (!searchTerm) {
+      return this.jobTypes;
+    }
+
+    searchTerm = searchTerm.toLowerCase();
+
+    return this.jobTypes.filter(jobType => {
+      const jobTypeName = this.removeDiacritics(jobType.name).toLowerCase();
+
+      return jobTypeName.includes(searchTerm);
+    });
+  }
+
+  // Helper function to remove diacritics for Vietnamese search
+  removeDiacritics(str: string): string {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 }

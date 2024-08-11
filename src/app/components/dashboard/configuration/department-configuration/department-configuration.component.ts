@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ConfigurationService} from "../../../../shared/services/configuration.service";
 import {MessageService} from "primeng/api";
 import {Department} from "../../../../shared/model/department.model";
+import {Skill} from "../../../../shared/model/skill.model";
+import {debounceTime, distinctUntilChanged, map} from "rxjs";
 
 @Component({
   selector: 'app-department-configuration',
@@ -12,8 +14,9 @@ import {Department} from "../../../../shared/model/department.model";
 export class DepartmentConfigurationComponent {
   departmentForm: FormGroup;
   departments: Department[] = [];
-  displayDepartment: Department[] = [];
+  filterDepartments: Department[] = [];
   loading: boolean = true;
+  searchControl: FormControl = new FormControl('');
 
   constructor(private fb: FormBuilder, private configurationService: ConfigurationService, private messageService: MessageService) {
     this.departmentForm = this.fb.group({
@@ -22,14 +25,20 @@ export class DepartmentConfigurationComponent {
     this.configurationService.departments$.subscribe(departments => {
       if (departments) {
         this.departments = departments;
-        this.displayDepartment = [...departments];
-      }else{
+        this.filterDepartments = this.departments;
+      } else {
         this.departments = [];
-        this.displayDepartment = [];
+        this.filterDepartments = [];
       }
       this.loading = false
     });
-
+    this.searchControl.valueChanges.pipe(
+      debounceTime(1000), // 1-second delay
+      distinctUntilChanged(),
+      map((searchTerm) => this.filterDepartment(searchTerm))
+    ).subscribe(filtered => {
+      this.filterDepartments = filtered;
+    });
   }
 
   onSubmit() {
@@ -67,10 +76,10 @@ export class DepartmentConfigurationComponent {
   filterTable(event: Event) {
     let filterWord = (event.target as HTMLInputElement).value;
     if (filterWord.length > 0) {
-      this.displayDepartment = this.displayDepartment
+      this.filterDepartments = this.filterDepartments
         .filter(jb => jb.name.toLowerCase().includes(filterWord) || filterWord.toLowerCase().includes(jb.name));
     } else {
-      this.displayDepartment = [...this.departments];
+      this.filterDepartments = [...this.departments];
     }
   }
 
@@ -100,5 +109,22 @@ export class DepartmentConfigurationComponent {
     }
   }
 
-  protected readonly HTMLInputElement = HTMLInputElement;
+  filterDepartment(searchTerm: string): Skill[] {
+    if (!searchTerm) {
+      return this.departments;
+    }
+
+    searchTerm = searchTerm.toLowerCase();
+
+    return this.departments.filter(department => {
+      const departmentName = this.removeDiacritics(department.name).toLowerCase();
+      return departmentName.includes(searchTerm);
+    });
+  }
+
+  // Helper function to remove diacritics for Vietnamese search
+  removeDiacritics(str: string): string {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
 }

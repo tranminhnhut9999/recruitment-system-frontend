@@ -15,7 +15,7 @@
   </form>
 
   <div class="existed-job-type-table mt-6">
-    <p-table [value]="displayDepartment"
+    <p-table [value]="filterDepartments"
              [tableStyle]="{ 'min-width': '50rem' }"
              [paginator]="true"
              [rows]="5"
@@ -28,7 +28,7 @@
           <input
             pInputText
             type="text"
-            (input)="filterTable($event)"
+            [formControl]="searchControl"
             placeholder="Search keyword"/>
         </div>
       </ng-template>
@@ -44,7 +44,8 @@
           <td>{{ rowIndex + 1 }}</td>
           <td>{{ department.name }}</td>
           <td>
-            <button (click)="deleteDepartment(department)" pButton label="Xóa" [pStyleClass]="'p-button-error'"></button>
+            <button (click)="deleteDepartment(department)" pButton label="Xóa"
+                    [pStyleClass]="'p-button-error'"></button>
           </td>
         </tr>
       </ng-template>

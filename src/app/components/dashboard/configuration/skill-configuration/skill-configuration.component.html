@@ -15,7 +15,7 @@
   </form>
 
   <div class="existed-job-type-table mt-6">
-    <p-table [value]="displaySkills"
+    <p-table [value]="filterSkills"
              [tableStyle]="{ 'min-width': '50rem' }"
              [paginator]="true"
              [rows]="5"
@@ -28,7 +28,7 @@
           <input
             pInputText
             type="text"
-            (input)="filterTable($event)"
+            [formControl]="searchControl"
             placeholder="Search keyword"/>
         </div>
       </ng-template>

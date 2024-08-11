@@ -8,14 +8,14 @@
         pInputText id="name" type="text" formControlName="name" class="form-control"/>
       <button label="Tạo Mới" pButton type="submit" class="btn btn-primary ml-3"
               [disabled]="jobTypeForm.invalid"></button>
-<!--      <div *ngIf="jobTypeForm.get('name')?.invalid && jobTypeForm.get('name')?.touched" class="text-danger">-->
-<!--        Không được để trống loại công việc-->
-<!--      </div>-->
+      <!--      <div *ngIf="jobTypeForm.get('name')?.invalid && jobTypeForm.get('name')?.touched" class="text-danger">-->
+      <!--        Không được để trống loại công việc-->
+      <!--      </div>-->
     </div>
   </form>
 
   <div class="existed-job-type-table mt-6">
-    <p-table [value]="displayJobTypes"
+    <p-table [value]="filteredJobTypes"
              [tableStyle]="{ 'min-width': '50rem' }"
              [paginator]="true"
              [rows]="5"
@@ -29,7 +29,7 @@
           <input
             pInputText
             type="text"
-            (input)="filterTable($event)"
+            [formControl]="searchControl"
             placeholder="Search keyword"/>
         </div>
       </ng-template>

@@ -1,7 +1,7 @@
 <div class="p-5">
   <h2>Quản Lý Tài Khoản Nhân Viên</h2>
   <div class="mt-6">
-    <p-table [value]="accounts" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'">
+    <p-table [value]="filteredAccounts" [paginator]="true" [rows]="10" [responsiveLayout]="'scroll'">
       <ng-template pTemplate="caption">
 
         <p-toolbar>
@@ -11,7 +11,8 @@
               <input
                 pInputText
                 type="text"
-                placeholder="Search keyword"/>
+                placeholder="Search keyword"
+                [formControl]="searchControl"/>
             </div>
           </div>
           <div class="p-toolbar-group-center">
@@ -54,7 +55,7 @@
       </ng-template>
     </p-table>
   </div>
-  <p-dialog [style]="{width: '80rem'}" [modal]="true"  [(visible)]="shouldShowAccountDetail" [maximizable]="true">
+  <p-dialog [style]="{width: '80rem'}" [modal]="true" [(visible)]="shouldShowAccountDetail" [maximizable]="true">
     <app-staff-detail [profile]="viewedAccount"></app-staff-detail>
   </p-dialog>
 </div>
