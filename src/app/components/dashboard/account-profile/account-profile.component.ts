@@ -54,7 +54,7 @@ export class AccountProfileComponent implements OnInit {
       workingPlace: [{value: '', disabled: true}],
       eduLevel: ['', Validators.required],
       gender: [{value: '', disabled: true}, Validators.required],
-      dob: [{value: '', disabled: true}],
+      dob: [{disabled: true}],
     });
 
   }

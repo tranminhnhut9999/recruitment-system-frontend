@@ -98,7 +98,7 @@
 
         <div class="job-posting__form-info col-6 flex">
           <label class="align-self-center">Loại việc làm</label>
-          <p-dropdown [filter]="true" filterBy="value"
+          <p-dropdown [filter]="true" filterBy="name"
                       [showClear]="true" class="flex-1 flex flex-row-reverse" optionLabel="name" optionValue="name"
                       [options]="jobTypes"
                       placeholder="Loại việc làm"
@@ -135,7 +135,7 @@
           [options]="skillKeywords"
           placeholder="Từ khóa kĩ năng"
           display="chip"
-          filterBy="value"
+          filterBy="name"
           optionLabel="name"
           optionValue="name"
           [showClear]="true"

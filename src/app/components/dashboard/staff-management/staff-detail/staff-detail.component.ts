@@ -8,6 +8,8 @@ import {AccountService} from "../../../../shared/services/account.service";
 import {WorkingAddress} from "../../../../shared/model/working-address.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RoleService} from "../../../../shared/services/role.service";
+import {AuthService} from "../../../../shared/services/auth.service";
+import {ROLE} from "../../../../shared/constants/role-config";
 
 @Component({
   selector: 'app-staff-detail',
@@ -37,7 +39,8 @@ export class StaffDetailComponent implements OnInit {
               private fb: FormBuilder,
               private configurationService: ConfigurationService,
               private messageService: MessageService,
-              private roleService: RoleService) {
+              private roleService: RoleService,
+              private authService: AuthService,) {
     this.profileForm = this.fb.group({
       email: [{value: '', disabled: true}, Validators.required],
       firstname: ['', Validators.required],
@@ -66,7 +69,20 @@ export class StaffDetailComponent implements OnInit {
   loadConfigurationData() {
     this.configurationService.departments$.subscribe(departments => this.departments = departments);
     this.configurationService.workingAddresses$.subscribe(workingAddress => this.workingPlaces = workingAddress);
-    this.roleService.roles$.subscribe(roles => this.roles = roles);
+    this.roleService.roles$.subscribe(roles => {
+      // ADMIN can create every user
+      let isAdmin = this.authService.userHasRoles([ROLE.ADMIN]);
+      this.roles = roles.filter(role => {
+        if (role.code == ROLE.ADMIN) {
+          return false;
+        } else if (isAdmin) {
+          return true;
+        } else if (role.code == ROLE.HR_MANAGER) {
+          return false
+        }
+        return true;
+      });
+    });
   }
 
   @Input()
@@ -164,7 +180,7 @@ export class StaffDetailComponent implements OnInit {
   }
 
   getFullName(firstName?: string, lastName?: string) {
-    return (firstName || "") == "" ? (lastName || "") : firstName +" " + (lastName || "");
+    return (firstName || "") == "" ? (lastName || "") : firstName + " " + (lastName || "");
   }
 
   onClickUpdate() {
@@ -212,7 +228,8 @@ export class StaffDetailComponent implements OnInit {
     formData.append('lastname', lastname || "");
     return formData;
   }
-  refreshData(){
+
+  refreshData() {
     this.accountService.loadAccount();
   }
 }

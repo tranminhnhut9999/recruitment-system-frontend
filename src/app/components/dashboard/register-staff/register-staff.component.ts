@@ -28,6 +28,7 @@ export class RegisterStaffComponent {
       code: 'POSTGRADUATE'
     }, {value: 'Sau đại học', code: 'DOCTORATE'}]
   workingAddress$?: Subject<WorkingAddress[]>;
+  selectedDate?: Date;
 
   constructor(private confirmService: ConfirmationService,
               private location: Location,
@@ -44,7 +45,6 @@ export class RegisterStaffComponent {
       workingAddress: new FormControl("", [Validators.required]),
       role: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
-      // department: new FormControl("", [Validators.required]),
       dob: new FormControl([Validators.required]),
       citizenID: new FormControl("", [Validators.required]),
       eduLevelCode: new FormControl("", [Validators.required]),
@@ -89,7 +89,6 @@ export class RegisterStaffComponent {
 
   handleSubmit() {
     let cloneForm = {...this.registerNewAccountForm.value};
-    this, this.setUtcValue(cloneForm);
     console.log(cloneForm);
     this.accountService.createAccount(cloneForm).subscribe({
       next: value => {
@@ -110,8 +109,8 @@ export class RegisterStaffComponent {
     })
   }
 
-  setUtcValue(formValue: any) {
-    formValue.dob = this.convertToUTC(formValue.dob);
+  onChangeDob(selectedDate: any) {
+    this.registerNewAccountForm.get("dob")?.setValue(this.convertToUTC(selectedDate));
   }
 
   convertToUTC(date: Date): string {
