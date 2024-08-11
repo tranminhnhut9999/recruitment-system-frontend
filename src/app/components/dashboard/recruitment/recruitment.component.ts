@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Job} from "../../../shared/model/job";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JobService} from "../../../shared/services/job.service";
+import {AuthService} from "../../../shared/services/auth.service";
+import {ROLE} from "../../../shared/constants/role-config";
 
 @Component({
   selector: 'app-recruitment',
