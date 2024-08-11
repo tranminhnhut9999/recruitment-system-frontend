@@ -8,7 +8,7 @@
         <div class="overall flex flex-row column-gap-4 row-gap-4">
           <div class="detail-info flex column-gap-2 align-items-center">
             <i class="ph ph-currency-circle-dollar"></i>
-            <span>Mức lương <br> <b>{{ 6000000 | vndShorthand }}</b></span>
+            <span>Mức lương <br> <b>{{ (job.salaryRangeFrom | vndShorthand) + '  - ' + (job.salaryRangeTo | vndShorthand) }}</b></span>
           </div>
           <div class="detail-info flex column-gap-2 align-items-center">
             <i class="ph ph-building"></i>
