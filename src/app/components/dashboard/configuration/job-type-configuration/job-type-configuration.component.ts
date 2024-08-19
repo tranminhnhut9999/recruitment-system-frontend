@@ -72,17 +72,6 @@ export class JobTypeConfigurationComponent {
     }
   }
 
-  filterTable(event: Event) {
-
-    let filterWord = (event.target as HTMLInputElement).value;
-    if (filterWord.length > 0) {
-      this.filteredJobTypes = this.filteredJobTypes
-        .filter(jb => jb.name.toLowerCase().includes(filterWord) || filterWord.toLowerCase().includes(jb.name));
-    } else {
-      this.filteredJobTypes = [...this.jobTypes];
-    }
-  }
-
   isExistJobType(newName: string) {
     return this.jobTypes.filter(jb => jb.name.toLowerCase() == newName.toLowerCase()).length > 0;
   }

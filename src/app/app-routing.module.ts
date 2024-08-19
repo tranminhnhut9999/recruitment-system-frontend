@@ -96,7 +96,7 @@ const routes: Routes = [
     path: "jobs",
     children: [
       {
-        path: '',
+        path: 'hiring',
         component: JobDisplayingComponent,
         children: [
           {
